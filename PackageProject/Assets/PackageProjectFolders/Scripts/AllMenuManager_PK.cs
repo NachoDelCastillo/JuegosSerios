@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using System;
 
 public class AllMenuManager_PK : MonoBehaviour
 {
@@ -56,10 +57,13 @@ public class AllMenuManager_PK : MonoBehaviour
     #region mainMenu Buttons
     public void PressPlay()
     {
-        mainMenu.enabled = false;
-        StartCoroutine(EnableMenu(levelSelectorMenu, true, cameraSpeed/2));
+        GameManager.GetInstance().ChangeScene("Gameplay");
 
-        cameraObj.DOMoveY(cameraDistanceY, cameraSpeed);
+
+        //mainMenu.enabled = false;
+        //StartCoroutine(EnableMenu(levelSelectorMenu, true, cameraSpeed/2));
+
+        //cameraObj.DOMoveY(cameraDistanceY, cameraSpeed);
     }
 
     public void PressSettings()
