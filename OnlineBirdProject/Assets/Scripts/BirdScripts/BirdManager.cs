@@ -57,6 +57,12 @@ public class BirdManager : NetworkBehaviour
     {
         transform.position = gameplayManager.spawnPositionList
             [OnlineMultiplayerManager.Instance.GetPlayerDataIndexFromClientId(OwnerClientId)].position;
+
+        if (!IsOwner)
+        {
+            CameraFollow camFollow = GetComponentInChildren<CameraFollow>();
+            Destroy(camFollow.gameObject);
+        }
     }
 
 

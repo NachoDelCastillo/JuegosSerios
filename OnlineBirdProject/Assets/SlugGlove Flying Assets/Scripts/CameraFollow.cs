@@ -62,6 +62,22 @@ public class CameraFollow : MonoBehaviour
     //setup objects
     void Awake()
     {
+        //transform.parent = null;
+
+        //pivot = camTransform.parent;
+        //LookAtPos = target.position;
+        //curZ = -DistanceFromPlayer;
+
+        //tiltAngle = 10f;
+        //AutoXInput = 0f;
+
+        //LookDirection = transform.forward;
+
+        //CamUnit = GetComponentInChildren<Camera>();
+    }
+
+    private void Start()
+    {
         transform.parent = null;
 
         pivot = camTransform.parent;
