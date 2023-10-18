@@ -39,7 +39,7 @@ public class GameplayManager : NetworkBehaviour
     NetworkVariable<float> countDownToStart_Timer = new NetworkVariable<float>(3f);
     // Tiempo que dura la partida
     NetworkVariable<float> gameplay_Timer = new NetworkVariable<float>(maxGameplayTimer);
-    public const float maxGameplayTimer = 3;
+    public const float maxGameplayTimer = 20;
     // Tiempo desde que termina la partida hasta que se vuelve al lobby, mostrando resultados de la partida
     NetworkVariable<float> gameover_Timer = new NetworkVariable<float>(maxGameoverTimer);
     public const float maxGameoverTimer = 3;
@@ -70,7 +70,7 @@ public class GameplayManager : NetworkBehaviour
     private void SceneManager_OnLoadEventCompleted(string sceneName, UnityEngine.SceneManagement.LoadSceneMode loadSceneMode, List<ulong> clientsCompleted, List<ulong> clientsTimedOut)
     {
         // Si no es la escena de juego, no instanciar ningun jugador
-        if (SceneManager.GetActiveScene().name != SceneLoader.SceneName.GameScene.ToString())
+        if (SceneManager.GetActiveScene().name != SceneLoader.SceneName.Gameplay.ToString())
             return;
 
         foreach (ulong clientId in NetworkManager.Singleton.ConnectedClientsIds)

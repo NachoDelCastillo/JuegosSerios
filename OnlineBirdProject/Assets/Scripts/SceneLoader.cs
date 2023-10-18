@@ -10,6 +10,7 @@ public class SceneLoader : MonoBehaviour
     {
         MainMenuScene,
         GameScene, 
+        Gameplay, 
         LoadingScene,
         LobbyScene,
         CharacterSelectScene,

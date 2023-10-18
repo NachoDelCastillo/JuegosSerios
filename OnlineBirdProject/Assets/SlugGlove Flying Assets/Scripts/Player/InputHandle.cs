@@ -27,6 +27,7 @@ public class InputHandle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        return;
         Horizontal = Input.GetAxis("Horizontal");
         Vertical = Input.GetAxis("Vertical");
 

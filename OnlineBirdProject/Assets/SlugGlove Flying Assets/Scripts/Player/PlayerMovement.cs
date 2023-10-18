@@ -25,7 +25,7 @@ public class PlayerMovement : MonoBehaviour
     [HideInInspector]
     public Rigidbody Rigid; //rigidbody 
     private Animator Anim; //animator
-    private InputHandle InputHand; //script for handling our inputs
+    private InputHandler InputHand; //script for handling our inputs
 
     float delta;
 
@@ -106,7 +106,7 @@ public class PlayerMovement : MonoBehaviour
         //static until finished setup
         States = WorldState.Static;
 
-        InputHand = GetComponent<InputHandle>();
+        InputHand = GetComponent<InputHandler>();
         Colli = GetComponent<DetectCollision>();
         Visuals = GetComponent<PlayerVisuals>();
         HipsPos = Visuals.HipsPos;
@@ -121,7 +121,7 @@ public class PlayerMovement : MonoBehaviour
         SetupCharacter();
     }
 
-    private void Update()   //inputs and animation
+    public void MovementUpdate()
     {
         //cannot function when dead
         if (States == WorldState.Static)
@@ -147,12 +147,12 @@ public class PlayerMovement : MonoBehaviour
                 return;
             }
 
-            if (InputHand.Jump)
+            if (InputHand.jump_input)
             {
                 //if the player can jump, isnt attacking and isnt using an item
                 if (!HasJumped)
-                {                   
-                    if(Anim)
+                {
+                    if (Anim)
                     {
                         MirrorAnim = !MirrorAnim;
                         Anim.SetBool("Mirror", MirrorAnim);
@@ -178,7 +178,7 @@ public class PlayerMovement : MonoBehaviour
             if (HasJumped) //cannot switch to flying until jump is done
                 return;
 
-            if (InputHand.Fly)  //switch to flying
+            if (InputHand.fly_input)  //switch to flying
                 SetFlying();
 
 
@@ -191,7 +191,7 @@ public class PlayerMovement : MonoBehaviour
                 return;
             }
         }
-        else if(States == WorldState.Flying)
+        else if (States == WorldState.Flying)
         {
             if (ActionAirTimer > 0) //reduce air timer 
                 return;
@@ -203,7 +203,7 @@ public class PlayerMovement : MonoBehaviour
             if (WallHit)
             {
                 //if we are going fast enough to crash into a wall
-                if(ActSpeed > SpeedLimitBeforeCrash)
+                if (ActSpeed > SpeedLimitBeforeCrash)
                 {
                     //stun character
                     Stunned(-transform.forward);
@@ -212,7 +212,7 @@ public class PlayerMovement : MonoBehaviour
             }
 
             //check for ground if we are not holding the flying button
-            if (!InputHand.Fly)
+            if (!InputHand.fly_input)
             {
                 bool Ground = Colli.CheckGround();
 
@@ -225,8 +225,11 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void FixedUpdate()  //world movement
+    private void Update()   //inputs and animation
+    {
+    }
+
+    public void MovementFixedUpdate()
     {
         //tick deltatime
         delta = Time.deltaTime;
@@ -250,8 +253,8 @@ public class PlayerMovement : MonoBehaviour
         FixedAnimCtrl(delta);
 
         //control our direction slightly when falling
-        float _xMov = InputHand.Horizontal;
-        float _zMov = InputHand.Vertical;
+        float _xMov = InputHand.horizontal;
+        float _zMov = InputHand.vertical;
 
         //get our direction of input based on camera position
         Vector3 screenMovementForward = CamY.transform.forward;
@@ -277,13 +280,13 @@ public class PlayerMovement : MonoBehaviour
             if (FloorTimer > 0)
                 FloorTimer -= delta;
 
-           if (InputHand.Horizontal == 0 && InputHand.Vertical == 0)
+            if (InputHand.horizontal == 0 && InputHand.vertical == 0)
             {
                 //we are not moving, lerp to a walk speed
                 LSpeed = 0f;
                 Accel = SlowDownAcceleration;
             }
-           //lerp our current speed
+            //lerp our current speed
             if (ActSpeed > LSpeed - 0.5f || ActSpeed < LSpeed + 0.5f)
                 LerpSpeed(delta, LSpeed, Accel);
             //move our character
@@ -311,7 +314,7 @@ public class PlayerMovement : MonoBehaviour
         else if (States == WorldState.Flying)
         {
             //setup gliding
-            if (!InputHand.Fly)
+            if (!InputHand.fly_input)
             {
                 if (FlyingTimer > 0) //reduce flying timer 
                     FlyingTimer -= delta;
@@ -319,7 +322,7 @@ public class PlayerMovement : MonoBehaviour
             else if (FlyingTimer < GlideTime)
             {
                 //flapping animation
-                if(FlyingTimer < GlideTime * 0.8f)
+                if (FlyingTimer < GlideTime * 0.8f)
                     Anim.SetTrigger("Flap");
 
                 FlyingTimer = GlideTime;
@@ -343,10 +346,10 @@ public class PlayerMovement : MonoBehaviour
             float YAmt = Rigid.velocity.y;
             float FlyAccel = FlyingAcceleration * FlyingAdjustmentLerp;
             float Spd = FlyingSpeed;
-            if (!InputHand.Fly)  //we are not holding fly, slow down
+            if (!InputHand.fly_input)  //we are not holding fly, slow down
             {
-                Spd = FlyingMinSpeed; 
-                if(ActSpeed > FlyingMinSpeed)
+                Spd = FlyingMinSpeed;
+                if (ActSpeed > FlyingMinSpeed)
                     FlyAccel = FlyingDecelleration * FlyingAdjustmentLerp;
             }
             else
@@ -389,7 +392,7 @@ public class PlayerMovement : MonoBehaviour
                     return;
                 }
             }
-            
+
             //lerp mesh slower when not on ground
             RotateSelf(DownwardDirection, delta, 8f);
             RotateMesh(delta, transform.forward, turnSpeed);
@@ -402,6 +405,11 @@ public class PlayerMovement : MonoBehaviour
             //falling audio
             Visuals.WindAudioSetting(delta, Rigid.velocity.magnitude);
         }
+    }
+
+    // Update is called once per frame
+    void FixedUpdate()  //world movement
+    {
     }
     //for when we return to the ground
     public void SetGrounded()
@@ -502,7 +510,7 @@ public class PlayerMovement : MonoBehaviour
         //set our grounded and flying animations
         Anim.SetBool("OnGround", OnGround);
         bool Fly = true;
-        if (!InputHand.Fly)
+        if (!InputHand.fly_input)
             Fly = false;
 
         Anim.SetBool("Flying", Fly);
@@ -511,7 +519,7 @@ public class PlayerMovement : MonoBehaviour
     void FixedAnimCtrl(float D) //animations involving a timer
     {
         //setup the xinput animation for tilting our wings left and right
-        float LAMT = InputHand.Horizontal;
+        float LAMT = InputHand.horizontal;
         XAnimFloat = Mathf.Lerp(XAnimFloat, LAMT, D * 4f);
         Anim.SetFloat("XInput", XAnimFloat);
     } 
@@ -548,7 +556,7 @@ public class PlayerMovement : MonoBehaviour
             if (TargetSpeed > 0.5)
             {
                 //influence by x and y input 
-                float Degree = Vector3.Magnitude(new Vector3(InputHand.Horizontal, InputHand.Vertical, 0).normalized);
+                float Degree = Vector3.Magnitude(new Vector3(InputHand.horizontal, InputHand.vertical, 0).normalized);
                 ActSpeed = Mathf.Lerp(ActSpeed, TargetSpeed, (d * Accel) * Degree);
             }
             else
@@ -700,7 +708,7 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 targetVelocity = transform.forward * Speed;
         //push down more when not pressing fly
-        if(InputHand.Fly)
+        if(InputHand.fly_input)
             ActGravAmt = Mathf.Lerp(ActGravAmt, FlyingGravityAmt, FlyingGravBuildSpeed * 4f * d);
         else
             ActGravAmt = Mathf.Lerp(ActGravAmt, GlideGravityAmt, FlyingGravBuildSpeed * 0.5f * d);
@@ -726,11 +734,11 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //LB and RB input = roll (this effects our downward direction
-        if (InputHand.LB) //left roll
+        if (InputHand.tiltLeft) //left roll
         {
             VD = Vector3.Lerp(VD, -transform.right, d * FlyingRollSpeed);
         }
-        else if (InputHand.RB) //right roll
+        else if (InputHand.tiltRight) //right roll
         {
             VD = Vector3.Lerp(VD, transform.right, d * FlyingRollSpeed);
         }
@@ -753,11 +761,11 @@ public class PlayerMovement : MonoBehaviour
             RollDir = Vector3.Lerp(RollDir, transform.right, d * (FlyingLeftRightSpeed * (XMove * -1)));
         }
         //bumper input
-        if (InputHand.LB)
+        if (InputHand.tiltLeft)
         {
             RollDir = Vector3.Lerp(RollDir, -transform.right, d * FlyingLeftRightSpeed * 0.2f);
         }
-        else if (InputHand.RB)
+        else if (InputHand.tiltRight)
         {
             RollDir = Vector3.Lerp(RollDir, transform.right, d * FlyingLeftRightSpeed * 0.2f);
         }

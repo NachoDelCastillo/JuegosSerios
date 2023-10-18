@@ -89,7 +89,7 @@ public class CharacterSelect_Online : NetworkBehaviour // CharacterSelectReady
             EraseLobbyReference_ClientRpc();
             GameLobby.Instance.DeleteLobby();
             GameLobby.Instance.LeaveLobby(); //
-            SceneLoader.LoadNetwork(SceneLoader.SceneName.GameScene);
+            SceneLoader.LoadNetwork(SceneLoader.SceneName.Gameplay);
         }
     }
 

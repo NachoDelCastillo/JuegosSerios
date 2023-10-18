@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
@@ -24,6 +25,16 @@ public class InputHandler : MonoBehaviour
     Vector2 movementInput;
     Vector2 cameraInput;
 
+
+
+    // Bird specific
+    public bool jump_input;
+    public bool jumpHold_input;
+    public bool fly_input;
+
+    public bool tiltRight;
+    public bool tiltLeft;
+
     public void OnEnable()
     {
         if (inputActions == null)
@@ -44,17 +55,36 @@ public class InputHandler : MonoBehaviour
     public void TickInput(float delta)
     {
         HandleMoveInput(delta);
+        HandleJumpInput(delta);
+        HandleTiltInput(delta);
         HandleSprintInput(delta);
         HandleInteractInput(delta);
     }
 
+    private void HandleTiltInput(float delta)
+    {
+        tiltRight = inputActions.PlayerActions.TiltRight.IsPressed();
+        tiltLeft = inputActions.PlayerActions.TiltLeft.IsPressed();
+    }
+
+    private void HandleJumpInput(float delta)
+    {
+        jump_input = inputActions.PlayerActions.Jump.WasPressedThisFrame();
+        jumpHold_input = inputActions.PlayerActions.Jump.IsPressed();
+        fly_input = jumpHold_input;
+    }
+
     private void HandleMoveInput(float delta)
     {
-        horizontal = movementInput.x;
-        vertical = movementInput.y;
-        moveAmount = Mathf.Clamp01(Mathf.Abs(horizontal) + Mathf.Abs(vertical));
-        mouseX = cameraInput.x;
-        mouseY = cameraInput.y;
+        // Movimiento mas smooth
+        horizontal = Input.GetAxis("Horizontal");
+        vertical = Input.GetAxis("Vertical");
+
+        //horizontal = movementInput.x;
+        //vertical = movementInput.y;
+        //moveAmount = Mathf.Clamp01(Mathf.Abs(horizontal) + Mathf.Abs(vertical));
+        //mouseX = cameraInput.x;
+        //mouseY = cameraInput.y;
     }
 
     private void HandleSprintInput(float delta)
