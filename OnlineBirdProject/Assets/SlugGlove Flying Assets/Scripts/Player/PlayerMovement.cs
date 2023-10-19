@@ -111,7 +111,8 @@ public class PlayerMovement : MonoBehaviour
         Visuals = GetComponent<PlayerVisuals>();
         HipsPos = Visuals.HipsPos;
 
-        Cam = GameObject.FindGameObjectWithTag("MainCamera").transform;
+        //Cam = GameObject.FindGameObjectWithTag("MainCamera").transform;
+        Cam = GetComponentInChildren<Camera>().transform;
         CamY = Cam.transform.parent.parent.transform;
         CamFol = Cam.GetComponentInParent<CameraFollow>();
 

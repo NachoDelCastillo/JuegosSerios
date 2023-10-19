@@ -5582,7 +5582,7 @@ Transform:
   - {fileID: 3632951078121918285}
   - {fileID: 6889135100394073101}
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &188004192440898349
 SphereCollider:
@@ -5776,11 +5776,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SyncPositionX: 1
-  SyncPositionY: 0
+  SyncPositionY: 1
   SyncPositionZ: 1
-  SyncRotAngleX: 0
+  SyncRotAngleX: 1
   SyncRotAngleY: 1
-  SyncRotAngleZ: 0
+  SyncRotAngleZ: 1
   SyncScaleX: 0
   SyncScaleY: 0
   SyncScaleZ: 0

@@ -111,7 +111,7 @@ public class CameraFollow : MonoBehaviour
         //reset auto input timer
         if (h != 0 || v != 0)
         {
-            if(AutoXInput < TimeBeforeAutoXInput)
+            if (AutoXInput < TimeBeforeAutoXInput)
                 AutoXInput = TimeBeforeAutoXInput;
         }
 
@@ -119,8 +119,8 @@ public class CameraFollow : MonoBehaviour
         handlePivotPosition();
 
         //look at player
-        
-        
+
+
         LookAtPos = target.position;
 
         //Vector3 WorldPos = transform.up;
@@ -160,7 +160,8 @@ public class CameraFollow : MonoBehaviour
 
         FovLerp = Mathf.Lerp(FovLerp, FAmt, d * 8f);
 
-        CamUnit.fieldOfView = FovLerp;
+        if (CamUnit != null)
+            CamUnit.fieldOfView = FovLerp;
     }
 
     void handlePivotPosition()

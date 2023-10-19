@@ -22,15 +22,12 @@ public class BirdManager : NetworkBehaviour
     {
         // Asignar los datos del personaje cliente a esta instancia
         // Tanto como si lo estas controlando como si no
-
-        //birdMovement.States = PlayerMovement.WorldState.Static;
-
     }
 
     void Update()
     {
-
-        if (CanMove())
+        // if (CanMove())
+        if (IsOwner)
         {
             float delta = Time.deltaTime;
             inputHandler.TickInput(delta);
@@ -40,15 +37,18 @@ public class BirdManager : NetworkBehaviour
             // Resetear inputs
         }
 
-        // Handle Movement
-        birdMovement.MovementUpdate();
+        if (IsOwner)
+
+            // Handle Movement
+            birdMovement.MovementUpdate();
     }
 
     private void FixedUpdate()
     {
+        if (IsOwner)
 
-        // Handle Movement
-        birdMovement.MovementFixedUpdate();
+            // Handle Movement
+            birdMovement.MovementFixedUpdate();
     }
 
 
@@ -64,7 +64,6 @@ public class BirdManager : NetworkBehaviour
             Destroy(camFollow.gameObject);
         }
     }
-
 
     bool CanMove()
     {

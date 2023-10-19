@@ -39,7 +39,7 @@ public class GameplayManager : NetworkBehaviour
     NetworkVariable<float> countDownToStart_Timer = new NetworkVariable<float>(3f);
     // Tiempo que dura la partida
     NetworkVariable<float> gameplay_Timer = new NetworkVariable<float>(maxGameplayTimer);
-    public const float maxGameplayTimer = 20;
+    public const float maxGameplayTimer = 300;
     // Tiempo desde que termina la partida hasta que se vuelve al lobby, mostrando resultados de la partida
     NetworkVariable<float> gameover_Timer = new NetworkVariable<float>(maxGameoverTimer);
     public const float maxGameoverTimer = 3;
