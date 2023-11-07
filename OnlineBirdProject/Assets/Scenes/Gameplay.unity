@@ -27213,7 +27213,7 @@ Terrain:
   m_TreeBillboardDistance: 2000
   m_TreeCrossFadeLength: 0
   m_TreeMaximumFullLODCount: 10000
-  m_DetailObjectDistance: 922
+  m_DetailObjectDistance: 111
   m_DetailObjectDensity: 0.39
   m_HeightmapPixelError: 5
   m_SplatMapDistance: 1000
@@ -30326,12 +30326,12 @@ Terrain:
   m_Enabled: 1
   serializedVersion: 6
   m_TerrainData: {fileID: 15600000, guid: 26c4cac53be96ed4ba0504ab59fd6a1c, type: 2}
-  m_TreeDistance: 2586
+  m_TreeDistance: 729
   m_TreeBillboardDistance: 2000
   m_TreeCrossFadeLength: 0
   m_TreeMaximumFullLODCount: 10000
-  m_DetailObjectDistance: 496
-  m_DetailObjectDensity: 0.473
+  m_DetailObjectDistance: 104
+  m_DetailObjectDensity: 0.304
   m_HeightmapPixelError: 200
   m_SplatMapDistance: 1000
   m_HeightmapMaximumLOD: 0
