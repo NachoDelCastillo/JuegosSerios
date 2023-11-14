@@ -1182,7 +1182,7 @@ PrefabInstance:
     - target: {fileID: 7679616428674263910, guid: c4b676f72b17b40499f23935f7abb96b,
         type: 3}
       propertyPath: m_text
-      value: ONLINE MULTIPLAYER
+      value: ONLINE
       objectReference: {fileID: 0}
     - target: {fileID: 7679616428674263911, guid: c4b676f72b17b40499f23935f7abb96b,
         type: 3}
@@ -1376,7 +1376,7 @@ PrefabInstance:
     - target: {fileID: 7679616428674263910, guid: c4b676f72b17b40499f23935f7abb96b,
         type: 3}
       propertyPath: m_text
-      value: LOCAL MULTIPLAYER
+      value: SINGLEPLAYER
       objectReference: {fileID: 0}
     - target: {fileID: 7679616428674263911, guid: c4b676f72b17b40499f23935f7abb96b,
         type: 3}

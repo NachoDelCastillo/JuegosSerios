@@ -17,7 +17,7 @@ public class LevelselectorMenu_PK : MenuManager_PK
         base.buttonPressed(index);
 
         if (index == 0)
-            PressLocalMultiplayer();
+            SinglePlayer();
         else if (index == 1)
             PressOnlineMultiplayer();
 
@@ -25,10 +25,10 @@ public class LevelselectorMenu_PK : MenuManager_PK
             allMenuManager.BackButton();
     }
 
-    public void PressLocalMultiplayer()
+    public void SinglePlayer()
     {
-        GameManager.SetPlayMode(GameManager.PlayMode.local);
-        GameManager.GetInstance().ChangeScene(SceneLoader.SceneName.CharacterSelectScene);
+        //GameManager.SetPlayMode(GameManager.PlayMode.local);
+        //GameManager.GetInstance().ChangeScene(SceneLoader.SceneName.CharacterSelectScene);
     }
 
     public void PressOnlineMultiplayer()
