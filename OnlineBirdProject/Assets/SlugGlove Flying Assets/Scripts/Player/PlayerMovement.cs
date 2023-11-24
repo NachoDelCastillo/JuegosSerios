@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    bool canDeccelerate = false;
+
+
     public enum WorldState
     {
         Grounded, //on ground
@@ -102,7 +105,7 @@ public class PlayerMovement : MonoBehaviour
 
     // Start is called before the first frame update
     void Awake()
-    { 
+    {
         //static until finished setup
         States = WorldState.Static;
 
@@ -310,7 +313,7 @@ public class PlayerMovement : MonoBehaviour
                 FlyingAdjustmentLerp -= delta * (FlyingAdjustmentSpeed * 0.5f);
 
             //control our character when falling
-            FallingCtrl(delta, ActSpeed, AirAcceleration, moveDirection);
+           // FallingCtrl(delta, ActSpeed, AirAcceleration, moveDirection);
         }
         else if (States == WorldState.Flying)
         {
@@ -406,6 +409,33 @@ public class PlayerMovement : MonoBehaviour
             //falling audio
             Visuals.WindAudioSetting(delta, Rigid.velocity.magnitude);
         }
+
+
+
+        Vector3 TargetVel = Rigid.velocity;
+
+        //if (Vector3.Angle(Rigid.velocity, Vector3.up) < 40 || !InputHand.fly_input)
+        //    canDeccelerate = true;
+        //else canDeccelerate = false;
+
+        //if (Vector3.Angle(Rigid.velocity, Vector3.up) > 140 && InputHand.fly_input)
+        //    canDeccelerate = false;
+        //else
+        //    canDeccelerate = true;
+
+
+        // No se puede desacelerar
+        if (InputHand.fly_input)
+        {
+            if (Rigid.velocity.magnitude < velocityLastFrame.magnitude)
+                Rigid.velocity = velocityLastFrame.magnitude * transform.forward;
+        }
+        else
+        {
+            Rigid.velocity = Vector3.Lerp(Rigid.velocity, TargetVel, Time.deltaTime * 2);
+        }
+
+        velocityLastFrame = Rigid.velocity;
     }
 
     // Update is called once per frame
@@ -523,7 +553,7 @@ public class PlayerMovement : MonoBehaviour
         float LAMT = InputHand.horizontal;
         XAnimFloat = Mathf.Lerp(XAnimFloat, LAMT, D * 4f);
         Anim.SetFloat("XInput", XAnimFloat);
-    } 
+    }
 
     IEnumerator JumpUp(float ForwardAmt, float UpwardsAmt)
     {
@@ -637,7 +667,7 @@ public class PlayerMovement : MonoBehaviour
         //accelerate our character
         ActAccel = Mathf.Lerp(ActAccel, Accel, HandleReturnSpeed * d);
         //lerp our movement direction
-        Vector3 dir = Vector3.Lerp(curVelocity, targetVelocity, d * ActAccel);   
+        Vector3 dir = Vector3.Lerp(curVelocity, targetVelocity, d * ActAccel);
         dir.y = Rigid.velocity.y;
         //set our rigibody direction
         Rigid.velocity = dir;
@@ -658,11 +688,11 @@ public class PlayerMovement : MonoBehaviour
         Vector3 LerpDirection = DownwardDirection;
         float FallDirSpd = FallingDirectionSpeed;
 
-        if(Rigid.velocity.y < -6) //we are going downwards
+        if (Rigid.velocity.y < -6) //we are going downwards
         {
             LerpDirection = Vector3.up;
             FallDirSpd = FallDirSpd * -(Rigid.velocity.y * 0.2f);
-        }         
+        }
 
         DownwardDirection = Vector3.Lerp(DownwardDirection, LerpDirection, FallDirSpd * d);
 
@@ -709,16 +739,18 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 targetVelocity = transform.forward * Speed;
         //push down more when not pressing fly
-        if(InputHand.fly_input)
+        if (InputHand.fly_input)
             ActGravAmt = Mathf.Lerp(ActGravAmt, FlyingGravityAmt, FlyingGravBuildSpeed * 4f * d);
         else
             ActGravAmt = Mathf.Lerp(ActGravAmt, GlideGravityAmt, FlyingGravBuildSpeed * 0.5f * d);
- 
+
         targetVelocity -= Vector3.up * ActGravAmt;
         //lerp velocity
         Vector3 dir = Vector3.Lerp(Rigid.velocity, targetVelocity, d * FlyLerpSpd);
         Rigid.velocity = dir;
     }
+
+    Vector3 velocityLastFrame;
 
     Vector3 VehicleFlyingDownwardDirection(float d, float ZMove)
     {
