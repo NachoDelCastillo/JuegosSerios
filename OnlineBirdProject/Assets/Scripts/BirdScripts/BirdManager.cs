@@ -5,6 +5,10 @@ using Unity.Netcode;
 
 public class BirdManager : NetworkBehaviour
 {
+    [SerializeField]
+    bool DEBUG;
+
+
     GameplayManager gameplayManager;
     InputHandler inputHandler;
 
@@ -27,7 +31,7 @@ public class BirdManager : NetworkBehaviour
     void Update()
     {
         // if (CanMove())
-        if (IsOwner)
+        if (IsOwnerBool())
         {
             float delta = Time.deltaTime;
             inputHandler.TickInput(delta);
@@ -37,7 +41,7 @@ public class BirdManager : NetworkBehaviour
             // Resetear inputs
         }
 
-        if (IsOwner)
+        if (IsOwnerBool())
 
             // Handle Movement
             birdMovement.MovementUpdate();
@@ -45,7 +49,7 @@ public class BirdManager : NetworkBehaviour
 
     private void FixedUpdate()
     {
-        if (IsOwner)
+        if (IsOwnerBool())
 
             // Handle Movement
             birdMovement.MovementFixedUpdate();
@@ -58,16 +62,22 @@ public class BirdManager : NetworkBehaviour
         transform.position = gameplayManager.spawnPositionList
             [OnlineMultiplayerManager.Instance.GetPlayerDataIndexFromClientId(OwnerClientId)].position;
 
-        if (!IsOwner)
+        if (!IsOwnerBool())
         {
             CameraFollow camFollow = GetComponentInChildren<CameraFollow>();
             Destroy(camFollow.gameObject);
         }
     }
 
-    bool CanMove()
+
+    bool IsOwnerBool()
     {
-        return IsOwner && gameplayManager.GetState() == GameplayManager.State.GamePlaying;
+        return IsOwner || DEBUG;
     }
+
+    //bool CanMove()
+    //{
+    //    return IsOwner && gameplayManager.GetState() == GameplayManager.State.GamePlaying;
+    //}
 
 }
