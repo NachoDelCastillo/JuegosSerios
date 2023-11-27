@@ -15,10 +15,10 @@ MonoBehaviour:
   Path: ../FMOD/BirdProject/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638366440550831754
+  lastModified: 638366785000762087
   FileSizes:
   - Name: Desktop
-    Value: 808
+    Value: 864
   Exists: 1
 --- !u!114 &-5446767345079484961
 MonoBehaviour:
@@ -35,11 +35,38 @@ MonoBehaviour:
   Path: ../FMOD/BirdProject/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638366440550801752
+  lastModified: 638366785000732119
   FileSizes:
   - Name: Desktop
-    Value: 560256
+    Value: 1161280
   Exists: 1
+--- !u!114 &-2067976007941109380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/WaterfallEvent
+  m_EditorClassIdentifier: 
+  Path: event:/WaterfallEvent
+  Guid:
+    Data1: -1694098545
+    Data2: 1272898847
+    Data3: -175220041
+    Data4: 844347137
+  Banks:
+  - {fileID: -5446767345079484961}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 51088
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -57,12 +84,13 @@ MonoBehaviour:
   - {fileID: -5446767345079484961}
   EditorEvents:
   - {fileID: 7968436969987873153}
+  - {fileID: -2067976007941109380}
   EditorParameters: []
   MasterBanks:
   - {fileID: -5446767345079484961}
   StringsBanks:
   - {fileID: -8918464647536446032}
-  cacheTime: 638366440550831754
+  cacheTime: 638366785000762087
   cacheVersion: 131609
 --- !u!114 &7393306983009350538
 MonoBehaviour:

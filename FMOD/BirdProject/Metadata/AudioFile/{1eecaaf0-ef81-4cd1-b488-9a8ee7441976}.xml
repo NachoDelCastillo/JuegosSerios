@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{1eecaaf0-ef81-4cd1-b488-9a8ee7441976}">
+		<property name="assetPath">
+			<value>WaterfallLight.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>51.088958333333331</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{e2bb1ffb-210e-4401-b764-9f4c36820545}</destination>
+		</relationship>
+	</object>
+</objects>
