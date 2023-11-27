@@ -413,7 +413,6 @@ public class PlayerMovement : MonoBehaviour
 
 
         Vector3 TargetVel = Rigid.velocity;
-
         //if (Vector3.Angle(Rigid.velocity, Vector3.up) < 40 || !InputHand.fly_input)
         //    canDeccelerate = true;
         //else canDeccelerate = false;
@@ -425,17 +424,18 @@ public class PlayerMovement : MonoBehaviour
 
 
         // No se puede desacelerar
-        if (InputHand.fly_input)
+        if (States == WorldState.Flying)
         {
-            if (Rigid.velocity.magnitude < velocityLastFrame.magnitude)
-                Rigid.velocity = velocityLastFrame.magnitude * transform.forward;
-        }
-        else
-        {
-            Rigid.velocity = Vector3.Lerp(Rigid.velocity, TargetVel, Time.deltaTime * 2);
-        }
+            if (InputHand.fly_input)
+            {
+                if (Rigid.velocity.magnitude < velocityLastFrame.magnitude)
+                    Rigid.velocity = velocityLastFrame.magnitude * transform.forward;
+            }
+            else
+                Rigid.velocity = Vector3.Lerp(Rigid.velocity, TargetVel, Time.deltaTime * 2);
 
-        velocityLastFrame = Rigid.velocity;
+            velocityLastFrame = Rigid.velocity;
+        }
     }
 
     // Update is called once per frame
