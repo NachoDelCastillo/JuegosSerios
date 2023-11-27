@@ -840,4 +840,8 @@ public class PlayerMovement : MonoBehaviour
         //return with our character being in air
         SetInAir();
     }
+
+
+    public float GetCurrentVelocity()
+    { return Rigid.velocity.magnitude; }
 }

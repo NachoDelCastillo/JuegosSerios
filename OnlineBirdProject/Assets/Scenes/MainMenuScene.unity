@@ -352,6 +352,7 @@ GameObject:
   m_Component:
   - component: {fileID: 364116811}
   - component: {fileID: 364116810}
+  - component: {fileID: 364116812}
   m_Layer: 0
   m_Name: AudioEmitter
   m_TagString: Untagged
@@ -374,11 +375,11 @@ MonoBehaviour:
   CollisionTag: 
   EventReference:
     Guid:
-      Data1: -385494015
-      Data2: 1195472629
-      Data3: -2064153176
-      Data4: 1900422219
-    Path: event:/Character/Player Footsteps
+      Data1: 703881185
+      Data2: 1299597418
+      Data3: 1786084788
+      Data4: -668537337
+    Path: event:/WindEvent
   Event: 
   PlayEvent: 1
   StopEvent: 2
@@ -386,9 +387,7 @@ MonoBehaviour:
   TriggerOnce: 0
   Preload: 0
   AllowNonRigidbodyDoppler: 0
-  Params:
-  - Name: Surface
-    Value: 1
+  Params: []
   OverrideAttenuation: 0
   OverrideMinDistance: 1
   OverrideMaxDistance: 20
@@ -407,6 +406,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &364116812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 364116809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 744a208c85da6d04c861d81b992e4ead, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Emitters:
+  - Target: {fileID: 364116810}
+    Params:
+    - Name: Pitch
+      Value: 1
+  TriggerEvent: 11
 --- !u!1001 &364504093
 PrefabInstance:
   m_ObjectHideFlags: 0
