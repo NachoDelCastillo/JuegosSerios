@@ -15,10 +15,34 @@ MonoBehaviour:
   Path: ../FMOD/BirdProject/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638366785000762087
+  lastModified: 638367276909090246
   FileSizes:
   - Name: Desktop
-    Value: 864
+    Value: 916
+  Exists: 1
+--- !u!114 &-7583088922670184367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/WaterfallEvent/Altitude
+  m_EditorClassIdentifier: 
+  Name: Altitude
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 1
+  ID:
+    data1: 884098810
+    data2: 3223730602
+  Type: 0
+  IsGlobal: 0
+  Labels: []
   Exists: 1
 --- !u!114 &-5446767345079484961
 MonoBehaviour:
@@ -35,10 +59,10 @@ MonoBehaviour:
   Path: ../FMOD/BirdProject/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638366785000732119
+  lastModified: 638367276909060239
   FileSizes:
   - Name: Desktop
-    Value: 1161280
+    Value: 2738112
   Exists: 1
 --- !u!114 &-2067976007941109380
 MonoBehaviour:
@@ -62,11 +86,12 @@ MonoBehaviour:
   - {fileID: -5446767345079484961}
   IsStream: 1
   Is3D: 1
-  IsOneShot: 0
-  Parameters: []
+  IsOneShot: 1
+  Parameters:
+  - {fileID: -7583088922670184367}
   MinDistance: 1
   MaxDistance: 20
-  Length: 51088
+  Length: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -90,7 +115,7 @@ MonoBehaviour:
   - {fileID: -5446767345079484961}
   StringsBanks:
   - {fileID: -8918464647536446032}
-  cacheTime: 638366785000762087
+  cacheTime: 638367276909090246
   cacheVersion: 131609
 --- !u!114 &7393306983009350538
 MonoBehaviour:

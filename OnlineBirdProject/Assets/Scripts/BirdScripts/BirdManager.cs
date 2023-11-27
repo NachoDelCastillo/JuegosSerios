@@ -70,7 +70,7 @@ public class BirdManager : NetworkBehaviour
     }
 
 
-    bool IsOwnerBool()
+    public bool IsOwnerBool()
     {
         return IsOwner || DEBUG;
     }
