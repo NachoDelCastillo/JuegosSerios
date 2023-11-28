@@ -954,6 +954,11 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 100fba5b905608d438a7a6781512299c, type: 2}
   - {fileID: 2100000, guid: b2cb8e986360e85429f311e1598d437c, type: 2}
   - {fileID: 2100000, guid: a65cbde611b41fd429f2fba4622fdd2f, type: 2}
+  neonMaterials:
+  - {fileID: 2100000, guid: 66e174ad660a40743bf3a1281c503190, type: 2}
+  - {fileID: 2100000, guid: 712c8f4e299b1f74bbb84b56b060f59f, type: 2}
+  - {fileID: 2100000, guid: 06024b0a2ff8a024992d71094a8bf377, type: 2}
+  - {fileID: 2100000, guid: 1b086eeae49a29943bb52ec207f56b44, type: 2}
 --- !u!1 &366114398
 GameObject:
   m_ObjectHideFlags: 0

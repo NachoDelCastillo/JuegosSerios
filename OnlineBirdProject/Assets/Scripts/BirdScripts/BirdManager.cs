@@ -16,6 +16,8 @@ public class BirdManager : NetworkBehaviour
 
     PlayerVisual playerVisual;
 
+    TrailRenderer[] trailRenderers;
+
     private void Awake()
     {
         // Asignaciones
@@ -23,6 +25,7 @@ public class BirdManager : NetworkBehaviour
         birdMovement = GetComponent<PlayerMovement>();
         gameplayManager = GameplayManager.Instance;
         playerVisual = GetComponentInChildren<PlayerVisual>();
+        trailRenderers = GetComponentsInChildren<TrailRenderer>();
     }
 
     private void Start()
@@ -33,6 +36,11 @@ public class BirdManager : NetworkBehaviour
         // Una vez que se ha asignado la variable de clientId, cambiar el color del personaje
         PlayerData playerData = OnlineMultiplayerManager.Instance.GetPlayerDataFromClientId(OwnerClientId);
         playerVisual.SetPlayerMaterial(OnlineMultiplayerManager.Instance.GetPlayerMaterial(playerData.colorId));
+
+
+        Material neonMaterial = OnlineMultiplayerManager.Instance.GetNeonMaterial(playerData.colorId);
+        for (int i = 0; i < trailRenderers.Length; i++)
+            trailRenderers[i].material = neonMaterial;
     }
 
     void Update()
@@ -60,8 +68,20 @@ public class BirdManager : NetworkBehaviour
 
             // Handle Movement
             birdMovement.MovementFixedUpdate();
+
+        float velocity = birdMovement.GetCurrentVelocity() / 44;
+
+        if (velocity < .3f)
+            velocity = 0;
+
+        velocity -= .3f;
+        velocity /= .7f;
+
+        for (int i = 0; i < trailRenderers.Length; i++)
+            trailRenderers[i].startWidth = velocity * maxTrailWidth;
     }
 
+    float maxTrailWidth = 0.033f; //0.033f;
 
 
     public override void OnNetworkSpawn()

@@ -21,6 +21,8 @@ public class OnlineMultiplayerManager : NetworkBehaviour
 
     // Almacena todos los posibles materiales que se puede elegir los jugadores
     [SerializeField] List<Material> playerMaterials = new List<Material>();
+    // Almacena todos los neones correspondientes
+    [SerializeField] List<Material> neonMaterials = new List<Material>();
 
     // Eventos
     public EventHandler OnTryingToJoinGame;
@@ -236,6 +238,12 @@ public class OnlineMultiplayerManager : NetworkBehaviour
     public Material GetPlayerMaterial(int colorId)
     {
         return playerMaterials[colorId];
+    }
+
+    // Devuelve el neon correspondiente
+    public Material GetNeonMaterial(int colorId)
+    {
+        return neonMaterials[colorId];
     }
 
     // Notifica al servidor de que se cambia el color del jugador de esta maquina
