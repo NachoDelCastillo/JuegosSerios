@@ -14,18 +14,25 @@ public class BirdManager : NetworkBehaviour
 
     PlayerMovement birdMovement;
 
+    PlayerVisual playerVisual;
+
     private void Awake()
     {
         // Asignaciones
         inputHandler = GetComponent<InputHandler>();
         birdMovement = GetComponent<PlayerMovement>();
         gameplayManager = GameplayManager.Instance;
+        playerVisual = GetComponentInChildren<PlayerVisual>();
     }
 
     private void Start()
     {
         // Asignar los datos del personaje cliente a esta instancia
         // Tanto como si lo estas controlando como si no
+
+        // Una vez que se ha asignado la variable de clientId, cambiar el color del personaje
+        PlayerData playerData = OnlineMultiplayerManager.Instance.GetPlayerDataFromClientId(OwnerClientId);
+        playerVisual.SetPlayerMaterial(OnlineMultiplayerManager.Instance.GetPlayerMaterial(playerData.colorId));
     }
 
     void Update()

@@ -5595,6 +5595,7 @@ GameObject:
   - component: {fileID: 2835872141085788341}
   - component: {fileID: 4606578688043706096}
   - component: {fileID: 3645663317419176265}
+  - component: {fileID: 4170412937728710338}
   m_Layer: 9
   m_Name: Bird
   m_TagString: Player
@@ -5832,6 +5833,20 @@ MonoBehaviour:
   InLocalSpace: 0
   Interpolate: 1
   SlerpPosition: 0
+--- !u!114 &4170412937728710338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7760568345176588189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30f4ee6fc8cc37140ac87194277df19d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  headMeshRenderer: {fileID: 0}
+  bodyMeshRenderer: {fileID: 6172472437396630520}
 --- !u!1 &7851332112728241390
 GameObject:
   m_ObjectHideFlags: 0
@@ -7285,3 +7300,9 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!137 &6172472437396630520 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -893833686729772748, guid: 430395e3cd988f942992356c9ac30064,
+    type: 3}
+  m_PrefabInstance: {fileID: 2752104018084616908}
+  m_PrefabAsset: {fileID: 0}
