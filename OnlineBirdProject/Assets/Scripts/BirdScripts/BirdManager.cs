@@ -18,6 +18,9 @@ public class BirdManager : NetworkBehaviour
 
     TrailRenderer[] trailRenderers;
 
+    [SerializeField]
+    Transform cameraFollow;
+
     private void Awake()
     {
         // Asignaciones
@@ -89,11 +92,23 @@ public class BirdManager : NetworkBehaviour
         transform.position = gameplayManager.spawnPositionList
             [OnlineMultiplayerManager.Instance.GetPlayerDataIndexFromClientId(OwnerClientId)].position;
 
-        if (!IsOwnerBool())
-        {
-            CameraFollow camFollow = GetComponentInChildren<CameraFollow>();
-            Destroy(camFollow.gameObject);
-        }
+        //if (!IsOwnerBool())
+        //{
+        //    CameraFollow camFollow = GetComponentInChildren<CameraFollow>();
+        //    Destroy(camFollow.gameObject);
+        //}
+
+        //CameraFollowTarget camFollow = GetComponentInChildren<CameraFollowTarget>();
+
+        //if (IsOwnerBool())
+        //{
+        //    // Destruir el resto de CameraFollow
+        //    CameraFollowTarget[] cameraFollows = FindObjectsOfType<CameraFollowTarget>();
+
+        //    for (int i = 0; i < cameraFollows.Length; i++)
+        //        if (cameraFollows[i] != null && cameraFollows[i].Target != gameObject)
+        //            Destroy(cameraFollows[i].gameObject);
+        //}
     }
 
 

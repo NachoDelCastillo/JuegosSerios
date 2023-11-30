@@ -19,4 +19,12 @@ public class CameraFollowTarget : MonoBehaviour
 
         transform.position = MPos + (OffsetDirection.up * Offset);
     }
+
+    private void Start()
+    {
+        BirdManager birdManager = Target.GetComponentInParent<BirdManager>();
+
+        if (!birdManager.IsOwner)
+            Destroy(gameObject);
+    }
 }
