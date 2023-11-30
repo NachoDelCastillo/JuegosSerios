@@ -7,14 +7,9 @@ public class FoodSelector : MonoBehaviour
     [SerializeField]
     private int foodNum = 4;
 
-    private void Start()
+    private void OnEnable()
     {
-        Random.RandomRange(0, foodNum);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Debug.Log("Me llamo");
+        transform.GetChild(1).gameObject.SetActive(true);
     }
 }
