@@ -9,7 +9,6 @@ public class FoodSelector : MonoBehaviour
 
     private void OnEnable()
     {
-        Debug.Log("Me llamo");
-        transform.GetChild(1).gameObject.SetActive(true);
+        transform.GetChild(Random.RandomRange(0,foodNum)).gameObject.SetActive(true);
     }
 }

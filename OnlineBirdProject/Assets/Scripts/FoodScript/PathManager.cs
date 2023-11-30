@@ -17,13 +17,14 @@ public class PathManager : MonoBehaviour
     {
         if (pathIndex < timesForPath.Count-1)
         {
-            yield return new WaitForSeconds(timesForPath[pathIndex]);
-            //Sumamos el path
-            //Si todavía no hemos terminado todos los grupos de comida, activamos el siguiente y esperamos el tiempo
-            //indicado en la lista para cada grupo de comida.
-            transform.GetChild(pathIndex).gameObject.SetActive(true);
-            Debug.Log("Path activado : " + pathIndex);
-            pathIndex++;
+            for(int i=pathIndex; i < timesForPath.Count;i++)
+            {
+                yield return new WaitForSeconds(timesForPath[pathIndex]);
+                //Sumamos el path
+                //Si todavía no hemos terminado todos los grupos de comida, activamos el siguiente y esperamos el tiempo
+                //indicado en la lista para cada grupo de comida.
+                transform.GetChild(i).gameObject.SetActive(true);
+            }
         }
         else StopCoroutine(activeGroup());
 
