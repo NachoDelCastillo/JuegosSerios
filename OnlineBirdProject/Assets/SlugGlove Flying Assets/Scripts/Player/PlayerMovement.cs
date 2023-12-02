@@ -313,7 +313,7 @@ public class PlayerMovement : MonoBehaviour
                 FlyingAdjustmentLerp -= delta * (FlyingAdjustmentSpeed * 0.5f);
 
             //control our character when falling
-           // FallingCtrl(delta, ActSpeed, AirAcceleration, moveDirection);
+            // FallingCtrl(delta, ActSpeed, AirAcceleration, moveDirection);
         }
         else if (States == WorldState.Flying)
         {
@@ -423,19 +423,50 @@ public class PlayerMovement : MonoBehaviour
         //    canDeccelerate = true;
 
 
-        // No se puede desacelerar
-        if (States == WorldState.Flying)
-        {
-            if (InputHand.fly_input)
-            {
-                if (Rigid.velocity.magnitude < velocityLastFrame.magnitude)
-                    Rigid.velocity = velocityLastFrame.magnitude * transform.forward;
-            }
-            else
-                Rigid.velocity = Vector3.Lerp(Rigid.velocity, TargetVel, Time.deltaTime * 2);
 
-            velocityLastFrame = Rigid.velocity;
+        if (Input.GetKeyDown(KeyCode.F))
+            Boost();
+
+        Debug.Log("Rigid.velocity = " + Rigid.velocity.magnitude);
+
+        Vector3 maxVelocityTarget = Rigid.velocity.normalized * 45;
+
+        //Si vas mas rapido de lo permitido, bajar suavemente
+        if (Rigid.velocity.magnitude > 45 && States == WorldState.Flying)
+        {
+            if (Rigid.velocity.magnitude < velocityLastFrame.magnitude)
+                Rigid.velocity = velocityLastFrame.magnitude * transform.forward * .99f;
         }
+
+        else
+        {
+            // No se puede desacelerar
+            if (States == WorldState.Flying)
+            {
+                if (InputHand.fly_input)
+                {
+                    if (Rigid.velocity.magnitude < velocityLastFrame.magnitude)
+                        Rigid.velocity = velocityLastFrame.magnitude * transform.forward;
+                }
+                else
+                    Rigid.velocity = Vector3.Lerp(Rigid.velocity, TargetVel, Time.deltaTime * 1.7f);
+
+            }
+        }
+
+        velocityLastFrame = Rigid.velocity;
+    }
+
+    void Boost()
+    {
+        float currentVelocity = Rigid.velocity.magnitude;
+
+        if (currentVelocity > 40)
+            currentVelocity += 20;
+        else
+            currentVelocity += 5;
+
+        Rigid.velocity = Rigid.velocity.normalized * currentVelocity;
     }
 
     // Update is called once per frame

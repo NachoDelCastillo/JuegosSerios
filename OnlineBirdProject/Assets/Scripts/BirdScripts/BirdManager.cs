@@ -82,6 +82,13 @@ public class BirdManager : NetworkBehaviour
 
         for (int i = 0; i < trailRenderers.Length; i++)
             trailRenderers[i].startWidth = velocity * maxTrailWidth;
+
+        if (velocity * maxTrailWidth < .001f)
+            for (int i = 0; i < trailRenderers.Length; i++)
+                trailRenderers[i].emitting = false;
+        else
+            for (int i = 0; i < trailRenderers.Length; i++)
+                trailRenderers[i].emitting = true;
     }
 
     float maxTrailWidth = 0.033f; //0.033f;

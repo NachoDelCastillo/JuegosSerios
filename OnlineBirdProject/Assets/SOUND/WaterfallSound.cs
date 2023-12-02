@@ -66,7 +66,7 @@ public class WaterfallSound : MonoBehaviour
         // y de esta forma poder tener cascadas de diferentes tamaños
         float altitudeParameter = (currentPlayerY - minY) / (maxY - minY);
 
-        Debug.Log("altitudeParameter = " + altitudeParameter);
+        //Debug.Log("altitudeParameter = " + altitudeParameter);
         eventEmitter.EventInstance.setParameterByID(altitudeId, altitudeParameter);
         //eventEmitter.EventInstance.setParameterByName("Altitude", altitudeParameter);
     }
@@ -81,9 +81,9 @@ public class WaterfallSound : MonoBehaviour
             && currentPlayerY < maxAltitude.position.y)
             transform.position = new Vector3(transform.position.x, currentPlayerY, transform.position.z);
 
-        Debug.Log("currentPlayerY = " + currentPlayerY);
-        Debug.Log("minAltitude.position.y = " + minAltitude.position.y);
-        Debug.Log("maxAltitude.position.y = " + maxAltitude.position.y);
+        //Debug.Log("currentPlayerY = " + currentPlayerY);
+        //Debug.Log("minAltitude.position.y = " + minAltitude.position.y);
+        //Debug.Log("maxAltitude.position.y = " + maxAltitude.position.y);
 
     }
 
