@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using DG.Tweening;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -457,6 +458,10 @@ public class PlayerMovement : MonoBehaviour
         velocityLastFrame = Rigid.velocity;
     }
 
+    [SerializeField]
+    Transform birdModel;
+
+
     void Boost()
     {
         float currentVelocity = Rigid.velocity.magnitude;
@@ -467,6 +472,8 @@ public class PlayerMovement : MonoBehaviour
             currentVelocity += 5;
 
         Rigid.velocity = Rigid.velocity.normalized * currentVelocity;
+
+        birdModel.DOLocalRotate(Vector3.forward * 360, 1, RotateMode.FastBeyond360);
     }
 
     // Update is called once per frame
