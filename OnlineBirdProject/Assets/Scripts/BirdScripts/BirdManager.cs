@@ -6,7 +6,7 @@ using Unity.Netcode;
 public class BirdManager : NetworkBehaviour
 {
     [SerializeField]
-    bool DEBUG;
+    public bool DEBUG;
 
 
     GameplayManager gameplayManager;

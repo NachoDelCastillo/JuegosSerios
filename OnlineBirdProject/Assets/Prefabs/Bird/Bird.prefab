@@ -5974,7 +5974,7 @@ Transform:
   - {fileID: 3632951078121918285}
   - {fileID: 6889135100394073101}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!114 &790948368296615679
 MonoBehaviour:
@@ -6043,6 +6043,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DEBUG: 1
+  cameraFollow: {fileID: 6889135100394073101}
 --- !u!114 &7124193783224146247
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -25,6 +25,7 @@ public class CameraFollowTarget : MonoBehaviour
         BirdManager birdManager = Target.GetComponentInParent<BirdManager>();
 
         if (!birdManager.IsOwner)
-            Destroy(gameObject);
+            if (birdManager.DEBUG == false)
+                Destroy(gameObject);
     }
 }
