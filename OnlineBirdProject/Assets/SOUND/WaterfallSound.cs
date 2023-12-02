@@ -42,6 +42,9 @@ public class WaterfallSound : MonoBehaviour
 
     private void Update()
     {
+        if (player == null)
+            return;
+
         // Si el jugador esta los suficientemente cerca, actualizar valores
         if (Vector3.Distance(player.transform.position, transform.position) < 500)
         {
