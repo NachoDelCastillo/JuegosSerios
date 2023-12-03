@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.Collections.LowLevel.Unsafe;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 using static UnityEngine.CullingGroup;
@@ -14,6 +15,12 @@ public class GameplayManager : NetworkBehaviour
 
     [SerializeField]
     private Transform playerPrefab;
+
+    private int numLevels = 3;
+    private int currentLevel = 1;
+
+    public GameObject deforestacion;
+    public PlayableDirector director;
 
     public enum State
     {
@@ -44,6 +51,8 @@ public class GameplayManager : NetworkBehaviour
     NetworkVariable<float> gameover_Timer = new NetworkVariable<float>(maxGameoverTimer);
     public const float maxGameoverTimer = 3;
 
+    private List<GameObject> clients = new List<GameObject>();
+
 
     private void Awake()
     {
@@ -73,11 +82,30 @@ public class GameplayManager : NetworkBehaviour
         if (SceneManager.GetActiveScene().name != SceneLoader.SceneName.Gameplay.ToString())
             return;
 
+        
+        director.stopped += OnTimelineFinished;
+
         foreach (ulong clientId in NetworkManager.Singleton.ConnectedClientsIds)
         {
             Transform playerTransform = Instantiate(playerPrefab);
+            clients.Add(playerTransform.gameObject);
             playerTransform.GetComponent<NetworkObject>().SpawnAsPlayerObject(clientId, true);
+            playerTransform.gameObject.SetActive(false);
+            playerTransform.gameObject.transform.GetChild(2).tag = "CameraFollow";
         }
+    }
+
+    // TimeLine acabada
+    void OnTimelineFinished(PlayableDirector director)
+    {
+        GameObject[] clientsArray = clients.ToArray();
+        
+        foreach (ulong clientId in NetworkManager.Singleton.ConnectedClientsIds)
+        {
+            clientsArray[clientId].SetActive(true);
+        }
+
+        GameObject.FindGameObjectWithTag("CameraFollow").SetActive(true);
     }
 
     // Se llama cada vez que cambia el estado
@@ -107,6 +135,11 @@ public class GameplayManager : NetworkBehaviour
             NetworkManager.Singleton.Shutdown();
             // Cambiar solo en esta maquina la escena a la del menu
             SceneLoader.Load(SceneLoader.SceneName.MainMenuScene);
+        }
+
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            changeLevel();
         }
 
         // Transicion de estados por tiempo
@@ -146,6 +179,26 @@ public class GameplayManager : NetworkBehaviour
                     SceneLoader.LoadNetwork(SceneLoader.SceneName.CharacterSelectScene);
                 }
                 break;
+        }
+    }
+
+    private void changeLevel()
+    {
+
+        if (currentLevel < numLevels)
+        {
+            currentLevel++;
+            deforestacion.SetActive(true);
+            GameObject.FindGameObjectWithTag("CameraFollow").SetActive(false);
+            GameObject[] clientsArray = clients.ToArray();
+            foreach (ulong clientId in NetworkManager.Singleton.ConnectedClientsIds)
+            {
+                clientsArray[clientId].transform.position = playerPrefab.transform.position;
+                clientsArray[clientId].transform.rotation = playerPrefab.transform.rotation;
+                clientsArray[clientId].SetActive(false);
+            }
+            director.time = 0f;
+            director.Play();
         }
     }
 
