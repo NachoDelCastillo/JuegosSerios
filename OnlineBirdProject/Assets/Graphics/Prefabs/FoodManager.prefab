@@ -61,6 +61,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7523014260271850430}
   - component: {fileID: 7704731803431539055}
+  - component: {fileID: -4412606783275742273}
   m_Layer: 0
   m_Name: FoodManager
   m_TagString: Untagged
@@ -96,6 +97,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 061b1412a59d7764f81b1409931059b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-4412606783275742273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1752764835436287587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 951099334
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1 &1936587635282465341
 GameObject:
   m_ObjectHideFlags: 0
@@ -128,11 +148,11 @@ Transform:
   - {fileID: 979879942851932957}
   - {fileID: 8066397120015603838}
   - {fileID: 7478043914359761970}
-  - {fileID: 5259249111210068483}
+  - {fileID: 1586511463650295126}
   - {fileID: 4033142936749500641}
   - {fileID: 1620572930826195686}
   - {fileID: 8043112635828902834}
-  - {fileID: 6436795006860497421}
+  - {fileID: 8481852151325427384}
   - {fileID: 4722716095442676352}
   - {fileID: 4543118258521317143}
   m_Father: {fileID: 794352772491789732}
@@ -217,7 +237,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6910862043208212210}
+  - {fileID: 386369295800841251}
   - {fileID: 5879239525293778888}
   - {fileID: 5548912575387463693}
   - {fileID: 2497116398741072098}
@@ -806,7 +826,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 770e0001484445d48bd801bcf3c7389c, type: 3}
---- !u!4 &6436795006860497421 stripped
+--- !u!4 &8481852151325427384 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6536122438805383890, guid: 770e0001484445d48bd801bcf3c7389c,
     type: 3}
@@ -1325,7 +1345,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5681f37ebe5e6704ab80c4ae3147af3f, type: 3}
---- !u!4 &5259249111210068483 stripped
+--- !u!4 &1586511463650295126 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6843484575491094356, guid: 5681f37ebe5e6704ab80c4ae3147af3f,
     type: 3}
@@ -1661,7 +1681,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 770e0001484445d48bd801bcf3c7389c, type: 3}
---- !u!4 &6910862043208212210 stripped
+--- !u!4 &386369295800841251 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6536122438805383890, guid: 770e0001484445d48bd801bcf3c7389c,
     type: 3}
