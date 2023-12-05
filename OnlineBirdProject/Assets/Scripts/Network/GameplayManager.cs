@@ -84,7 +84,7 @@ public class GameplayManager : NetworkBehaviour
         if (SceneManager.GetActiveScene().name != SceneLoader.SceneName.Gameplay.ToString())
             return;
 
-        
+
         director.stopped += OnTimelineFinished;
 
         foreach (ulong clientId in NetworkManager.Singleton.ConnectedClientsIds)
@@ -92,7 +92,7 @@ public class GameplayManager : NetworkBehaviour
             Transform playerTransform = Instantiate(playerPrefab);
             clients.Add(playerTransform.gameObject);
             playerTransform.GetComponent<NetworkObject>().SpawnAsPlayerObject(clientId, true);
-            playerTransform.gameObject.SetActive(false);
+           // playerTransform.gameObject.SetActive(false);
             playerTransform.gameObject.transform.GetChild(2).tag = "CameraFollow";
         }
 
@@ -103,15 +103,14 @@ public class GameplayManager : NetworkBehaviour
     void createFoodServerRpc()
     {
         Debug.Log("En el server se ejecuta");
-        Transform p = Instantiate(foodManagerPrefab);
-        p.GetComponent<NetworkObject>().Spawn();
+        Instantiate(foodManagerPrefab);
     }
 
     // TimeLine acabada
     void OnTimelineFinished(PlayableDirector director)
     {
         GameObject[] clientsArray = clients.ToArray();
-        
+
         foreach (ulong clientId in NetworkManager.Singleton.ConnectedClientsIds)
         {
             clientsArray[clientId].SetActive(true);
@@ -123,7 +122,8 @@ public class GameplayManager : NetworkBehaviour
     // Se llama cada vez que cambia el estado
     private void State_OnValueChanged(State previousValue, State newValue)
     {
-        OnStateChanged.Invoke(this, newValue);
+        if (OnStateChanged != null)
+            OnStateChanged.Invoke(this, newValue);
     }
 
     // Timers
