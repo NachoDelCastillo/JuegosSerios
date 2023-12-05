@@ -15,6 +15,8 @@ public class GameplayManager : NetworkBehaviour
 
     [SerializeField]
     private Transform playerPrefab;
+    [SerializeField]
+    private Transform foodManagerPrefab;
 
     private int numLevels = 3;
     private int currentLevel = 1;
@@ -93,6 +95,15 @@ public class GameplayManager : NetworkBehaviour
             playerTransform.gameObject.SetActive(false);
             playerTransform.gameObject.transform.GetChild(2).tag = "CameraFollow";
         }
+
+        createFoodServerRpc();
+    }
+
+    [ServerRpc]
+    void createFoodServerRpc()
+    {
+        Debug.Log("En el server se ejecuta");
+        Instantiate(foodManagerPrefab);
     }
 
     // TimeLine acabada
