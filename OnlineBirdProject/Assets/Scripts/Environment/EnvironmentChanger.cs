@@ -27,6 +27,8 @@ public class EnvironmentChanger : MonoBehaviour
 
     [SerializeField]
     Transform greenTerrain;
+    [SerializeField]
+    Transform lessGreenTerrain;
 
     [SerializeField]
     Transform bigRocks;
@@ -72,6 +74,9 @@ public class EnvironmentChanger : MonoBehaviour
         MeshRenderer[] rocksMeshRenderers = bigRocks.GetComponentsInChildren<MeshRenderer>();
         for (int i = 0; i < rocksMeshRenderers.Length; i++)
             rocksMeshRenderers[i].material = greenRocks;
+
+        greenTerrain.gameObject.SetActive(true);
+        lessGreenTerrain.gameObject.SetActive(false);
     }
 
     void SetSecondLevel()
@@ -85,7 +90,10 @@ public class EnvironmentChanger : MonoBehaviour
 
         MeshRenderer[] rocksMeshRenderers = bigRocks.GetComponentsInChildren<MeshRenderer>();
         for (int i = 0; i < rocksMeshRenderers.Length; i++)
-            rocksMeshRenderers[i].material = greyRocks;
+            rocksMeshRenderers[i].material = lessGreenRocks;
+
+        greenTerrain.gameObject.SetActive(false);
+        lessGreenTerrain.gameObject.SetActive(true);
     }
 
     void SetThirdLevel()
@@ -98,5 +106,9 @@ public class EnvironmentChanger : MonoBehaviour
         MeshRenderer[] rocksMeshRenderers = bigRocks.GetComponentsInChildren<MeshRenderer>();
         for (int i = 0; i < rocksMeshRenderers.Length; i++)
             rocksMeshRenderers[i].material = greyRocks;
+
+
+        greenTerrain.gameObject.SetActive(false);
+        lessGreenTerrain.gameObject.SetActive(false);
     }
 }
