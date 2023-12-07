@@ -34,6 +34,8 @@ public class EnvironmentChanger : MonoBehaviour
     [SerializeField]
     Material greenRocks;
     [SerializeField]
+    Material lessGreenRocks;
+    [SerializeField]
     Material greyRocks;
 
 
