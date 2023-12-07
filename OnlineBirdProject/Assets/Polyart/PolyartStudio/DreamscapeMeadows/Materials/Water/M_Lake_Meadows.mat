@@ -9,6 +9,8 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: M_Lake_Meadows
   m_Shader: {fileID: 4800000, guid: ad8e030ef04669d4aba092657d5d84b4, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -17,6 +19,7 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -95,10 +98,10 @@ Material:
     - _Float4: 0.73
     - _Float5: 0.1
     - _Float6: 0
-    - _FoamCutoff: 0.77
-    - _FoamDepthFade: 0.18
+    - _FoamCutoff: 1.12
+    - _FoamDepthFade: 18.9
     - _FoamScale: 25
-    - _FoamSpeed: -0.13
+    - _FoamSpeed: -1
     - _Metallic: 0
     - _NormalIntensity: 0.178
     - _Opacity: 1
@@ -107,10 +110,10 @@ Material:
     - _ReflectionTurbulenceTiling: 0
     - _ReflectionsIntensity: 0.083
     - _ReflectionsIntensity1: 1
-    - _RefractionDepth: 2.84
+    - _RefractionDepth: 94.2
     - _RefractionDepth1: 3.31
     - _RefractionDepthStrength1: 0
-    - _RefractionStrength: 1
+    - _RefractionStrength: 83.06
     - _RefractionStrength1: 0.33
     - _Smoothness: 0.96
     - _TurbulenceDistortionIntensity: 1.84
@@ -121,7 +124,7 @@ Material:
     - _TurbulenceTiling1: 0
     - _WaveDistortionIntensity: 4
     - _WaveDistortionIntensity1: 0.6
-    - _WaveNormalIntensity: 0.092
+    - _WaveNormalIntensity: 0.32
     - _WaveTile: 33
     - _WaveTile1: 0
     - _WaveTile2: 20
@@ -130,7 +133,7 @@ Material:
     - _WorldtoObjectPosition: 0
     - __dirty: 0
     m_Colors:
-    - _ColorDeep: {r: 0, g: 0.31132072, b: 0.41509432, a: 1}
+    - _ColorDeep: {r: 0.08052685, g: 0.33376077, b: 0.49056602, a: 1}
     - _ColorShallow: {r: 0.043120317, g: 0.4397011, b: 0.4811321, a: 0}
     - _Deep: {r: 0, g: 0.29965103, b: 0.40566036, a: 1}
     - _Deep1: {r: 0.12130647, g: 0.34791896, b: 0.5471698, a: 0}
