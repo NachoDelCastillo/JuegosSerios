@@ -39,8 +39,8 @@ public class AllMenuManager_PK : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log("Mathf.Abs(cameraObj.position.z) = " + Mathf.Abs(cameraObj.position.z));
-        Debug.Log("initialZ + cameraDistanceX = " + initialZ + cameraDistanceX);
+        //Debug.Log("Mathf.Abs(cameraObj.position.z) = " + Mathf.Abs(cameraObj.position.z));
+        //Debug.Log("initialZ + cameraDistanceX = " + initialZ + cameraDistanceX);
 
         if (Input.anyKeyDown && ( Mathf.Abs(cameraObj.position.z) >= initialZ + cameraDistanceX || Mathf.Abs(cameraObj.position.z) < 181 )) 
         {
