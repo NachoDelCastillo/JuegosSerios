@@ -40,6 +40,9 @@ public class EnvironmentChanger : MonoBehaviour
     [SerializeField]
     Material greyRocks;
 
+    [SerializeField]
+    Transform subwaterFloor;
+
 
 
     private void Start()
@@ -77,6 +80,8 @@ public class EnvironmentChanger : MonoBehaviour
 
         greenTerrain.gameObject.SetActive(true);
         lessGreenTerrain.gameObject.SetActive(false);
+
+        subwaterFloor.gameObject.SetActive(false);
     }
 
     void SetSecondLevel()
@@ -86,7 +91,7 @@ public class EnvironmentChanger : MonoBehaviour
             t.gameObject.SetActive(false);
 
         water.gameObject.SetActive(true);
-        water.position = new Vector3(water.position.x, waterInitialY - 30, water.position.z);
+        water.position = new Vector3(water.position.x, waterInitialY - 50, water.position.z);
 
         MeshRenderer[] rocksMeshRenderers = bigRocks.GetComponentsInChildren<MeshRenderer>();
         for (int i = 0; i < rocksMeshRenderers.Length; i++)
@@ -94,6 +99,7 @@ public class EnvironmentChanger : MonoBehaviour
 
         greenTerrain.gameObject.SetActive(false);
         lessGreenTerrain.gameObject.SetActive(true);
+        subwaterFloor.gameObject.SetActive(false);
     }
 
     void SetThirdLevel()
@@ -110,5 +116,6 @@ public class EnvironmentChanger : MonoBehaviour
 
         greenTerrain.gameObject.SetActive(false);
         lessGreenTerrain.gameObject.SetActive(false);
+        subwaterFloor.gameObject.SetActive(true);
     }
 }
