@@ -19,6 +19,9 @@ public class AllMenuManager_PK : MonoBehaviour
     SettingsMenu_PK settingsMenu;
     LevelselectorMenu_PK levelSelectorMenu;
 
+    float initialZ;
+    float initialY;
+
     private void Awake()
     {
         mainMenu = FindObjectOfType<MainMenu_PK>();
@@ -28,18 +31,24 @@ public class AllMenuManager_PK : MonoBehaviour
         mainMenu.enabled = true;
         settingsMenu.enabled = false;
         levelSelectorMenu.enabled = false;
+
+        initialZ = cameraObj.transform.position.z;
+        initialY = cameraObj.transform.position.y;
     }
 
 
     private void Update()
     {
-        if (Input.anyKeyDown && Mathf.Abs(cameraObj.position.x) == cameraDistanceX) 
+        Debug.Log("Mathf.Abs(cameraObj.position.z) = " + Mathf.Abs(cameraObj.position.z));
+        Debug.Log("initialZ + cameraDistanceX = " + initialZ + cameraDistanceX);
+
+        if (Input.anyKeyDown && ( Mathf.Abs(cameraObj.position.z) >= initialZ + cameraDistanceX || Mathf.Abs(cameraObj.position.z) < 181 )) 
         {
             // Sound
             AudioManager_PK.GetInstance().Play("ButtonPress", 1);
 
             StartCoroutine(EnableMenu(mainMenu, true, cameraSpeed));
-            cameraObj.DOMoveX(0, cameraSpeed);
+            cameraObj.DOMoveZ(initialZ, cameraSpeed);
         }
     }
 
@@ -60,7 +69,7 @@ public class AllMenuManager_PK : MonoBehaviour
         mainMenu.enabled = false;
         StartCoroutine(EnableMenu(levelSelectorMenu, true, cameraSpeed / 2));
 
-        cameraObj.DOMoveY(cameraDistanceY, cameraSpeed);
+        cameraObj.DOMoveY(initialY + cameraDistanceY, cameraSpeed);
     }
 
     public void PressSettings()
@@ -68,21 +77,21 @@ public class AllMenuManager_PK : MonoBehaviour
         mainMenu.enabled = false;
         StartCoroutine(EnableMenu(settingsMenu, true, cameraSpeed/2));
 
-        cameraObj.DOMoveY(-cameraDistanceY, cameraSpeed);
+        cameraObj.DOMoveY(initialY - cameraDistanceY, cameraSpeed);
     }
 
     public void PressControls()
     {
         mainMenu.enabled = false;
 
-        cameraObj.DOMoveX(-cameraDistanceX, cameraSpeed);
+        cameraObj.DOMoveZ(initialZ + cameraDistanceX, cameraSpeed);
     }
 
     public void PressCredits()
     {
         mainMenu.enabled = false;
 
-        cameraObj.DOMoveX(cameraDistanceX, cameraSpeed);
+        cameraObj.DOMoveZ(initialZ - cameraDistanceX, cameraSpeed);
     }
 
     #endregion
@@ -95,7 +104,7 @@ public class AllMenuManager_PK : MonoBehaviour
         levelSelectorMenu.enabled = false;
         StartCoroutine(EnableMenu(mainMenu, true, cameraSpeed/2));
 
-        cameraObj.DOMoveY(0, cameraSpeed);
+        cameraObj.DOMoveY(initialY, cameraSpeed);
     }
 
     #endregion
