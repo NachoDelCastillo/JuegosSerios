@@ -77,6 +77,7 @@ public class CharacterSelectTemplate : MonoBehaviour
                 readyGameObject.SetActive(CharacterSelect_Online.Instance.IsPlayerReady(playerData.clientId));
                 playerNameText.text = playerData.playerName.ToString();
                 characterVisual.SetPlayerMaterial(OnlineMultiplayerManager.Instance.GetPlayerMaterial(playerData.colorId));
+                characterVisual.SetNeonColorById(playerData.colorId);
             }
 
             else
