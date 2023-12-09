@@ -1299,15 +1299,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bird
       objectReference: {fileID: 0}
+    - target: {fileID: 2095507291213762859, guid: 8f21bb9c5d192964bb5751543da407a8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7807618410109607445, guid: 8f21bb9c5d192964bb5751543da407a8,
         type: 3}
       propertyPath: GlobalObjectIdHash
       value: 2678465
-      objectReference: {fileID: 0}
-    - target: {fileID: 8422326593188390150, guid: 8f21bb9c5d192964bb5751543da407a8,
-        type: 3}
-      propertyPath: DEBUG
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4359,7 +4359,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1824161597}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -10.43}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

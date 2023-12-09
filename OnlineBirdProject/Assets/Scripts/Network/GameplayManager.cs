@@ -102,7 +102,7 @@ public class GameplayManager : NetworkBehaviour
     [ClientRpc]
     void createFoodClientRpc()
     {
-        Debug.Log("En el server se ejecuta");
+        //Debug.Log("En el server se ejecuta");
         Transform p = Instantiate(foodManagerPrefab);
         p.GetComponent<NetworkObject>().Spawn();
     }

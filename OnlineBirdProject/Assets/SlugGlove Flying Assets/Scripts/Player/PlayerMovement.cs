@@ -428,7 +428,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F))
             Boost();
 
-        Debug.Log("Rigid.velocity = " + Rigid.velocity.magnitude);
+        //Debug.Log("Rigid.velocity = " + Rigid.velocity.magnitude);
 
         Vector3 maxVelocityTarget = Rigid.velocity.normalized * 45;
 
