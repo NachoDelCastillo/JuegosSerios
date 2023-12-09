@@ -9,12 +9,12 @@ public class Food : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.GetComponent<BirdManager>() && other.gameObject.GetComponent<BirdManager>().IsOwner)
+        if (other.gameObject.GetComponent<BirdManager>() && other.GetComponent<BirdManager>().IsOwner)
         {
-
-            Debug.Log("Se ha comida la comidita");
-            Destroy(this.gameObject);
+            other.GetComponent<LifeBar>().eatFood(foodCount);
         }
+
+        if (other.gameObject.GetComponent<BirdManager>()) { Destroy(this.gameObject); }
 
     }
 }

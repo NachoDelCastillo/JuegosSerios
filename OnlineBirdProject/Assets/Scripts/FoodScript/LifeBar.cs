@@ -5,11 +5,17 @@ using UnityEngine.UI;
 
 public class LifeBar : MonoBehaviour
 {
-    public Image barImage;
-    public Image barImage2;
+    private Image barImage;
+    private Image barImage2;
     [SerializeField]
-    private float lifeAmountDecreasing = 3f;
+    private float lifeAmountDecreasing = 0.000000000001f;
 
+
+    private void Start()
+    {
+        barImage = GameObject.Find("Lifes").GetComponent<Image>();
+        barImage2 = GameObject.Find("Lifes2").GetComponent<Image>();
+    }
     // Update is called once per frame
     void Update()
     {

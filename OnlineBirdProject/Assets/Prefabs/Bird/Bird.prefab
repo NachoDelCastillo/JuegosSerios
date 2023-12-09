@@ -1451,6 +1451,7 @@ GameObject:
   - component: {fileID: 7807618410109607445}
   - component: {fileID: 6187256036099945933}
   - component: {fileID: 2665529723033891471}
+  - component: {fileID: 5112533914086515097}
   m_Layer: 9
   m_Name: Bird
   m_TagString: Player
@@ -1544,7 +1545,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 340b16ad798c4b84daaf0d741c620d08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DEBUG: 0
+  DEBUG: 1
   cameraFollow: {fileID: 832141912906834625}
 --- !u!114 &4570356234517578725
 MonoBehaviour:
@@ -1737,6 +1738,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   headMeshRenderer: {fileID: 0}
   bodyMeshRenderer: {fileID: 4876354726135476697}
+--- !u!114 &5112533914086515097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2095507291213762859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c21ce8253333ee84f8a231b06a84e3a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifeAmountDecreasing: 0.03
 --- !u!1 &2170088773449617208
 GameObject:
   m_ObjectHideFlags: 0
@@ -6444,7 +6458,7 @@ GameObject:
   - component: {fileID: 2214352198796113694}
   m_Layer: 0
   m_Name: CameraFollow
-  m_TagString: Untagged
+  m_TagString: CameraFollow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

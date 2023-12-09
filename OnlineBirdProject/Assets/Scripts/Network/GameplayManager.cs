@@ -96,11 +96,11 @@ public class GameplayManager : NetworkBehaviour
             playerTransform.gameObject.transform.GetChild(2).tag = "CameraFollow";
         }
 
-        createFoodServerRpc();
+        createFoodClientRpc();
     }
 
-    [ServerRpc]
-    void createFoodServerRpc()
+    [ClientRpc]
+    void createFoodClientRpc()
     {
         Debug.Log("En el server se ejecuta");
         Transform p = Instantiate(foodManagerPrefab);
