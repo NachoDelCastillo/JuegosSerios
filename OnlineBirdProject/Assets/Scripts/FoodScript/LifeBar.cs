@@ -24,28 +24,16 @@ public class LifeBar : MonoBehaviour
         barImage2.fillAmount -= lifeAmountDecreasing*Time.deltaTime;
 
         if (barImage.fillAmount == 0 && barImage2.fillAmount == 0 && transform.GetComponent<BirdManager>().IsOwner) {
-            // Encuentra todos los objetos con el nombre específico
-            // Encuentra todos los objetos con el mismo nombre
-            GameObject[] cameraFollows = GameObject.FindGameObjectsWithTag("CameraFollow");
+            Destroy(this.gameObject);
+            Transform cameraFollow = GetComponent<BirdManager>().cameraFollow;
 
-            //int i = 0;
-            //while (cameraFollows[i].GetComponent<CameraFollow>().target != transform.GetChild(1)) {
-            //    i++;
-            //}
-            //if(i> cameraFollows.Length)
-            //{
-            //    //FIN DEL JUEGO
-            //}
-            //else
-            //{
-            //    GameObject[] pajaros = GameObject.FindGameObjectsWithTag("CameraFollow");
-            //    int j = 0;
-            //    while (pajaros[i].GetComponent<BirdManager>().IsOwner)
-            //    {
-            //        j++;
-            //    }
-            //    cameraFollows[i].GetComponent<CameraFollow>().target = pajaros[i].transform.GetChild(1);
-            //}
+            GameObject[] birds = GameObject.FindGameObjectsWithTag("Player");
+            int i = 0;
+            while(birds[i] == this)
+            {
+                i++;
+            }
+            cameraFollow.GetComponent<CameraFollow>().target = birds[i].transform.GetChild(1);
         }
     }
     

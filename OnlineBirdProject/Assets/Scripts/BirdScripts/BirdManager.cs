@@ -19,7 +19,7 @@ public class BirdManager : NetworkBehaviour
     TrailRenderer[] trailRenderers;
 
     [SerializeField]
-    Transform cameraFollow;
+    public Transform cameraFollow;
 
     private void Awake()
     {
