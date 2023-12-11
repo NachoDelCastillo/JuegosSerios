@@ -156,9 +156,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timesForPath:
-  - 5
-  - 20
-  - 20
+  - 10
+  - 40
+  - 40
 --- !u!1 &3662947793287990302
 GameObject:
   m_ObjectHideFlags: 0

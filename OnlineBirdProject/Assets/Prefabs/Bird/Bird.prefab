@@ -1545,7 +1545,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 340b16ad798c4b84daaf0d741c620d08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DEBUG: 1
+  DEBUG: 0
   cameraFollow: {fileID: 832141912906834625}
 --- !u!114 &4570356234517578725
 MonoBehaviour:
@@ -1750,7 +1750,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c21ce8253333ee84f8a231b06a84e3a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifeAmountDecreasing: 0.004
+  lifeAmountDecreasing: 0.008
 --- !u!1 &2170088773449617208
 GameObject:
   m_ObjectHideFlags: 0

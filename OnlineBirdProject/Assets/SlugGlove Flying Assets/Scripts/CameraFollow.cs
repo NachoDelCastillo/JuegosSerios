@@ -120,6 +120,8 @@ public class CameraFollow : MonoBehaviour
 
         //look at player
 
+        if (target == null)
+            target = GameObject.FindGameObjectsWithTag("Player")[0].transform.GetChild(1).transform;
 
         LookAtPos = target.position;
 

@@ -12,13 +12,37 @@ public class CameraFollowTarget : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 MPos = Target.transform.position;
+        if (Target != null && OffsetDirection!=null)
+        {
+            Vector3 MPos = Vector3.up;
 
-        if (Target.Rigid != null)
-            MPos = Target.Rigid.position;
+            if (Target.Rigid != null)
+                MPos = Target.Rigid.position;
+            transform.position = Target.transform.position + (MPos * 2);
+        }
+        else
+        {
+            GameObject[] birds = GameObject.FindGameObjectsWithTag("Player");
+            Target = birds[0].GetComponent<PlayerMovement>();
+            OffsetDirection = birds[0].transform;
+        }
 
-        transform.position = MPos + (OffsetDirection.up * Offset);
     }
+
+    public void SetTarget(PlayerMovement target)
+    {
+        Debug.Log("Se llama");
+        Debug.Log(target);
+        Target = target;
+    }
+
+    public void SetOffsetDirection(Transform offsetDirection)
+    {
+        Debug.Log("Se llama2");
+        Debug.Log(offsetDirection);
+        OffsetDirection = offsetDirection;
+    }
+
 
     private void Start()
     {
