@@ -12,6 +12,10 @@ public class CameraFollowTarget : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Vector3 MPoss = Vector3.up;
+        transform.position = Target.transform.position + (MPoss * 2);
+        return;
+
         if (Target != null && OffsetDirection!=null)
         {
             Vector3 MPos = Vector3.up;
@@ -31,6 +35,7 @@ public class CameraFollowTarget : MonoBehaviour
 
     public void SetTarget(PlayerMovement target)
     {
+        return;
         Debug.Log("Se llama");
         Debug.Log(target);
         Target = target;
@@ -38,6 +43,7 @@ public class CameraFollowTarget : MonoBehaviour
 
     public void SetOffsetDirection(Transform offsetDirection)
     {
+        return;
         Debug.Log("Se llama2");
         Debug.Log(offsetDirection);
         OffsetDirection = offsetDirection;
