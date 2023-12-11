@@ -1,3 +1,4 @@
+using Cinemachine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -61,6 +62,10 @@ public class GameplayManager : NetworkBehaviour
         Instance = this;
     }
 
+    private void Start()
+    {
+    }
+
     // Estado actual
     public State GetState()
     { return state.Value; }
@@ -94,10 +99,55 @@ public class GameplayManager : NetworkBehaviour
             playerTransform.GetComponent<NetworkObject>().SpawnAsPlayerObject(clientId, true);
            // playerTransform.gameObject.SetActive(false);
             playerTransform.gameObject.transform.GetChild(2).tag = "CameraFollow";
+
+            if (playerTransform.GetComponent<BirdManager>().IsOwner)
+            {
+                birdCamera = playerTransform.GetComponent<CameraFollowTarget>();
+            }
         }
 
         createFoodClientRpc();
     }
+
+    [ServerRpc]
+    void StartAnimationServerRpc()
+    {
+        StartCoroutine(StartingLevelAnimation());
+        StartAnimationClientRpc();
+    }
+    [ClientRpc]
+    void StartAnimationClientRpc()
+    {
+        StartCoroutine(StartingLevelAnimation());
+    }
+
+
+    // ANIMATION MANAGER
+    bool DEBUG_ANIMATION = true;
+    bool animationPlayed = false;
+
+    CinemachineVirtualCamera[] cameras;
+
+    IEnumerator StartingLevelAnimation()
+    {
+        Debug.Log("START LEVEL ANIMATION");
+
+        yield return new WaitForSeconds(1);
+
+        Debug.Log("END LEVEL ANIMATION");
+    }
+
+    CameraFollowTarget birdCamera;
+
+    void DeactivateBirdCamera()
+    {
+        birdCamera.gameObject.SetActive(false);
+    }
+
+
+
+
+
 
     [ClientRpc]
     void createFoodClientRpc()
@@ -179,6 +229,19 @@ public class GameplayManager : NetworkBehaviour
 
             case State.GamePlaying:
                 gameplay_Timer.Value -= Time.deltaTime;
+
+                if (!animationPlayed && gameplay_Timer.Value < maxGameplayTimer - 5)
+                {
+                    animationPlayed = true;
+
+                    if (DEBUG_ANIMATION)
+                        StartCoroutine(StartingLevelAnimation());
+                    else
+                    // El servidor activa la animacion, la cual tambien avisa al resto de maquinas para que empiecen 
+                    // la misma animacion en su propia maquina local
+                    StartAnimationServerRpc();
+                }
+
                 if (gameplay_Timer.Value < 0)
                 {
                     state.Value = State.GameOver;
