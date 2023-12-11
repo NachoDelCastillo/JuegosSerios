@@ -109,12 +109,12 @@ public class GameplayManager : NetworkBehaviour
         createFoodClientRpc();
     }
 
-    [ServerRpc]
-    void StartAnimationServerRpc()
-    {
-        StartCoroutine(StartingLevelAnimation());
-        StartAnimationClientRpc();
-    }
+    //[ServerRpc]
+    //void StartAnimationServerRpc()
+    //{
+    //    StartCoroutine(StartingLevelAnimation());
+    //    StartAnimationClientRpc();
+    //}
     [ClientRpc]
     void StartAnimationClientRpc()
     {
@@ -123,7 +123,7 @@ public class GameplayManager : NetworkBehaviour
 
 
     // ANIMATION MANAGER
-    bool DEBUG_ANIMATION = true;
+    bool DEBUG_ANIMATION = false;
     bool animationPlayed = false;
 
     CinemachineVirtualCamera[] cameras;
@@ -237,9 +237,9 @@ public class GameplayManager : NetworkBehaviour
                     if (DEBUG_ANIMATION)
                         StartCoroutine(StartingLevelAnimation());
                     else
-                    // El servidor activa la animacion, la cual tambien avisa al resto de maquinas para que empiecen 
-                    // la misma animacion en su propia maquina local
-                    StartAnimationServerRpc();
+                        // El servidor activa la animacion, la cual tambien avisa al resto de maquinas para que empiecen 
+                        // la misma animacion en su propia maquina local
+                        StartAnimationClientRpc();
                 }
 
                 if (gameplay_Timer.Value < 0)
