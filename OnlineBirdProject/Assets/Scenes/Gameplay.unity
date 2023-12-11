@@ -1302,7 +1302,7 @@ PrefabInstance:
     - target: {fileID: 2095507291213762859, guid: 8f21bb9c5d192964bb5751543da407a8,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7807618410109607445, guid: 8f21bb9c5d192964bb5751543da407a8,
         type: 3}
@@ -2412,7 +2412,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 1602493333437324716, guid: 8f21bb9c5d192964bb5751543da407a8,
     type: 3}
-  foodManagerPrefab: {fileID: 7523014260271850430, guid: da15110de96aa974c8f0636ffef0ef4d,
+  foodManagerPrefab: {fileID: 4048881799816841872, guid: da15110de96aa974c8f0636ffef0ef4d,
     type: 3}
   deforestacion: {fileID: 1425133192}
   director: {fileID: 1814901399}
