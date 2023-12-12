@@ -89,9 +89,6 @@ public class GameplayManager : NetworkBehaviour
         if (SceneManager.GetActiveScene().name != SceneLoader.SceneName.Gameplay.ToString())
             return;
 
-
-        director.stopped += OnTimelineFinished;
-
         foreach (ulong clientId in NetworkManager.Singleton.ConnectedClientsIds)
         {
             Transform playerTransform = Instantiate(playerPrefab);
@@ -99,14 +96,23 @@ public class GameplayManager : NetworkBehaviour
             playerTransform.GetComponent<NetworkObject>().SpawnAsPlayerObject(clientId, true);
            // playerTransform.gameObject.SetActive(false);
             playerTransform.gameObject.transform.GetChild(2).tag = "CameraFollow";
-
-            if (playerTransform.GetComponent<BirdManager>().IsOwner)
-            {
-                birdCamera = playerTransform.GetComponent<CameraFollowTarget>();
-            }
         }
 
         createFoodClientRpc();
+
+        DeactivateMainCameraClientRpc();
+    }
+
+    [ClientRpc]
+    void DeactivateMainCameraClientRpc()
+    {
+        Invoke("DeactivateMainCamera", .1f);
+    }
+
+    void DeactivateMainCamera()
+    {
+        birdCamera = FindObjectOfType<CameraFollowTarget>();
+        birdCamera.gameObject.SetActive(false);
     }
 
     //[ServerRpc]
@@ -126,25 +132,32 @@ public class GameplayManager : NetworkBehaviour
     bool DEBUG_ANIMATION = false;
     bool animationPlayed = false;
 
+    [SerializeField]
     CinemachineVirtualCamera[] cameras;
 
     IEnumerator StartingLevelAnimation()
     {
         Debug.Log("START LEVEL ANIMATION");
 
+        for (int i = 0; i < cameras.Length; i++)
+            cameras[i].gameObject.SetActive(false);
+       
+
+        cameras[0].gameObject.SetActive(true);
+
         yield return new WaitForSeconds(1);
+
+        cameras[0].gameObject.SetActive(false);
+        cameras[1].gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(2);
+
+        birdCamera.gameObject.SetActive(true);
 
         Debug.Log("END LEVEL ANIMATION");
     }
 
     CameraFollowTarget birdCamera;
-
-    void DeactivateBirdCamera()
-    {
-        birdCamera.gameObject.SetActive(false);
-    }
-
-
 
 
 
@@ -158,17 +171,17 @@ public class GameplayManager : NetworkBehaviour
     }
 
     // TimeLine acabada
-    void OnTimelineFinished(PlayableDirector director)
-    {
-        GameObject[] clientsArray = clients.ToArray();
+    //void OnTimelineFinished(PlayableDirector director)
+    //{
+    //    GameObject[] clientsArray = clients.ToArray();
 
-        foreach (ulong clientId in NetworkManager.Singleton.ConnectedClientsIds)
-        {
-            clientsArray[clientId].SetActive(true);
-        }
+    //    foreach (ulong clientId in NetworkManager.Singleton.ConnectedClientsIds)
+    //    {
+    //        clientsArray[clientId].SetActive(true);
+    //    }
 
-        GameObject.FindGameObjectWithTag("CameraFollow").SetActive(true);
-    }
+    //    GameObject.FindGameObjectWithTag("CameraFollow").SetActive(true);
+    //}
 
     // Se llama cada vez que cambia el estado
     private void State_OnValueChanged(State previousValue, State newValue)
@@ -230,7 +243,7 @@ public class GameplayManager : NetworkBehaviour
             case State.GamePlaying:
                 gameplay_Timer.Value -= Time.deltaTime;
 
-                if (!animationPlayed && gameplay_Timer.Value < maxGameplayTimer - 5)
+                if (!animationPlayed && gameplay_Timer.Value < maxGameplayTimer - 3)
                 {
                     animationPlayed = true;
 
