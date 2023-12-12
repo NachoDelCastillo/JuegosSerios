@@ -8,43 +8,40 @@ public class CameraFollowTarget : MonoBehaviour
     public PlayerMovement Target;
     public float Offset;
     public Transform OffsetDirection;
+    bool specting = false;
 
     // Update is called once per frame
     void Update()
     {
-        Vector3 MPoss = Vector3.up;
-        transform.position = Target.transform.position + (MPoss * 2);
-        return;
 
         if (Target != null && OffsetDirection!=null)
         {
-            Vector3 MPos = Vector3.up;
-
+            Vector3 MPos = Target.transform.position;
             if (Target.Rigid != null)
                 MPos = Target.Rigid.position;
-            transform.position = Target.transform.position + (MPos * 2);
+            if(!specting)transform.position = MPos + (OffsetDirection.up * Offset);
+            else transform.position = Target.transform.position + (Vector3.up * 2);
         }
         else
         {
             GameObject[] birds = GameObject.FindGameObjectsWithTag("Player");
             Target = birds[0].GetComponent<PlayerMovement>();
             OffsetDirection = birds[0].transform;
+            specting = true;
+            Debug.Log("Entra al cambio de target");
         }
 
     }
 
     public void SetTarget(PlayerMovement target)
     {
-        return;
-        Debug.Log("Se llama");
+
         Debug.Log(target);
         Target = target;
     }
 
     public void SetOffsetDirection(Transform offsetDirection)
     {
-        return;
-        Debug.Log("Se llama2");
         Debug.Log(offsetDirection);
         OffsetDirection = offsetDirection;
     }
