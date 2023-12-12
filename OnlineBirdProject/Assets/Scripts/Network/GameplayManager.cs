@@ -2,6 +2,7 @@ using Cinemachine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.Collections.LowLevel.Unsafe;
 using Unity.Netcode;
 using UnityEngine;
@@ -20,7 +21,8 @@ public class GameplayManager : NetworkBehaviour
     private Transform foodManagerPrefab;
 
     private int numLevels = 3;
-    private int currentLevel = 1;
+    private int currentLevel = 0;
+    String[] ageStrings = { "1320", "2023", "2083" };
 
     public GameObject deforestacion;
     public PlayableDirector director;
@@ -64,6 +66,8 @@ public class GameplayManager : NetworkBehaviour
 
     private void Start()
     {
+        if (DEBUG_ANIMATION)
+            StartCoroutine(StartingLevelAnimation());
     }
 
     // Estado actual
@@ -129,8 +133,12 @@ public class GameplayManager : NetworkBehaviour
 
 
     // ANIMATION MANAGER
-    bool DEBUG_ANIMATION = false;
+    bool DEBUG_ANIMATION = true;
     bool animationPlayed = false;
+
+    [SerializeField]
+    TMP_Text ageText;
+
 
     [SerializeField]
     CinemachineVirtualCamera[] cameras;
@@ -150,11 +158,32 @@ public class GameplayManager : NetworkBehaviour
         cameras[0].gameObject.SetActive(false);
         cameras[1].gameObject.SetActive(true);
 
+        yield return new WaitForSeconds(1);
+
+        // Renderizar Texto
+        StartCoroutine(RenderText());
+
         yield return new WaitForSeconds(2);
 
         birdCamera.gameObject.SetActive(true);
 
         Debug.Log("END LEVEL ANIMATION");
+    }
+
+    IEnumerator RenderText()
+    {
+
+        int typographicTime = 1;
+
+        String s = ageStrings[currentLevel];
+        float timeperLetter = (float)typographicTime / (float)s.Length;
+        String currentText = "";
+        foreach (char letter in s)
+        {
+            currentText += letter;
+            ageText.text = currentText;
+            yield return new WaitForSeconds(timeperLetter);
+        }
     }
 
     CameraFollowTarget birdCamera;
