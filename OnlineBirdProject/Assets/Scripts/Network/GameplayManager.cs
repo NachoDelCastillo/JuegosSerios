@@ -13,6 +13,9 @@ using static UnityEngine.CullingGroup;
 
 public class GameplayManager : NetworkBehaviour
 {
+    float secondsToAnimation = 5;
+
+
     static public GameplayManager Instance;
 
     [SerializeField]
@@ -104,11 +107,11 @@ public class GameplayManager : NetworkBehaviour
 
         createFoodClientRpc();
 
-        DeactivateMainCameraClientRpc();
+        initializeClientsClientRpc();
     }
 
     [ClientRpc]
-    void DeactivateMainCameraClientRpc()
+    void initializeClientsClientRpc()
     {
         Invoke("DeactivateMainCamera", .1f);
     }
@@ -117,6 +120,8 @@ public class GameplayManager : NetworkBehaviour
     {
         birdCamera = FindObjectOfType<CameraFollowTarget>();
         birdCamera.gameObject.SetActive(false);
+
+        waitingForOtherPlayersText.transform.parent.gameObject.SetActive(true);
     }
 
     //[ServerRpc]
@@ -133,11 +138,14 @@ public class GameplayManager : NetworkBehaviour
 
 
     // ANIMATION MANAGER
-    bool DEBUG_ANIMATION = true;
+    bool DEBUG_ANIMATION = false;
     bool animationPlayed = false;
 
     [SerializeField]
     TMP_Text ageText;
+
+    [SerializeField]
+    TMP_Text waitingForOtherPlayersText;
 
 
     [SerializeField]
@@ -147,9 +155,10 @@ public class GameplayManager : NetworkBehaviour
     {
         Debug.Log("START LEVEL ANIMATION");
 
+        waitingForOtherPlayersText.transform.parent.gameObject.SetActive(false);
+
         for (int i = 0; i < cameras.Length; i++)
             cameras[i].gameObject.SetActive(false);
-       
 
         cameras[0].gameObject.SetActive(true);
 
@@ -172,8 +181,7 @@ public class GameplayManager : NetworkBehaviour
 
     IEnumerator RenderText()
     {
-
-        int typographicTime = 1;
+        int typographicTime = 2;
 
         String s = ageStrings[currentLevel];
         float timeperLetter = (float)typographicTime / (float)s.Length;
@@ -251,6 +259,11 @@ public class GameplayManager : NetworkBehaviour
         if (!IsServer)
             return;
 
+        int timerNumber = 5 - Mathf.RoundToInt(maxGameplayTimer - gameplay_Timer.Value);// - secondsToAnimation);
+        waitingForOtherPlayersText.text = 
+            "Waiting for other Players (" + timerNumber + ")";
+
+
         switch (state.Value)
         {
             case State.WaitingToStart:
@@ -272,7 +285,9 @@ public class GameplayManager : NetworkBehaviour
             case State.GamePlaying:
                 gameplay_Timer.Value -= Time.deltaTime;
 
-                if (!animationPlayed && gameplay_Timer.Value < maxGameplayTimer - 3)
+                Debug.Log("gameplay_Timer.Value = " + gameplay_Timer.Value);
+
+                if (!animationPlayed && gameplay_Timer.Value < maxGameplayTimer - secondsToAnimation)
                 {
                     animationPlayed = true;
 
@@ -302,7 +317,6 @@ public class GameplayManager : NetworkBehaviour
 
     private void changeLevel()
     {
-
         if (currentLevel < numLevels)
         {
             currentLevel++;
