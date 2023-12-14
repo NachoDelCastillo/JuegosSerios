@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{13d1911c-2bf7-4ea8-83a9-d1f7e69a3590}">
+		<property name="name">
+			<value>EatPitch</value>
+		</property>
+		<relationship name="folder">
+			<destination>{6b2d2ab2-d250-4afb-a3f2-b36c0a7e7d96}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{903bfa94-1b54-46a0-bf15-22740ed95322}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{903bfa94-1b54-46a0-bf15-22740ed95322}">
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>
