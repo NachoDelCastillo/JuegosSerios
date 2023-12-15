@@ -15,7 +15,7 @@ MonoBehaviour:
   Path: ../FMOD/BirdProject/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638367285200156369
+  lastModified: 638371115704284939
   FileSizes:
   - Name: Desktop
     Value: 916
@@ -59,7 +59,7 @@ MonoBehaviour:
   Path: ../FMOD/BirdProject/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638367285200116351
+  lastModified: 638371115704284939
   FileSizes:
   - Name: Desktop
     Value: 2738112
@@ -115,7 +115,7 @@ MonoBehaviour:
   - {fileID: -5446767345079484961}
   StringsBanks:
   - {fileID: -8918464647536446032}
-  cacheTime: 638367285200156369
+  cacheTime: 638371115704284939
   cacheVersion: 131609
 --- !u!114 &7393306983009350538
 MonoBehaviour:
