@@ -19,6 +19,9 @@ public class GameplayManager : NetworkBehaviour
     [SerializeField]
     private TMP_Text countDownText;
 
+    [SerializeField]
+    private TMP_Text levelTimerText;
+    bool showLevelTimerText = false;
 
     static public GameplayManager Instance;
 
@@ -151,9 +154,6 @@ public class GameplayManager : NetworkBehaviour
     [SerializeField]
     TMP_Text waitingForOtherPlayersText;
 
-    [SerializeField]
-    TMP_Text countdowntext;
-
 
     [SerializeField]
     CinemachineVirtualCamera[] cameras;
@@ -164,6 +164,9 @@ public class GameplayManager : NetworkBehaviour
 
         ageText.DOFade(0, .001f);
         countDownText.text = "";
+
+        showLevelTimerText = false;
+        levelTimerText.text = "";
 
         waitingForOtherPlayersText.transform.parent.gameObject.SetActive(false);
 
@@ -201,6 +204,8 @@ public class GameplayManager : NetworkBehaviour
         yield return new WaitForSeconds(1);
         countDownText.text = "SURVIVE";
         countDownText.DOFade(0, 1);
+
+        showLevelTimerText = true;
 
         // Devolver controles al pajaroOwner
 
@@ -281,6 +286,13 @@ public class GameplayManager : NetworkBehaviour
         if (Input.GetKeyDown(KeyCode.V))
         {
             changeLevel();
+        }
+
+        if (!showLevelTimerText)
+            levelTimerText.text = "";
+        else
+        {
+            levelTimerText.text = Mathf.CeilToInt(gameplay_Timer.Value).ToString();
         }
 
         // Transicion de estados por tiempo
