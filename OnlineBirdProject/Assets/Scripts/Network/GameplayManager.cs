@@ -10,10 +10,14 @@ using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 using static UnityEngine.CullingGroup;
+using DG.Tweening;
 
 public class GameplayManager : NetworkBehaviour
 {
     float secondsToAnimation = 5;
+
+    [SerializeField]
+    private TMP_Text countDownText;
 
 
     static public GameplayManager Instance;
@@ -158,6 +162,9 @@ public class GameplayManager : NetworkBehaviour
     {
         Debug.Log("START LEVEL ANIMATION");
 
+        ageText.DOFade(0, .001f);
+        countDownText.text = "";
+
         waitingForOtherPlayersText.transform.parent.gameObject.SetActive(false);
 
         for (int i = 0; i < cameras.Length; i++)
@@ -172,12 +179,30 @@ public class GameplayManager : NetworkBehaviour
 
         yield return new WaitForSeconds(1);
 
+        ageText.text = ageStrings[currentLevel];
+        ageText.DOFade(1, 1);
         // Renderizar Texto
-        StartCoroutine(RenderText());
+        //StartCoroutine(RenderText());
 
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1);
+
+        ageText.DOFade(0, 1);
+
+        yield return new WaitForSeconds(1);
 
         birdCamera.gameObject.SetActive(true);
+
+
+        countDownText.text = "3";
+        yield return new WaitForSeconds(1);
+        countDownText.text = "2";
+        yield return new WaitForSeconds(1);
+        countDownText.text = "1";
+        yield return new WaitForSeconds(1);
+        countDownText.text = "SURVIVE";
+        countDownText.DOFade(0, 1);
+
+        // Devolver controles al pajaroOwner
 
         Debug.Log("END LEVEL ANIMATION");
     }
