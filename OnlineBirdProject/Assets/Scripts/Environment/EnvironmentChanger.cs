@@ -65,7 +65,7 @@ public class EnvironmentChanger : MonoBehaviour
             SetThirdLevel();
     }
 
-    void SetFirstLevel()
+    public void SetFirstLevel()
     {
         // Cascadas
         foreach (Transform t in waterFalls)
@@ -84,7 +84,7 @@ public class EnvironmentChanger : MonoBehaviour
         subwaterFloor.gameObject.SetActive(false);
     }
 
-    void SetSecondLevel()
+    public void SetSecondLevel()
     {
         // Cascadas
         foreach (Transform t in waterFalls)
@@ -102,7 +102,7 @@ public class EnvironmentChanger : MonoBehaviour
         subwaterFloor.gameObject.SetActive(false);
     }
 
-    void SetThirdLevel()
+    public void SetThirdLevel()
     {
         foreach (Transform t in waterFalls)
             t.gameObject.SetActive(false);

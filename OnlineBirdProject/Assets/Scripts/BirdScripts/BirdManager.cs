@@ -29,6 +29,8 @@ public class BirdManager : NetworkBehaviour
         gameplayManager = GameplayManager.Instance;
         playerVisual = GetComponentInChildren<PlayerVisual>();
         trailRenderers = GetComponentsInChildren<TrailRenderer>();
+
+        GameplayManager.Instance.addBird(this);
     }
 
     private void Start()
@@ -128,5 +130,10 @@ public class BirdManager : NetworkBehaviour
     //{
     //    return IsOwner && gameplayManager.GetState() == GameplayManager.State.GamePlaying;
     //}
+
+    private void OnDestroy()
+    {
+        GameplayManager.Instance.birdDestroyed(this);
+    }
 
 }

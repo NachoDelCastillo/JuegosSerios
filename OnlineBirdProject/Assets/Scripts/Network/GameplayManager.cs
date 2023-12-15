@@ -14,10 +14,15 @@ using DG.Tweening;
 
 public class GameplayManager : NetworkBehaviour
 {
+    List<BirdManager> allBirds;
+
     float secondsToAnimation = 5;
 
     [SerializeField]
     private TMP_Text countDownText;
+
+    [SerializeField]
+    private TMP_Text birdsLeftText;
 
     [SerializeField]
     private TMP_Text levelTimerText;
@@ -61,10 +66,10 @@ public class GameplayManager : NetworkBehaviour
     NetworkVariable<float> countDownToStart_Timer = new NetworkVariable<float>(3f);
     // Tiempo que dura la partida
     NetworkVariable<float> gameplay_Timer = new NetworkVariable<float>(maxGameplayTimer);
-    public const float maxGameplayTimer = 40;
+    public const float maxGameplayTimer = 15;
     // Tiempo desde que termina la partida hasta que se vuelve al lobby, mostrando resultados de la partida
     NetworkVariable<float> gameover_Timer = new NetworkVariable<float>(maxGameoverTimer);
-    public const float maxGameoverTimer = 3;
+    public const float maxGameoverTimer = 5;
 
     private List<GameObject> clients = new List<GameObject>();
 
@@ -72,6 +77,7 @@ public class GameplayManager : NetworkBehaviour
     private void Awake()
     {
         Instance = this;
+        allBirds = new List<BirdManager>();
     }
 
     private void Start()
@@ -108,7 +114,7 @@ public class GameplayManager : NetworkBehaviour
             Transform playerTransform = Instantiate(playerPrefab);
             clients.Add(playerTransform.gameObject);
             playerTransform.GetComponent<NetworkObject>().SpawnAsPlayerObject(clientId, true);
-           // playerTransform.gameObject.SetActive(false);
+            // playerTransform.gameObject.SetActive(false);
             playerTransform.gameObject.transform.GetChild(2).tag = "CameraFollow";
         }
 
@@ -120,26 +126,73 @@ public class GameplayManager : NetworkBehaviour
     [ClientRpc]
     void initializeClientsClientRpc()
     {
-        Invoke("DeactivateMainCamera", .1f);
+        currentLevel = 1;
+        Invoke("SetupValues", .1f);
     }
 
-    void DeactivateMainCamera()
+    void SetupValues()
     {
         birdCamera = FindObjectOfType<CameraFollowTarget>();
         birdCamera.gameObject.SetActive(false);
-
         waitingForOtherPlayersText.transform.parent.gameObject.SetActive(true);
     }
 
-    //[ServerRpc]
-    //void StartAnimationServerRpc()
-    //{
-    //    StartCoroutine(StartingLevelAnimation());
-    //    StartAnimationClientRpc();
-    //}
+
+    float endingAnimationTime = 5;
+
     [ClientRpc]
-    void StartAnimationClientRpc()
+    void EndLevelClientRpc(int newLevel)
     {
+        gameplay_Timer.Value = maxGameplayTimer + endingAnimationTime;
+
+        StartCoroutine(EndingLevelAnimation(newLevel));
+    }
+
+    IEnumerator EndingLevelAnimation(int newLevel)
+    {
+        BirdManager[] allPlayerManagers = FindObjectsByType<BirdManager>(FindObjectsSortMode.None);
+
+        bool playerStillAlive = false;
+
+        for (int i = 0; i < allPlayerManagers.Length; i++)
+            if (allPlayerManagers[i].IsOwner)
+            {
+                playerStillAlive = true;
+                break;
+            }
+
+        ageText.DOFade(1, 0.01f);
+        if (playerStillAlive)
+            ageText.text = "YOU SURVIVED";
+        else
+            ageText.text = "YOU ARE DEAD";
+
+        ageText.DOFade(1, 1);
+
+        yield return new WaitForSeconds(endingAnimationTime/2);
+
+        ageText.DOFade(0, 1);
+
+        yield return new WaitForSeconds(endingAnimationTime/2);
+
+        StartLevelClientRpc(newLevel);
+    }
+
+    [ClientRpc]
+    void StartLevelClientRpc(int newLevel)
+    {
+        gameplay_Timer.Value = maxGameplayTimer;
+
+        if (newLevel == 1)
+            EnvironmentChanger.Instance.SetFirstLevel();
+        else if (newLevel == 2)
+            EnvironmentChanger.Instance.SetSecondLevel();
+        else if (newLevel == 3)
+            EnvironmentChanger.Instance.SetThirdLevel();
+
+
+        birdCamera.gameObject.SetActive(false);
+        currentLevel = newLevel;
         StartCoroutine(StartingLevelAnimation());
     }
 
@@ -158,11 +211,13 @@ public class GameplayManager : NetworkBehaviour
     [SerializeField]
     CinemachineVirtualCamera[] cameras;
 
+
     IEnumerator StartingLevelAnimation()
     {
         Debug.Log("START LEVEL ANIMATION");
 
         ageText.DOFade(0, .001f);
+        birdsLeftText.DOFade(0, .001f);
         countDownText.text = "";
 
         showLevelTimerText = false;
@@ -184,18 +239,22 @@ public class GameplayManager : NetworkBehaviour
 
         ageText.text = ageStrings[currentLevel];
         ageText.DOFade(1, 1);
+
+        birdsLeftText.text = "< " + allBirds.Count + " birds left >";
+        birdsLeftText.DOFade(1, 1);
         // Renderizar Texto
         //StartCoroutine(RenderText());
 
         yield return new WaitForSeconds(1);
 
         ageText.DOFade(0, 1);
+        birdsLeftText.DOFade(0, 1);
 
         yield return new WaitForSeconds(1);
 
         birdCamera.gameObject.SetActive(true);
 
-
+        countDownText.DOFade(1, .5f);
         countDownText.text = "3";
         yield return new WaitForSeconds(1);
         countDownText.text = "2";
@@ -208,6 +267,9 @@ public class GameplayManager : NetworkBehaviour
         showLevelTimerText = true;
 
         // Devolver controles al pajaroOwner
+
+        for (int i = 0; i < cameras.Length; i++)
+            cameras[i].gameObject.SetActive(false);
 
         Debug.Log("END LEVEL ANIMATION");
     }
@@ -291,16 +353,14 @@ public class GameplayManager : NetworkBehaviour
         if (!showLevelTimerText)
             levelTimerText.text = "";
         else
-        {
             levelTimerText.text = Mathf.CeilToInt(gameplay_Timer.Value).ToString();
-        }
 
         // Transicion de estados por tiempo
         if (!IsServer)
             return;
 
         int timerNumber = 5 - Mathf.RoundToInt(maxGameplayTimer - gameplay_Timer.Value);// - secondsToAnimation);
-        waitingForOtherPlayersText.text = 
+        waitingForOtherPlayersText.text =
             "Waiting for other Players (" + timerNumber + ")";
 
 
@@ -336,17 +396,24 @@ public class GameplayManager : NetworkBehaviour
                     else
                         // El servidor activa la animacion, la cual tambien avisa al resto de maquinas para que empiecen 
                         // la misma animacion en su propia maquina local
-                        StartAnimationClientRpc();
+                        //StartAnimationClientRpc();
+                        StartLevelClientRpc(1);
                 }
 
                 if (gameplay_Timer.Value < 0)
                 {
-                    state.Value = State.GameOver;
+                    showLevelTimerText = false;
+                    //StartLevelClientRpc(2);
+                    EndLevelClientRpc(2);
                 }
+                //state.Value = State.GameOver;
+
                 break;
 
             case State.GameOver:
                 gameover_Timer.Value -= Time.deltaTime;
+
+                Debug.Log("GAMEOVER");
                 if (gameover_Timer.Value < 0)
                 {
                     SceneLoader.LoadNetwork(SceneLoader.SceneName.CharacterSelectScene);
@@ -380,4 +447,15 @@ public class GameplayManager : NetworkBehaviour
 
     public bool IsWaitingToStart()
     { return state.Value == State.WaitingToStart; }
+
+
+    public void addBird(BirdManager birdManager)
+    {
+        allBirds.Add(birdManager);
+    }
+
+    public void birdDestroyed(BirdManager birdManager)
+    {
+        allBirds.Remove(birdManager);
+    }
 }
