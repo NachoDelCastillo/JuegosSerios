@@ -288,7 +288,7 @@ public class GameplayManager : NetworkBehaviour
             case State.GamePlaying:
                 gameplay_Timer.Value -= Time.deltaTime;
 
-                Debug.Log("gameplay_Timer.Value = " + gameplay_Timer.Value);
+                //Debug.Log("gameplay_Timer.Value = " + gameplay_Timer.Value);
 
                 if (!animationPlayed && gameplay_Timer.Value < maxGameplayTimer - secondsToAnimation)
                 {
