@@ -41,9 +41,7 @@ public class LifeBar : MonoBehaviour
             cameraFollow.GetComponent<CameraFollow>().target = birds[i].transform;
             cameraFollow.GetComponent<CameraFollowTarget>().SetTarget(birds[i].GetComponent<PlayerMovement>());
             cameraFollow.GetComponent<CameraFollowTarget>().SetOffsetDirection(birds[i].transform);
-
         }
-
 
         if (birdManager.IsOwner)
         {

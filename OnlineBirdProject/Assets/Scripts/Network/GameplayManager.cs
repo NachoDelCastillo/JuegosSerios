@@ -87,6 +87,8 @@ public class GameplayManager : NetworkBehaviour
     {
         if (DEBUG_ANIMATION)
             StartCoroutine(StartingLevelAnimation());
+
+        birdHasDied.DOFade(0, 0.01f);
     }
 
     // Estado actual
@@ -363,24 +365,59 @@ public class GameplayManager : NetworkBehaviour
 
 
     [ClientRpc]
-    void EndGameClientRpc(int newLevel)
+    void EndGameClientRpc()
     {
-        if (IsServer)
-            gameplay_Timer.Value = maxGameplayTimer;
+        Debug.Log("END GAME");
 
-        if (newLevel == 1)
-            EnvironmentChanger.Instance.SetFirstLevel();
-        else if (newLevel == 2)
-            EnvironmentChanger.Instance.SetSecondLevel();
-        else if (newLevel == 3)
-            EnvironmentChanger.Instance.SetThirdLevel();
+        //if (IsServer)
+        //    gameplay_Timer.Value = maxGameplayTimer;
 
+        //if (newLevel == 1)
+        //    EnvironmentChanger.Instance.SetFirstLevel();
+        //else if (newLevel == 2)
+        //    EnvironmentChanger.Instance.SetSecondLevel();
+        //else if (newLevel == 3)
+        //    EnvironmentChanger.Instance.SetThirdLevel();
+
+
+        for (int i = 0; i < cameras.Length; i++)
+            cameras[i].gameObject.SetActive(false);
 
         birdCamera.gameObject.SetActive(false);
-        currentLevel = newLevel;
-        StartCoroutine(StartingLevelAnimation());
+        //currentLevel = newLevel;
+        StartCoroutine(EndGameAnimation());
     }
 
+    IEnumerator EndGameAnimation()
+    {
+        Debug.Log("END GAME ENUMERATOR");
+
+        ageText.text = "Nobody wins";
+        ageText.DOFade(1, 1);
+
+        yield return new WaitForSeconds(1);
+
+        cameras[0].gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(1);
+
+        cameras[0].gameObject.SetActive(false);
+        cameras[1].gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(1);
+
+        birdsLeftText.text = "Returning to Lobby";
+        birdsLeftText.DOFade(1, 1);
+
+        yield return new WaitForSeconds(1);
+
+        ageText.DOFade(0, 1);
+        birdsLeftText.DOFade(0, 1);
+
+        yield return new WaitForSeconds(1.5f);
+
+        SceneLoader.LoadNetwork(SceneLoader.SceneName.CharacterSelectScene);
+    }
 
     private void Update()
     {
@@ -412,17 +449,6 @@ public class GameplayManager : NetworkBehaviour
         waitingForOtherPlayersText.text =
             "Waiting for other Players (" + timerNumber + ")";
 
-
-        // Si se esta en el tercer nivel, comprobar cuando se mueren todos los pajaros
-        if (currentLevel == 3)
-        {
-            // Si el numero de pajaros vivos llega a 0
-            if (allBirds.Count == 0)
-            {
-                // Animacion de final de juego en la que nadie sobrevive
-
-            }
-        }
 
         switch (state.Value)
         {
@@ -457,7 +483,7 @@ public class GameplayManager : NetworkBehaviour
                         // El servidor activa la animacion, la cual tambien avisa al resto de maquinas para que empiecen 
                         // la misma animacion en su propia maquina local
                         //StartAnimationClientRpc();
-                        StartLevelClientRpc(1);
+                        StartLevelClientRpc(3); // 1
                 }
 
                 if (gameplay_Timer.Value < 0)
@@ -474,19 +500,32 @@ public class GameplayManager : NetworkBehaviour
                 }
                 //state.Value = State.GameOver;
 
+                // Si estas en el ultimo nivel, esperar hasta que todos mueran
+                if (currentLevel == 3)
+                {
+                    // Si todos los pajaros estan muertos
+                    if (allBirds.Count == 0)
+                    {
+                        // Terminar la partida
+                        EndGameClientRpc();
+                        state.Value = State.GameOver;
+                    }
+
+                }
                 break;
 
             case State.GameOver:
                 gameover_Timer.Value -= Time.deltaTime;
 
-                Debug.Log("GAMEOVER");
-                if (gameover_Timer.Value < 0)
-                {
-                    SceneLoader.LoadNetwork(SceneLoader.SceneName.CharacterSelectScene);
-                }
+                //Debug.Log("GAMEOVER");
+                //if (gameover_Timer.Value < 0)
+                //{
+                //    SceneLoader.LoadNetwork(SceneLoader.SceneName.CharacterSelectScene);
+                //}
                 break;
         }
     }
+
 
     private void changeLevel()
     {
@@ -537,7 +576,7 @@ public class GameplayManager : NetworkBehaviour
 
     void BirdDestroyedUI()
     {
-        birdHasDied.text = "A bird has died \n " + allBirds.Count + " birds alive";
+        birdHasDied.text = "Only " + allBirds.Count + " birds alive";
         birdHasDied.DOFade(1, 0.1f);
 
         Invoke("BirdDestroyedUIDissappear", 1);
