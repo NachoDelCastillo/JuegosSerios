@@ -144,7 +144,14 @@ public class GameplayManager : NetworkBehaviour
     void EndLevelClientRpc(int newLevel)
     {
         if (IsServer)
-            gameplay_Timer.Value = maxGameplayTimer + endingAnimationTime;
+        {
+            if (newLevel == 3)
+                gameplay_Timer.Value = maxGameplayTimer + endingAnimationTime + 1000;
+            else
+                gameplay_Timer.Value = maxGameplayTimer + endingAnimationTime;
+        }
+
+        showLevelTimerText = false;
 
         StartCoroutine(EndingLevelAnimation(newLevel));
     }
@@ -170,11 +177,11 @@ public class GameplayManager : NetworkBehaviour
 
         ageText.DOFade(1, 1);
 
-        yield return new WaitForSeconds(endingAnimationTime / 2);
+        yield return new WaitForSeconds(endingAnimationTime / 4);
 
         ageText.DOFade(0, 1);
 
-        yield return new WaitForSeconds(endingAnimationTime / 2);
+        yield return new WaitForSeconds(endingAnimationTime / 4);
 
         StartLevelClientRpc(newLevel);
     }
@@ -222,7 +229,8 @@ public class GameplayManager : NetworkBehaviour
         birdsLeftText.DOFade(0, .001f);
         countDownText.text = "";
 
-        showLevelTimerText = false;
+        if (currentLevel != 3)
+            showLevelTimerText = false;
         levelTimerText.text = "";
 
         waitingForOtherPlayersText.transform.parent.gameObject.SetActive(false);
@@ -239,7 +247,7 @@ public class GameplayManager : NetworkBehaviour
 
         yield return new WaitForSeconds(1);
 
-        ageText.text = ageStrings[currentLevel];
+        ageText.text = ageStrings[currentLevel-1];
         ageText.DOFade(1, 1);
 
         birdsLeftText.text = " " + allBirds.Count + " birds left ";
@@ -335,6 +343,26 @@ public class GameplayManager : NetworkBehaviour
     { return gameover_Timer.Value; }
 
 
+    [ClientRpc]
+    void EndGameClientRpc(int newLevel)
+    {
+        if (IsServer)
+            gameplay_Timer.Value = maxGameplayTimer;
+
+        if (newLevel == 1)
+            EnvironmentChanger.Instance.SetFirstLevel();
+        else if (newLevel == 2)
+            EnvironmentChanger.Instance.SetSecondLevel();
+        else if (newLevel == 3)
+            EnvironmentChanger.Instance.SetThirdLevel();
+
+
+        birdCamera.gameObject.SetActive(false);
+        currentLevel = newLevel;
+        StartCoroutine(StartingLevelAnimation());
+    }
+
+
     private void Update()
     {
         // Codigo provisional
@@ -365,6 +393,17 @@ public class GameplayManager : NetworkBehaviour
         waitingForOtherPlayersText.text =
             "Waiting for other Players (" + timerNumber + ")";
 
+
+        // Si se esta en el tercer nivel, comprobar cuando se mueren todos los pajaros
+        if (currentLevel == 3)
+        {
+            // Si el numero de pajaros vivos llega a 0
+            if (allBirds.Count == 0)
+            {
+                // Animacion de final de juego en la que nadie sobrevive
+
+            }
+        }
 
         switch (state.Value)
         {
@@ -404,9 +443,15 @@ public class GameplayManager : NetworkBehaviour
 
                 if (gameplay_Timer.Value < 0)
                 {
-                    showLevelTimerText = false;
-                    //StartLevelClientRpc(2);
-                    EndLevelClientRpc(2);
+                    if (currentLevel == 1 || currentLevel == 2)
+                    {
+                        currentLevel++;
+                        EndLevelClientRpc(currentLevel);
+                    }
+                    else
+                    {
+                        // Esto no deberia pasar nunca, todos los pajaros mueren antes de que llegue aqui
+                    }
                 }
                 //state.Value = State.GameOver;
 
