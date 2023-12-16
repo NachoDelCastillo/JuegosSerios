@@ -8,7 +8,7 @@ public class PathManager : MonoBehaviour
     public List<float> timesForPath;
     private int pathIndex = 0;
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
         StartCoroutine(activeGroup());
     }
