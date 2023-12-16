@@ -143,7 +143,8 @@ public class GameplayManager : NetworkBehaviour
     [ClientRpc]
     void EndLevelClientRpc(int newLevel)
     {
-        gameplay_Timer.Value = maxGameplayTimer + endingAnimationTime;
+        if (IsServer)
+            gameplay_Timer.Value = maxGameplayTimer + endingAnimationTime;
 
         StartCoroutine(EndingLevelAnimation(newLevel));
     }
@@ -169,11 +170,11 @@ public class GameplayManager : NetworkBehaviour
 
         ageText.DOFade(1, 1);
 
-        yield return new WaitForSeconds(endingAnimationTime/2);
+        yield return new WaitForSeconds(endingAnimationTime / 2);
 
         ageText.DOFade(0, 1);
 
-        yield return new WaitForSeconds(endingAnimationTime/2);
+        yield return new WaitForSeconds(endingAnimationTime / 2);
 
         StartLevelClientRpc(newLevel);
     }
@@ -181,7 +182,8 @@ public class GameplayManager : NetworkBehaviour
     [ClientRpc]
     void StartLevelClientRpc(int newLevel)
     {
-        gameplay_Timer.Value = maxGameplayTimer;
+        if (IsServer)
+            gameplay_Timer.Value = maxGameplayTimer;
 
         if (newLevel == 1)
             EnvironmentChanger.Instance.SetFirstLevel();
@@ -240,7 +242,7 @@ public class GameplayManager : NetworkBehaviour
         ageText.text = ageStrings[currentLevel];
         ageText.DOFade(1, 1);
 
-        birdsLeftText.text = "< " + allBirds.Count + " birds left >";
+        birdsLeftText.text = " " + allBirds.Count + " birds left ";
         birdsLeftText.DOFade(1, 1);
         // Renderizar Texto
         //StartCoroutine(RenderText());
