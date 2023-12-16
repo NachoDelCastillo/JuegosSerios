@@ -501,16 +501,16 @@ public class GameplayManager : NetworkBehaviour
                 //state.Value = State.GameOver;
 
                 // Si estas en el ultimo nivel, esperar hasta que todos mueran
-                if (currentLevel == 3)
+                if (!gameEnded && currentLevel == 3)
                 {
                     // Si todos los pajaros estan muertos
                     if (allBirds.Count == 0)
                     {
                         // Terminar la partida
                         EndGameClientRpc();
-                        state.Value = State.GameOver;
+                        gameEnded = true;
+                        //state.Value = State.GameOver;
                     }
-
                 }
                 break;
 
@@ -526,6 +526,7 @@ public class GameplayManager : NetworkBehaviour
         }
     }
 
+    bool gameEnded = false;
 
     private void changeLevel()
     {
