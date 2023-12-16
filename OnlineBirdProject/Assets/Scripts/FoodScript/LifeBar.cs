@@ -37,10 +37,13 @@ public class LifeBar : MonoBehaviour
                 i++;
 
             Debug.Log(birds[i]);
-            Destroy(this.gameObject);
             cameraFollow.GetComponent<CameraFollow>().target = birds[i].transform;
             cameraFollow.GetComponent<CameraFollowTarget>().SetTarget(birds[i].GetComponent<PlayerMovement>());
             cameraFollow.GetComponent<CameraFollowTarget>().SetOffsetDirection(birds[i].transform);
+
+            //Destroy(this.gameObject);
+
+            GameplayManager.Instance.birdDestroyed(birdManager);
         }
 
         if (birdManager.IsOwner)

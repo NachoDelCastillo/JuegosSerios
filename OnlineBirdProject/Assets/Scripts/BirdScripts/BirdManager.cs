@@ -131,9 +131,9 @@ public class BirdManager : NetworkBehaviour
     //    return IsOwner && gameplayManager.GetState() == GameplayManager.State.GamePlaying;
     //}
 
-    private void OnDestroy()
-    {
-        GameplayManager.Instance.birdDestroyed(this);
-    }
+    //private void OnDestroy()
+    //{
+    //    GameplayManager.Instance.birdDestroyed(this);
+    //}
 
 }

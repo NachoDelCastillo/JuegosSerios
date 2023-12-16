@@ -118,7 +118,8 @@ public class GameplayManager : NetworkBehaviour
         {
             Transform playerTransform = Instantiate(playerPrefab);
             clients.Add(playerTransform.gameObject);
-            playerTransform.GetComponent<NetworkObject>().SpawnAsPlayerObject(clientId, true);
+            //playerTransform.GetComponent<NetworkObject>().SpawnAsPlayerObject(clientId, true);
+            playerTransform.GetComponent<NetworkObject>().SpawnWithOwnership(clientId, true);
             // playerTransform.gameObject.SetActive(false);
             playerTransform.gameObject.transform.GetChild(2).tag = "CameraFollow";
         }
@@ -562,15 +563,32 @@ public class GameplayManager : NetworkBehaviour
 
     public void birdDestroyed(BirdManager birdManager)
     {
-        allBirds.Remove(birdManager);
+        int deletedIndex = 0;
 
-        Debug.Log("BIRD ReMOVED");
+        for (int i = 0; i < allBirds.Count; i++)
+        {
+            if (allBirds[i] == birdManager)
+                deletedIndex = i;
+        }
+
+        BirdDestroyedClientRpc(deletedIndex);
+
+        // Quitarlo de la lista local
+        //allBirds.Remove(birdManager);
+
+        Debug.Log("BIRD REMOVED");
+    }
+
+    [ClientRpc]
+    void BirdDestroyedClientRpc(int index)
+    {
+        Destroy(allBirds[index].gameObject);
+
+        allBirds.RemoveAt(index);
 
         if (allBirds.Count == 1)
-        {
             if (allBirds[0].IsOwner)
                 YouAreLastBird();
-        }
 
         BirdDestroyedUI();
     }
