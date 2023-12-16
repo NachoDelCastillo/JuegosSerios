@@ -11,11 +11,15 @@ public class LifeBar : MonoBehaviour
     [SerializeField]
     private float lifeAmountDecreasing = 0.000000000001f;
 
+    BirdManager birdManager;
+
 
     private void Start()
     {
         barImage = GameObject.Find("Lifes").GetComponent<Image>();
         barImage2 = GameObject.Find("Lifes2").GetComponent<Image>();
+
+        birdManager = GetComponent<BirdManager>();
     }
     // Update is called once per frame
     void Update()
@@ -23,7 +27,7 @@ public class LifeBar : MonoBehaviour
         barImage.fillAmount -= lifeAmountDecreasing*Time.deltaTime;
         barImage2.fillAmount -= lifeAmountDecreasing*Time.deltaTime;
 
-        if (barImage.fillAmount == 0 && barImage2.fillAmount == 0 && transform.GetComponent<BirdManager>().IsOwner) {
+        if (barImage.fillAmount <= 0 && barImage2.fillAmount <= 0 && transform.GetComponent<BirdManager>().IsOwner) {
             GameObject cameraFollow = GameObject.Find("CameraFollow");
             Debug.Log(cameraFollow);
             GameObject[] birds = GameObject.FindGameObjectsWithTag("Player");
@@ -38,6 +42,22 @@ public class LifeBar : MonoBehaviour
             cameraFollow.GetComponent<CameraFollowTarget>().SetTarget(birds[i].GetComponent<PlayerMovement>());
             cameraFollow.GetComponent<CameraFollowTarget>().SetOffsetDirection(birds[i].transform);
 
+        }
+
+
+        if (birdManager.IsOwner)
+        {
+            if (Input.GetKeyDown(KeyCode.T))
+            {
+                barImage.fillAmount -= 20;
+                barImage2.fillAmount -= 20;
+            }
+
+            if (Input.GetKeyDown(KeyCode.Y))
+            {
+                barImage.fillAmount += 20;
+                barImage2.fillAmount += 20;
+            }
         }
     }
     

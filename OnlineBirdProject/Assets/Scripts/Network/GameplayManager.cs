@@ -19,6 +19,9 @@ public class GameplayManager : NetworkBehaviour
     float secondsToAnimation = 5;
 
     [SerializeField]
+    private TMP_Text birdHasDied;
+
+    [SerializeField]
     private TMP_Text countDownText;
 
     [SerializeField]
@@ -206,6 +209,22 @@ public class GameplayManager : NetworkBehaviour
     }
 
 
+    public void YouAreLastBird()
+    {
+        StartCoroutine(YouAreLastBirdEnumerator());
+    }
+
+    IEnumerator YouAreLastBirdEnumerator()
+    {
+        ageText.text = "You are the last survivor";
+        ageText.DOFade(1, 1);
+
+        yield return new WaitForSeconds(1);
+
+        ageText.DOFade(0, 1);
+    }
+
+
     // ANIMATION MANAGER
     bool DEBUG_ANIMATION = false;
     bool animationPlayed = false;
@@ -247,7 +266,7 @@ public class GameplayManager : NetworkBehaviour
 
         yield return new WaitForSeconds(1);
 
-        ageText.text = ageStrings[currentLevel-1];
+        ageText.text = ageStrings[currentLevel - 1];
         ageText.DOFade(1, 1);
 
         birdsLeftText.text = " " + allBirds.Count + " birds left ";
@@ -504,5 +523,28 @@ public class GameplayManager : NetworkBehaviour
     public void birdDestroyed(BirdManager birdManager)
     {
         allBirds.Remove(birdManager);
+
+        Debug.Log("BIRD ReMOVED");
+
+        if (allBirds.Count == 1)
+        {
+            if (allBirds[0].IsOwner)
+                YouAreLastBird();
+        }
+
+        BirdDestroyedUI();
+    }
+
+    void BirdDestroyedUI()
+    {
+        birdHasDied.text = "A bird has died \n " + allBirds.Count + " birds alive";
+        birdHasDied.DOFade(1, 0.1f);
+
+        Invoke("BirdDestroyedUIDissappear", 1);
+    }
+
+    void BirdDestroyedUIDissappear()
+    {
+        birdHasDied.DOFade(0, 1);
     }
 }
