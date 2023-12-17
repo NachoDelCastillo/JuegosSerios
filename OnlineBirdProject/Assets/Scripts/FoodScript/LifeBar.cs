@@ -24,8 +24,8 @@ public class LifeBar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        barImage.fillAmount -= lifeAmountDecreasing*Time.deltaTime;
-        barImage2.fillAmount -= lifeAmountDecreasing*Time.deltaTime;
+        //barImage.fillAmount -= lifeAmountDecreasing*Time.deltaTime;
+        //barImage2.fillAmount -= lifeAmountDecreasing*Time.deltaTime;
 
         if (barImage.fillAmount <= 0 && barImage2.fillAmount <= 0 && transform.GetComponent<BirdManager>().IsOwner) {
             GameObject cameraFollow = GameObject.Find("CameraFollow");

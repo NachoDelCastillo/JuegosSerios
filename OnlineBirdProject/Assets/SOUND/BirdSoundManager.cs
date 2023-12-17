@@ -80,13 +80,15 @@ public class BirdSoundManager : MonoBehaviour
 
         float finalValue = Mathf.Max(birdVelocityNormalized, NearestBirdDistance());
 
+        UnityEngine.Debug.Log("finalValue = " + finalValue);
+
         // Informar a FMOD del nuevo valor de la velocidad
         instance.setParameterByID(velocityId, finalValue);
         instance.setParameterByName("Velocity", finalValue);
     }
 
-    float maxDistance = 30;
-    float minDistance = 2;
+    float maxDistance = 120;
+    float minDistance = 10;
 
     float NearestBirdDistance()
     {
@@ -112,8 +114,12 @@ public class BirdSoundManager : MonoBehaviour
         finalValue = Mathf.Clamp(finalValue, 0, 1);
         finalValue = 1 - finalValue;
 
-        UnityEngine.Debug.Log("finalValue = " + finalValue);
-
         return finalValue;
+    }
+
+    private void OnDestroy()
+    {
+        instance.setParameterByID(velocityId, 0);
+        instance.setParameterByName("Velocity", 0);
     }
 }
