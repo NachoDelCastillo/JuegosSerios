@@ -63,6 +63,9 @@
 	</object>
 	<object class="MarkerTrack" id="{f1ca3fa5-ef4a-4be4-84ec-79f7019de2d9}" />
 	<object class="GroupTrack" id="{9f03232a-856d-481e-bb5a-c83287d30287}">
+		<relationship name="automationTracks">
+			<destination>{292c1088-79cf-4934-bbe0-51ff635cd030}</destination>
+		</relationship>
 		<relationship name="modules">
 			<destination>{8cc2187a-da43-432d-a5e3-b4a20c8f19d3}</destination>
 		</relationship>
@@ -95,6 +98,11 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{6dfc35de-c94a-4d9d-a435-da4ee88d9f7f}" />
+	<object class="AutomationTrack" id="{292c1088-79cf-4934-bbe0-51ff635cd030}">
+		<relationship name="automator">
+			<destination>{15b8bb1e-0204-4afd-bc94-5f279bb506a6}</destination>
+		</relationship>
+	</object>
 	<object class="SoundScatterer" id="{8cc2187a-da43-432d-a5e3-b4a20c8f19d3}">
 		<property name="length">
 			<value>9</value>
@@ -122,6 +130,9 @@
 		<property name="name">
 			<value>Audio 1</value>
 		</property>
+		<relationship name="automators">
+			<destination>{15b8bb1e-0204-4afd-bc94-5f279bb506a6}</destination>
+		</relationship>
 		<relationship name="effectChain">
 			<destination>{45de4a02-bac2-40b7-b7fe-5de26d180455}</destination>
 		</relationship>
@@ -168,6 +179,14 @@
 			<destination>{dedbbbaa-8fb6-4575-ba5d-d11bd9f2e6bd}</destination>
 			<destination>{6341d449-7852-49b9-bb60-0f367f67ebbf}</destination>
 			<destination>{e0d31ac2-c1fb-42b8-b63d-cec4b259cf6b}</destination>
+		</relationship>
+	</object>
+	<object class="Automator" id="{15b8bb1e-0204-4afd-bc94-5f279bb506a6}">
+		<property name="nameOfPropertyBeingAutomated">
+			<value>volume</value>
+		</property>
+		<relationship name="automationCurves">
+			<destination>{de17eee7-61f3-491d-a051-899caf524ecc}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusEffectChain" id="{45de4a02-bac2-40b7-b7fe-5de26d180455}">
@@ -253,6 +272,15 @@
 			<destination>{fbed5a18-6703-43ea-a352-a653d0806830}</destination>
 		</relationship>
 	</object>
+	<object class="AutomationCurve" id="{de17eee7-61f3-491d-a051-899caf524ecc}">
+		<relationship name="parameter">
+			<destination>{2d4ef3b6-42ca-4457-bddc-9f16c68ce28b}</destination>
+		</relationship>
+		<relationship name="automationPoints">
+			<destination>{fa35982e-115c-475d-9538-511b8673bd69}</destination>
+			<destination>{3c060d66-5718-43a5-adf1-c025b41470e4}</destination>
+		</relationship>
+	</object>
 	<object class="CompressorEffect" id="{e03a6a65-e875-47b8-86e9-91583e939bc6}">
 		<property name="threshold">
 			<value>-8.5</value>
@@ -275,17 +303,36 @@
 		<property name="HFReference">
 			<value>7000</value>
 		</property>
+		<property name="HFDecayRatio">
+			<value>81</value>
+		</property>
 		<property name="density">
 			<value>79.5</value>
 		</property>
 		<property name="lowShelfGain">
-			<value>-1.5</value>
+			<value>7.5</value>
 		</property>
 		<property name="highCut">
-			<value>2000</value>
+			<value>20000</value>
 		</property>
 		<property name="dryLevel">
 			<value>-8.5</value>
+		</property>
+	</object>
+	<object class="AutomationPoint" id="{fa35982e-115c-475d-9538-511b8673bd69}">
+		<property name="position">
+			<value>0</value>
+		</property>
+		<property name="value">
+			<value>-34</value>
+		</property>
+	</object>
+	<object class="AutomationPoint" id="{3c060d66-5718-43a5-adf1-c025b41470e4}">
+		<property name="position">
+			<value>1</value>
+		</property>
+		<property name="value">
+			<value>10</value>
 		</property>
 	</object>
 </objects>

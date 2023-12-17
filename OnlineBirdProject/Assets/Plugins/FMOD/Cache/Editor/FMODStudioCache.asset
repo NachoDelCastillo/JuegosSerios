@@ -19,8 +19,8 @@ MonoBehaviour:
     Data3: 1786084788
     Data4: -668537337
   Banks:
-  - {fileID: -8038520381620364574}
   - {fileID: 6953961819368678785}
+  - {fileID: -8038520381620364574}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
@@ -53,7 +53,8 @@ MonoBehaviour:
   IsStream: 1
   Is3D: 1
   IsOneShot: 0
-  Parameters: []
+  Parameters:
+  - {fileID: -6930850310353684556}
   MinDistance: 1
   MaxDistance: 20
   Length: 589008
@@ -72,10 +73,34 @@ MonoBehaviour:
   Path: ../FMOD/BirdProject/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638384306992461669
+  lastModified: 638384349186806639
   FileSizes:
   - Name: Desktop
-    Value: 14365440
+    Value: 14366272
+  Exists: 1
+--- !u!114 &-6930850310353684556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/DefaultNature/Nature
+  m_EditorClassIdentifier: 
+  Name: Nature
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 3203398404
+    data2: 3480262509
+  Type: 0
+  IsGlobal: 0
+  Labels: []
   Exists: 1
 --- !u!114 &-6430573811895102014
 MonoBehaviour:
@@ -155,6 +180,30 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-4058404736225016125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Enviroment/Enviroment
+  m_EditorClassIdentifier: 
+  Name: Enviroment
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 1044615207
+    data2: 1765935857
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &-3940199339303524238
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -238,7 +287,7 @@ MonoBehaviour:
   - {fileID: 6953961819368678785}
   StringsBanks:
   - {fileID: 8376274002329717970}
-  cacheTime: 638384334850343030
+  cacheTime: 638384349186806639
   cacheVersion: 131609
 --- !u!114 &385201373054299167
 MonoBehaviour:
@@ -343,7 +392,8 @@ MonoBehaviour:
   IsStream: 1
   Is3D: 1
   IsOneShot: 0
-  Parameters: []
+  Parameters:
+  - {fileID: -4058404736225016125}
   MinDistance: 1
   MaxDistance: 20
   Length: 9000
@@ -389,7 +439,7 @@ MonoBehaviour:
   Path: ../FMOD/BirdProject/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638384334850313017
+  lastModified: 638384349185194740
   FileSizes:
   - Name: Desktop
     Value: 7181920
@@ -436,10 +486,10 @@ MonoBehaviour:
   Path: ../FMOD/BirdProject/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638384334850343030
+  lastModified: 638384349185250243
   FileSizes:
   - Name: Desktop
-    Value: 1392
+    Value: 1470
   Exists: 1
 --- !u!114 &8688371610667639727
 MonoBehaviour:
