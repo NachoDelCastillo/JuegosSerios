@@ -14,7 +14,7 @@ using DG.Tweening;
 
 public class GameplayManager : NetworkBehaviour
 {
-    List<BirdManager> allBirds;
+    public List<BirdManager> allBirds;
 
     float secondsToAnimation = 5;
 

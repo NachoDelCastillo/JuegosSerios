@@ -77,9 +77,43 @@ public class BirdSoundManager : MonoBehaviour
         birdVelocityNormalized = (currentVelocity - minVelocity) / (maxVelocity - minVelocity);
         birdVelocityNormalized = Mathf.Clamp(birdVelocityNormalized, 0, 1);
 
+
+        float finalValue = Mathf.Max(birdVelocityNormalized, NearestBirdDistance());
+
         // Informar a FMOD del nuevo valor de la velocidad
-        instance.setParameterByID(velocityId, birdVelocityNormalized);
-        instance.setParameterByName("Velocity", birdVelocityNormalized);
+        instance.setParameterByID(velocityId, finalValue);
+        instance.setParameterByName("Velocity", finalValue);
+    }
+
+    float maxDistance = 30;
+    float minDistance = 2;
+
+    float NearestBirdDistance()
+    {
        
+        List<BirdManager> lb = GameplayManager.Instance.allBirds;
+
+        float currentMinDistance = Mathf.Infinity;
+
+        for (int i = 0; i < lb.Count; i++)
+        {
+            BirdManager thisLB = lb[i];
+            if (thisLB != null && !thisLB.IsOwner)
+            {
+                float distance = Vector3.Distance(transform.position, thisLB.transform.position);
+                if (distance < currentMinDistance)
+                    currentMinDistance = distance;
+            }
+        }
+
+        float finalValue;
+
+        finalValue = (currentMinDistance - minDistance) / (maxDistance - minDistance);
+        finalValue = Mathf.Clamp(finalValue, 0, 1);
+        finalValue = 1 - finalValue;
+
+        UnityEngine.Debug.Log("finalValue = " + finalValue);
+
+        return finalValue;
     }
 }
