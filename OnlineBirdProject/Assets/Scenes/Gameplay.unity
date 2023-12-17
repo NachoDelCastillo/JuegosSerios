@@ -348,6 +348,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 418067210940340831, guid: 8f21bb9c5d192964bb5751543da407a8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5739573928703297390, guid: 8f21bb9c5d192964bb5751543da407a8,
         type: 3}
       propertyPath: GlobalObjectIdHash
@@ -2434,7 +2439,7 @@ PrefabInstance:
         type: 3}
       propertyPath: playerPrefab
       value: 
-      objectReference: {fileID: 7827211136509489689, guid: 8f21bb9c5d192964bb5751543da407a8,
+      objectReference: {fileID: 7488347084163326072, guid: 8f21bb9c5d192964bb5751543da407a8,
         type: 3}
     - target: {fileID: 2878073466882889593, guid: ca1d321a9a30c434ca2746d0d695ef5a,
         type: 3}
