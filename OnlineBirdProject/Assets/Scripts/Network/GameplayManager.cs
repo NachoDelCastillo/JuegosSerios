@@ -76,6 +76,7 @@ public class GameplayManager : NetworkBehaviour
 
     private List<GameObject> clients = new List<GameObject>();
 
+    NetworkVariable<int> birdsAlive = new NetworkVariable<int>(0);
 
     private void Awake()
     {
@@ -114,6 +115,7 @@ public class GameplayManager : NetworkBehaviour
         if (SceneManager.GetActiveScene().name != SceneLoader.SceneName.Gameplay.ToString())
             return;
 
+
         foreach (ulong clientId in NetworkManager.Singleton.ConnectedClientsIds)
         {
             Transform playerTransform = Instantiate(playerPrefab);
@@ -122,6 +124,8 @@ public class GameplayManager : NetworkBehaviour
             playerTransform.GetComponent<NetworkObject>().SpawnWithOwnership(clientId, true);
             // playerTransform.gameObject.SetActive(false);
             playerTransform.gameObject.transform.GetChild(2).tag = "CameraFollow";
+
+            birdsAlive.Value++;
         }
 
         createFoodClientRpc();
@@ -272,7 +276,7 @@ public class GameplayManager : NetworkBehaviour
         ageText.text = ageStrings[currentLevel - 1];
         ageText.DOFade(1, 1);
 
-        birdsLeftText.text = " " + allBirds.Count + " birds left ";
+        birdsLeftText.text = " " + birdsAlive + " birds left ";
         birdsLeftText.DOFade(1, 1);
         // Renderizar Texto
         //StartCoroutine(RenderText());
@@ -446,6 +450,8 @@ public class GameplayManager : NetworkBehaviour
         if (!IsServer)
             return;
 
+        Debug.Log("birdsAlive.Value = " + birdsAlive.Value);
+
         int timerNumber = 5 - Mathf.RoundToInt(maxGameplayTimer - gameplay_Timer.Value);// - secondsToAnimation);
         waitingForOtherPlayersText.text =
             "Waiting for other Players (" + timerNumber + ")";
@@ -504,13 +510,20 @@ public class GameplayManager : NetworkBehaviour
                 // Si estas en el ultimo nivel, esperar hasta que todos mueran
                 if (!gameEnded && currentLevel == 3)
                 {
-                    // Si todos los pajaros estan muertos
-                    if (allBirds.Count == 0)
+                    //// Si todos los pajaros estan muertos
+                    //if (allBirds.Count == 0)
+                    //{
+                    //    // Terminar la partida
+                    //    EndGameClientRpc();
+                    //    gameEnded = true;
+                    //    //state.Value = State.GameOver;
+                    //}
+
+                    if (birdsAlive.Value <= 0)
                     {
                         // Terminar la partida
                         EndGameClientRpc();
                         gameEnded = true;
-                        //state.Value = State.GameOver;
                     }
                 }
                 break;
@@ -571,31 +584,72 @@ public class GameplayManager : NetworkBehaviour
                 deletedIndex = i;
         }
 
-        BirdDestroyedClientRpc(deletedIndex);
+        BirdDestroyedServerRpc(deletedIndex);
+        //BirdDestroyedClientRpc(deletedIndex);
 
         // Quitarlo de la lista local
         //allBirds.Remove(birdManager);
+    }
 
-        Debug.Log("BIRD REMOVED");
+    [ServerRpc(RequireOwnership = false)]
+    void BirdDestroyedServerRpc(int index)
+    {
+        GameObject g = allBirds[index].gameObject;
+
+        if (g == null)
+            return;
+
+        Debug.Log("BirdDestroyedClientRpc = " + index + " , obj = " + g);
+        Destroy(g);
+
+        int value = birdsAlive.Value;
+        value--;
+        birdsAlive.Value = value;
+
+        // Destroy(allBirds[index].gameObject.GetComponent<NetworkBehaviour>().d);
+
+        //allBirds.RemoveAt(index);
+
+        //if (allBirds.Count == 1)
+        //    if (allBirds[0].IsOwner)
+        //        YouAreLastBird();
+
+        BirdDestroyedUI();
     }
 
     [ClientRpc]
     void BirdDestroyedClientRpc(int index)
     {
+        Debug.Log("BirdDestroyedClientRpc = " + index);
+
         Destroy(allBirds[index].gameObject);
 
         allBirds.RemoveAt(index);
 
-        if (allBirds.Count == 1)
-            if (allBirds[0].IsOwner)
-                YouAreLastBird();
+        //if (allBirds.Count == 1)
+        //    if (allBirds[0].IsOwner)
+        //        YouAreLastBird();
+
+        BirdManager[] birdManager = FindObjectsByType<BirdManager>(FindObjectsSortMode.None);
+        bool thisBirdAlive = false;
+        for (int i = 0; i < birdManager.Length; i++)
+        {
+            if (birdManager[i].IsOwner == true)
+            {
+                thisBirdAlive = true;
+                break;
+            }
+        }
+
+        if (thisBirdAlive && birdsAlive.Value == 1)
+            YouAreLastBird();
 
         BirdDestroyedUI();
     }
 
     void BirdDestroyedUI()
     {
-        birdHasDied.text = "Only " + allBirds.Count + " birds alive";
+        birdHasDied.text = "Only " + birdsAlive.Value + " birds alive";
         birdHasDied.DOFade(1, 0.1f);
 
         Invoke("BirdDestroyedUIDissappear", 1);
