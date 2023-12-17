@@ -243,12 +243,14 @@ public class GameplayManager : NetworkBehaviour
         if (IsServer)
             gameplay_Timer.Value = maxGameplayTimer;
 
-        if (newLevel == 1)
-            EnvironmentChanger.Instance.SetFirstLevel();
-        else if (newLevel == 2)
-            EnvironmentChanger.Instance.SetSecondLevel();
-        else if (newLevel == 3)
-            EnvironmentChanger.Instance.SetThirdLevel();
+        //if (newLevel == 1)
+        //    EnvironmentChanger.Instance.SetFirstLevel();
+        //else if (newLevel == 2)
+        //    EnvironmentChanger.Instance.SetSecondLevel();
+        //else if (newLevel == 3)
+        //    EnvironmentChanger.Instance.SetThirdLevel();
+
+        EnvironmentChanger.Instance.SetFirstLevel();
 
 
         birdCamera.gameObject.SetActive(false);
@@ -312,7 +314,7 @@ public class GameplayManager : NetworkBehaviour
         cameras[0].gameObject.SetActive(false);
         cameras[1].gameObject.SetActive(true);
 
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(5);
 
         ageText.text = ageStrings[currentLevel - 1];
         ageText.DOFade(1, 1);
@@ -322,12 +324,12 @@ public class GameplayManager : NetworkBehaviour
         // Renderizar Texto
         //StartCoroutine(RenderText());
 
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(3);
 
         ageText.DOFade(0, 1);
         birdsLeftText.DOFade(0, 1);
 
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(2);
 
         birdCamera.gameObject.SetActive(true);
 
