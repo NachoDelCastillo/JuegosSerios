@@ -80,7 +80,7 @@ public class BirdSoundManager : MonoBehaviour
 
         float finalValue = Mathf.Max(birdVelocityNormalized, NearestBirdDistance());
 
-        UnityEngine.Debug.Log("finalValue = " + finalValue);
+        //UnityEngine.Debug.Log("finalValue = " + finalValue);
 
         // Informar a FMOD del nuevo valor de la velocidad
         instance.setParameterByID(velocityId, finalValue);
