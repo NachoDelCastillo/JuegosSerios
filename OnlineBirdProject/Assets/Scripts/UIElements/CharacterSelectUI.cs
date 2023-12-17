@@ -33,6 +33,8 @@ public class CharacterSelectUI : MonoBehaviour
         {
             mainMenuButton.onClick.AddListener(() =>
             {
+                FMODUnity.RuntimeManager.PlayOneShot("event:/PressButton");
+
                 if (NetworkManager.Singleton.IsServer)
                     GameLobby.Instance.DeleteLobby();
                 else
@@ -45,6 +47,7 @@ public class CharacterSelectUI : MonoBehaviour
 
             readyButton.onClick.AddListener(() =>
             {
+                FMODUnity.RuntimeManager.PlayOneShot("event:/PressButton");
                 CharacterSelect_Online.Instance.SetPlayerReady();
             });
         }

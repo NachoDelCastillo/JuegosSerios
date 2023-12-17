@@ -24,6 +24,7 @@ public class CharacterColorSelectUI : MonoBehaviour
         GetComponent<Button>().onClick.AddListener(() =>
         {
             OnlineMultiplayerManager.Instance.ChangePlayerMaterial(colorId);
+            FMODUnity.RuntimeManager.PlayOneShot("event:/PressButton");
         });
 
         OnlineMultiplayerManager.Instance.OnPlayerDataNetworkListChanged += GameMultiplayer_OnPlayerDataNetworkListChanged;
