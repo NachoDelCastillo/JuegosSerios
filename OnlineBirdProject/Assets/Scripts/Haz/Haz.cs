@@ -6,7 +6,7 @@ public class Haz : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<BirdManager>().IsOwner)
+        if (other.GetComponent<BirdManager>() && other.GetComponent<BirdManager>().IsOwner)
         {
             gameObject.SetActive(false);
         }

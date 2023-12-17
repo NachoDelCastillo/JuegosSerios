@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{1cb41e04-48ab-4d36-91cd-31eb06433365}">
+		<property name="assetPath">
+			<value>CriCri.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>24</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>89.207999999999998</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{e2bb1ffb-210e-4401-b764-9f4c36820545}</destination>
+		</relationship>
+	</object>
+</objects>
