@@ -168,7 +168,7 @@ public class PlayerMovement : MonoBehaviour
                 //SetStatic(true);
             }
 
-            TeleportThis(finalPosition);
+            //TeleportThis(finalPosition);
         }
 
         //if (staticThis)

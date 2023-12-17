@@ -491,7 +491,7 @@ public class GameplayManager : NetworkBehaviour
         if (!IsServer)
             return;
 
-        Debug.Log("birdsAlive.Value = " + birdsAlive.Value);
+        //Debug.Log("birdsAlive.Value = " + birdsAlive.Value);
 
         int timerNumber = 5 - Mathf.RoundToInt(maxGameplayTimer - gameplay_Timer.Value);// - secondsToAnimation);
         waitingForOtherPlayersText.text =

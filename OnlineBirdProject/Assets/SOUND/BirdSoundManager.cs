@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FMOD;
 
 public class BirdSoundManager : MonoBehaviour
 {
@@ -44,9 +45,9 @@ public class BirdSoundManager : MonoBehaviour
         eventDescription.getParameterDescriptionByName("Velocity", out velocityParameterDescription); ;
         velocityId = velocityParameterDescription.id;
 
-        instance.start();
 
         instance.setParameterByName("Obstruction", 1);
+
 
         // Comprobar si este es el pajaro local
         if (GetComponent<BirdManager>().IsOwnerBool())
@@ -56,6 +57,14 @@ public class BirdSoundManager : MonoBehaviour
 
             for (int i = 0; i < waterfallSounds.Length; i++)
                 waterfallSounds[i].Initialize(this);
+        }
+        else
+        {
+            // Si no es el pajaro local
+            GetComponent<FMODUnity.StudioListener>().enabled = false;
+            this.enabled = false;
+
+            instance.start();
         }
     }
 
@@ -68,8 +77,6 @@ public class BirdSoundManager : MonoBehaviour
         birdVelocityNormalized = (currentVelocity - minVelocity) / (maxVelocity - minVelocity);
         birdVelocityNormalized = Mathf.Clamp(birdVelocityNormalized, 0, 1);
 
-        //Debug.Log("birdVelocityNormalized = " + birdVelocityNormalized);
-       
         // Informar a FMOD del nuevo valor de la velocidad
         instance.setParameterByID(velocityId, birdVelocityNormalized);
         instance.setParameterByName("Velocity", birdVelocityNormalized);
