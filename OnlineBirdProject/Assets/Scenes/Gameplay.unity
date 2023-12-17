@@ -1654,7 +1654,7 @@ MonoBehaviour:
   m_BlendUpdateMethod: 1
   m_DefaultBlend:
     m_Style: 1
-    m_Time: 1.82
+    m_Time: 20.68
     m_CustomCurve:
       serializedVersion: 2
       m_Curve: []
@@ -2395,6 +2395,11 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 2074368914
       objectReference: {fileID: 0}
+    - target: {fileID: 1717075805933693207, guid: ca1d321a9a30c434ca2746d0d695ef5a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1837081721003811020, guid: ca1d321a9a30c434ca2746d0d695ef5a,
         type: 3}
       propertyPath: m_IsActive
@@ -2810,6 +2815,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_text
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9012449571142023843, guid: ca1d321a9a30c434ca2746d0d695ef5a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9111360776213936970, guid: ca1d321a9a30c434ca2746d0d695ef5a,
         type: 3}
