@@ -112,8 +112,8 @@ public class BirdManager : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
-        transform.position = gameplayManager.spawnPositionList
-            [OnlineMultiplayerManager.Instance.GetPlayerDataIndexFromClientId(OwnerClientId)].position;
+        //transform.position = gameplayManager.spawnPositionList
+        //    [OnlineMultiplayerManager.Instance.GetPlayerDataIndexFromClientId(OwnerClientId)].position;
 
         //if (!IsOwnerBool())
         //{

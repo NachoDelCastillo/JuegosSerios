@@ -134,7 +134,9 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector3 dir = position - transform.position;
 
-        teleportVel = dir.normalized * 80;
+        float totalDistance = Vector3.Distance(transform.position, position);
+
+        teleportVel = dir.normalized * 80 * totalDistance/100;
 
         teleporting = true;
 
@@ -161,17 +163,22 @@ public class PlayerMovement : MonoBehaviour
                 velocityLastFrame = Vector3.zero;
 
 
-                //States = WorldState.Flying;
-                SetStatic(true);
+                States = WorldState.Flying;
+                SetFlying();
+                //SetStatic(true);
             }
+
+            TeleportThis(finalPosition);
         }
 
-        if (staticThis)
-        {
-            Rigid.velocity = Vector3.up * .1f;
-            transform.position = finalPosition;
-            return;
-        }
+        //if (staticThis)
+        //{
+        //   // Rigid.velocity = Vector3.up * .1f;
+        //   // transform.DOMove(finalPosition, 1);
+
+        //    transform.position = finalPosition;
+        //    return;
+        //}
 
         //if (teleporting)
         //{
@@ -289,9 +296,6 @@ public class PlayerMovement : MonoBehaviour
     public void MovementFixedUpdate()
     {
         if (teleporting)
-            return;
-
-        if (staticThis)
             return;
 
 

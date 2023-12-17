@@ -5220,6 +5220,12 @@ PrefabInstance:
       objectReference: {fileID: 1419969352}
     - target: {fileID: 2878073466882889593, guid: ca1d321a9a30c434ca2746d0d695ef5a,
         type: 3}
+      propertyPath: playerPrefab
+      value: 
+      objectReference: {fileID: 7827211136509489689, guid: 8f21bb9c5d192964bb5751543da407a8,
+        type: 3}
+    - target: {fileID: 2878073466882889593, guid: ca1d321a9a30c434ca2746d0d695ef5a,
+        type: 3}
       propertyPath: deforestacion
       value: 
       objectReference: {fileID: 1425133192}
