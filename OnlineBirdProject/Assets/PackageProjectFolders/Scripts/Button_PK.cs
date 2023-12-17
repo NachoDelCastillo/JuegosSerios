@@ -73,8 +73,11 @@ public class Button_PK : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
             return;
 
         // Sound
-        if (SceneManager.GetActiveScene().name == "MainMenu_Scene")
-            AudioManager_PK.GetInstance().Play("ButtonOnselect", 1);
+        if (SceneManager.GetActiveScene().name == "MainMenuScene")
+        {
+            //AudioManager_PK.GetInstance().Play("ButtonOnselect", 1);
+            FMODUnity.RuntimeManager.PlayOneShot("event:/SelectButton");
+        }
 
         // Animation
         thisText.transform.DOScale(Vector3.one * thisText_InitScale * 1.3f, buttonScaleVel).SetUpdate(true);

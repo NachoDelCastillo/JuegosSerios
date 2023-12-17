@@ -76,7 +76,10 @@ public class MenuManager_PK : MonoBehaviour
             }
 
             if (canSound)
+            {
                 AudioManager_PK.GetInstance().Play("ButtonPress", 1);
+                FMODUnity.RuntimeManager.PlayOneShot("event:/PressButton");
+            }
         }
     }
     protected virtual void buttonPressed(int index) { }
