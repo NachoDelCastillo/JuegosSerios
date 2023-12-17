@@ -39,19 +39,23 @@ public class LobbyUI : MonoBehaviour
 
             GameManager.GetInstance().ChangeScene(SceneLoader.SceneName.MainMenuScene);
             // SceneLoader.Load(SceneLoader.SceneName.MainMenuScene);
+            FMODUnity.RuntimeManager.PlayOneShot("event:/PressButton");
         });
         createLobbyButton.onClick.AddListener(() =>
         {
             // Mostrar la tabla de creacion de lobby
             lobbyCreateUI.Show();
+            FMODUnity.RuntimeManager.PlayOneShot("event:/PressButton");
         });
         quickJoinButton.onClick.AddListener(() =>
         { 
             GameLobby.Instance.QuickJoin();
+            FMODUnity.RuntimeManager.PlayOneShot("event:/PressButton");
         });
         joinCodeButton.onClick.AddListener(() =>
         {
             GameLobby.Instance.JoinWithCode(joinCodeInputField.text);
+            FMODUnity.RuntimeManager.PlayOneShot("event:/PressButton");
         });
 
         lobbyTemplate.gameObject.SetActive(false);
