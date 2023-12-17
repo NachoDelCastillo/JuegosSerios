@@ -5,6 +5,11 @@ using UnityEngine;
 public class FoodManager : MonoBehaviour
 {
 
+    private void Start()
+    {
+        FirstLevelFood();
+    }
+
     public void FirstLevelFood()
     {
         //Los 5 primeros hijos son los paths del primer nivel

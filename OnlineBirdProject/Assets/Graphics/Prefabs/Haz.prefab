@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -5518785482305012065}
   - component: {fileID: 8645967444403818832}
   - component: {fileID: 4810728945506457269}
+  - component: {fileID: -5715254430369163215}
   m_Layer: 0
   m_Name: Haz
   m_TagString: Untagged
@@ -4891,3 +4892,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a0bc01e714df084a964c825bcca2898, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-5715254430369163215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4342278841660805418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -200191072
+      Data2: 1139274643
+      Data3: 1312892811
+      Data4: -1899911007
+    Path: event:/LightSpawn
+  Event: 
+  PlayEvent: 11
+  StopEvent: 2
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  AllowNonRigidbodyDoppler: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20

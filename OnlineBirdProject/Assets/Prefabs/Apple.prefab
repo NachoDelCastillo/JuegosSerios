@@ -215,6 +215,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47b557e0833ea9a44883df0bbefc7873, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  eatSound:
+    Guid:
+      Data1: -862438355
+      Data2: 1315965675
+      Data3: 1563703963
+      Data4: -1978377321
+    Path: event:/EatSound
   foodCount: 2
 --- !u!114 &-3207538346917006281
 MonoBehaviour:

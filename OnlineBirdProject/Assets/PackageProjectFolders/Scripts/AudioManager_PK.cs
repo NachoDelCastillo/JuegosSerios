@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
+using FMODUnity;
 
 public class AudioManager_PK : MonoBehaviour
 {
@@ -81,6 +82,11 @@ public class AudioManager_PK : MonoBehaviour
         s.source.Play();
     }
 
+    public void PlayOneShoot(EventReference sound,Vector3 worldPosition)
+    {
+        RuntimeManager.PlayOneShot(sound, worldPosition);
+    }
+
     public void Stop(string name)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
@@ -105,7 +111,7 @@ public class AudioManager_PK : MonoBehaviour
         volume = volume / 10;
 
         AudioSource[] AllaudioSources = GetComponents<AudioSource>();
-
+        
         for (int i = 0; i < AllaudioSources.Length; i++)
         {
             if (sounds[i].music == isMusic)
