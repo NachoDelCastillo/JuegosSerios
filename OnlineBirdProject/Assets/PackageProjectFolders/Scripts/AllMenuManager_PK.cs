@@ -34,6 +34,8 @@ public class AllMenuManager_PK : MonoBehaviour
 
         initialZ = cameraObj.transform.position.z;
         initialY = cameraObj.transform.position.y;
+
+       // FMODUnity.RuntimeManager.PlayOneShot("event:/MenuMusic");
     }
 
 

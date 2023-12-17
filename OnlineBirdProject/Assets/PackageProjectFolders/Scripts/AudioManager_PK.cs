@@ -72,6 +72,12 @@ public class AudioManager_PK : MonoBehaviour
 
     public void Play(string name, float pitch)
     {
+        if (name == "MainMenu_Music")
+        {
+            Debug.Log("MainMenu_Music");
+            FMODUnity.RuntimeManager.PlayOneShot("event:/MenuMusic");
+        }
+
         Sound s = Array.Find(sounds, sound => sound.name == name);
         if (s == null)
         {
