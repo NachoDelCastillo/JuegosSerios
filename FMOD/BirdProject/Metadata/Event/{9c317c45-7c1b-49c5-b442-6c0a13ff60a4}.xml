@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="Event" id="{9c317c45-7c1b-49c5-b442-6c0a13ff60a4}">
 		<property name="name">
-			<value>Ambience1</value>
+			<value>Enviroment</value>
 		</property>
 		<property name="outputFormat">
 			<value>5</value>
@@ -31,6 +31,9 @@
 		<relationship name="timeline">
 			<destination>{9254e0df-9b3b-49ae-9e28-9ebe271cb78f}</destination>
 		</relationship>
+		<relationship name="banks">
+			<destination>{5f01f89e-3d39-482d-994d-d7c5c9774a7e}</destination>
+		</relationship>
 	</object>
 	<object class="EventMixer" id="{16c36bda-6bc5-4c05-8f77-c6b90e0b16c9}">
 		<relationship name="masterBus">
@@ -53,7 +56,11 @@
 			<destination>{c0ac66b5-64a1-4e08-9d3b-9fdf14fa89c9}</destination>
 		</relationship>
 	</object>
-	<object class="EventAutomatableProperties" id="{a2bd782a-adfb-4ff6-a63b-6ca7f3deaf05}" />
+	<object class="EventAutomatableProperties" id="{a2bd782a-adfb-4ff6-a63b-6ca7f3deaf05}">
+		<property name="priority">
+			<value>3</value>
+		</property>
+	</object>
 	<object class="MarkerTrack" id="{f1ca3fa5-ef4a-4be4-84ec-79f7019de2d9}" />
 	<object class="GroupTrack" id="{9f03232a-856d-481e-bb5a-c83287d30287}">
 		<relationship name="modules">
@@ -96,7 +103,7 @@
 			<value>250</value>
 		</property>
 		<property name="maximumTimeBetweenSounds">
-			<value>2000</value>
+			<value>800</value>
 		</property>
 		<property name="spawnRate">
 			<value>66</value>
@@ -109,6 +116,9 @@
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{4f140168-6050-40b9-95f9-86e88f890d77}">
+		<property name="volume">
+			<value>0.5</value>
+		</property>
 		<property name="name">
 			<value>Audio 1</value>
 		</property>
@@ -164,9 +174,14 @@
 		<relationship name="effects">
 			<destination>{e03a6a65-e875-47b8-86e9-91583e939bc6}</destination>
 			<destination>{0ce6c1ea-f6c6-4f7d-92ae-181dbacf23f9}</destination>
+			<destination>{b37742f7-14f5-4c89-8604-7aebeaf0ea63}</destination>
 		</relationship>
 	</object>
-	<object class="MixerBusPanner" id="{8b89027d-3b7b-47e9-a988-2054cc463dc2}" />
+	<object class="MixerBusPanner" id="{8b89027d-3b7b-47e9-a988-2054cc463dc2}">
+		<property name="surroundLFELevel">
+			<value>-2</value>
+		</property>
+	</object>
 	<object class="MixerBusFader" id="{b0e8e101-b702-4f5b-b1e9-0c67bba1866c}" />
 	<object class="SingleSound" id="{034371a0-b26a-400d-aa80-80814d37f6fc}">
 		<relationship name="audioFile">
@@ -253,4 +268,24 @@
 		</property>
 	</object>
 	<object class="MixerBusFader" id="{0ce6c1ea-f6c6-4f7d-92ae-181dbacf23f9}" />
+	<object class="SFXReverbEffect" id="{b37742f7-14f5-4c89-8604-7aebeaf0ea63}">
+		<property name="decayTime">
+			<value>280</value>
+		</property>
+		<property name="HFReference">
+			<value>7000</value>
+		</property>
+		<property name="density">
+			<value>79.5</value>
+		</property>
+		<property name="lowShelfGain">
+			<value>-1.5</value>
+		</property>
+		<property name="highCut">
+			<value>2000</value>
+		</property>
+		<property name="dryLevel">
+			<value>-8.5</value>
+		</property>
+	</object>
 </objects>

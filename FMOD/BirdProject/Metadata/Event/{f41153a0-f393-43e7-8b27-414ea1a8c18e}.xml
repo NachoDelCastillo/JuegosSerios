@@ -56,7 +56,11 @@
 			<destination>{c0ac66b5-64a1-4e08-9d3b-9fdf14fa89c9}</destination>
 		</relationship>
 	</object>
-	<object class="EventAutomatableProperties" id="{f13b868d-4682-4d20-853a-ba1efec0977a}" />
+	<object class="EventAutomatableProperties" id="{f13b868d-4682-4d20-853a-ba1efec0977a}">
+		<property name="dopplerEnabled">
+			<value>true</value>
+		</property>
+	</object>
 	<object class="MarkerTrack" id="{bba955cc-6e2b-4f08-b8a3-554af467d7d5}" />
 	<object class="GroupTrack" id="{8d448508-5ea2-43bc-af69-38943e403aee}">
 		<relationship name="modules">

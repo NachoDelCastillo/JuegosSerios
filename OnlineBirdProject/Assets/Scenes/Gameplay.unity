@@ -39,7 +39,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 355987664}
-  m_IndirectSpecularColor: {r: 0.11588039, g: 0.17825106, b: 0.18100405, a: 1}
+  m_IndirectSpecularColor: {r: 0.115882285, g: 0.17842102, b: 0.18096131, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -750,6 +750,111 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 013f7c8078ffbb04ca41b24b171f5826, type: 3}
+--- !u!1 &940540792
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 940540796}
+  - component: {fileID: 940540795}
+  - component: {fileID: 940540794}
+  - component: {fileID: 940540793}
+  m_Layer: 0
+  m_Name: Bosque1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &940540793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 940540792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: Player
+  EventReference:
+    Guid:
+      Data1: -453056869
+      Data2: 1144264232
+      Data3: -1211344208
+      Data4: -582096863
+    Path: event:/DefaultNature
+  Event: 
+  PlayEvent: 1
+  StopEvent: 3
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  AllowNonRigidbodyDoppler: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
+--- !u!114 &940540794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 940540792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7b83277f5c041e42843bc617142551a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fmodEvent:
+    Guid:
+      Data1: -1674478523
+      Data2: 1237679131
+      Data3: 174867124
+      Data4: -1537147117
+    Path: event:/Ambience1
+--- !u!65 &940540795
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 940540792}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 250, y: 100, z: 250}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &940540796
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 940540792}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1513.7, y: 474.7, z: 455.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 21
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &969037342
 GameObject:
   m_ObjectHideFlags: 0
@@ -1418,7 +1523,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -14.340088, y: -71.250015}
+  m_AnchoredPosition: {x: -14.340088, y: -71.25003}
   m_SizeDelta: {x: -28.67999, y: -18.600006}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1425133192
@@ -2302,8 +2407,49 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 63417873932370561, guid: e6f981d14cf06b04d8bcc3fa7ef8d7a1,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6872624102111380241}
   m_SourcePrefab: {fileID: 100100000, guid: e6f981d14cf06b04d8bcc3fa7ef8d7a1, type: 3}
+--- !u!1 &6872624102111380240 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 63417873932370561, guid: e6f981d14cf06b04d8bcc3fa7ef8d7a1,
+    type: 3}
+  m_PrefabInstance: {fileID: 6872624102111380239}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6872624102111380241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6872624102111380240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 1385418207
+      Data2: 1340321325
+      Data3: 783046282
+      Data4: -2087954919
+    Path: event:/River
+  Event: 
+  PlayEvent: 1
+  StopEvent: 2
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  AllowNonRigidbodyDoppler: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1001 &8918309248356464086
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2606,7 +2752,7 @@ PrefabInstance:
     - target: {fileID: 4040559291382411489, guid: ca1d321a9a30c434ca2746d0d695ef5a,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -0.000045776367
       objectReference: {fileID: 0}
     - target: {fileID: 4040628133773610787, guid: ca1d321a9a30c434ca2746d0d695ef5a,
         type: 3}
