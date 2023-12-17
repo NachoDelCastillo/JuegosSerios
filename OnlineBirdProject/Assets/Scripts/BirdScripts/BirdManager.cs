@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
+using DG.Tweening;
 
 public class BirdManager : NetworkBehaviour
 {
@@ -55,6 +56,19 @@ public class BirdManager : NetworkBehaviour
         {
             float delta = Time.deltaTime;
             inputHandler.TickInput(delta);
+
+            //if (Input.GetKeyDown(KeyCode.G))
+            //{
+            //    //transform.position = new Vector3(0, 0, 0);
+            //    Debug.Log("TELEPORT");
+
+            //    Vector3 v = gameplayManager.spawnPositionList
+            //        [OnlineMultiplayerManager.Instance.GetPlayerDataIndexFromClientId(OwnerClientId)].position;
+
+            //    v = new Vector3(0, 0, 0);
+
+            //    transform.DOMove(v, 10);
+            //}
         }
         else
         {

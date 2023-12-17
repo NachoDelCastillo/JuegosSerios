@@ -104,6 +104,10 @@ public class PlayerMovement : MonoBehaviour
     private float RunTimer; //animation ctrl for running
     private float FlyingTimer; //the time before the animation stops flying
 
+    bool teleporting = false;
+    Vector3 teleportVel;
+    Vector3 finalPosition;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -126,8 +130,56 @@ public class PlayerMovement : MonoBehaviour
         SetupCharacter();
     }
 
+    public void TeleportThis(Vector3 position)
+    {
+        Vector3 dir = position - transform.position;
+
+        teleportVel = dir.normalized * 80;
+
+        teleporting = true;
+
+        finalPosition = position;
+    }
+
+    bool staticThis = false;
+
+    public void SetStatic(bool b)
+    {
+        staticThis = b;
+    }
+
     public void MovementUpdate()
     {
+        if (teleporting)
+        {
+            Rigid.velocity = teleportVel;
+
+            if (Vector3.Distance(transform.position, finalPosition) < 10)
+            {
+                teleporting = false;
+                Rigid.velocity = Vector3.zero;
+                velocityLastFrame = Vector3.zero;
+
+
+                //States = WorldState.Flying;
+                SetStatic(true);
+            }
+        }
+
+        if (staticThis)
+        {
+            Rigid.velocity = Vector3.up * .1f;
+            transform.position = finalPosition;
+            return;
+        }
+
+        //if (teleporting)
+        //{
+
+
+        //    return;
+        //}
+
         //cannot function when dead
         if (States == WorldState.Static)
             return;
@@ -236,6 +288,13 @@ public class PlayerMovement : MonoBehaviour
 
     public void MovementFixedUpdate()
     {
+        if (teleporting)
+            return;
+
+        if (staticThis)
+            return;
+
+
         //tick deltatime
         delta = Time.deltaTime;
 

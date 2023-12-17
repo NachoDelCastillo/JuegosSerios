@@ -18,6 +18,8 @@ public class GameplayManager : NetworkBehaviour
 
     float secondsToAnimation = 5;
 
+
+
     [SerializeField]
     private TMP_Text birdHasDied;
 
@@ -138,6 +140,45 @@ public class GameplayManager : NetworkBehaviour
     {
         currentLevel = 1;
         Invoke("SetupValues", .1f);
+    }
+
+    BirdManager localBirdManager;
+
+    [ClientRpc]
+    void SetStaticFalseClientRpc()
+    {
+        localBirdManager.GetComponent<PlayerMovement>().SetStatic(false);
+    }
+
+    [ClientRpc]
+    void BirdsToSpawnPointClientRpc()
+    {
+        //if (localBirdManager != null)
+        //{
+        //    Vector3 spawnPoint = spawnPositionList
+        //        [OnlineMultiplayerManager.Instance.GetPlayerDataIndexFromClientId(localBirdManager.OwnerClientId)].position;
+        //    localBirdManager.GetComponent<PlayerMovement>().TeleportThis(spawnPoint);
+        //    localBirdManager.GetComponent<PlayerMovement>().SetStatic(true);
+        //}
+
+        //else
+        {
+            for (int i = 0; i < allBirds.Count; i++)
+            {
+                BirdManager bm = allBirds[i];
+                if (bm != null)
+                    if (bm.IsOwner)
+                    {
+                        Vector3 spawnPoint = spawnPositionList
+                            [OnlineMultiplayerManager.Instance.GetPlayerDataIndexFromClientId(bm.OwnerClientId)].position;
+
+                        localBirdManager = bm;
+
+                        localBirdManager.GetComponent<PlayerMovement>().TeleportThis(spawnPoint);
+                        //localBirdManager.GetComponent<PlayerMovement>().SetStatic(true);
+                    }
+            }
+        }
     }
 
     void SetupValues()
@@ -456,6 +497,11 @@ public class GameplayManager : NetworkBehaviour
         waitingForOtherPlayersText.text =
             "Waiting for other Players (" + timerNumber + ")";
 
+        if (Input.GetKeyDown(KeyCode.Z))
+            BirdsToSpawnPointClientRpc();
+
+        //if (Input.GetKeyDown(KeyCode.C))
+        //    SetStaticFalseClientRpc();
 
         switch (state.Value)
         {
