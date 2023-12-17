@@ -39,7 +39,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 355987664}
-  m_IndirectSpecularColor: {r: 0.115882285, g: 0.17842102, b: 0.18096131, a: 1}
+  m_IndirectSpecularColor: {r: 0.11588039, g: 0.17825106, b: 0.18100405, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -793,6 +793,9 @@ MonoBehaviour:
       Data3: -1211344208
       Data4: -582096863
     Path: event:/DefaultNature
+  xPos: 500
+  yPos: 200
+  zPos: 500
 --- !u!4 &940540796
 Transform:
   m_ObjectHideFlags: 0
@@ -1266,7 +1269,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1419969352
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2387,10 +2390,25 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 2074368914
       objectReference: {fileID: 0}
+    - target: {fileID: 1837081721003811020, guid: ca1d321a9a30c434ca2746d0d695ef5a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2262590946510581917, guid: ca1d321a9a30c434ca2746d0d695ef5a,
         type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -14.340088
+      objectReference: {fileID: 0}
+    - target: {fileID: 2754650897423480683, guid: ca1d321a9a30c434ca2746d0d695ef5a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2868438166068298298, guid: ca1d321a9a30c434ca2746d0d695ef5a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2878073466882889593, guid: ca1d321a9a30c434ca2746d0d695ef5a,
         type: 3}
@@ -2611,7 +2629,7 @@ PrefabInstance:
     - target: {fileID: 4040559291382411489, guid: ca1d321a9a30c434ca2746d0d695ef5a,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000030517578
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4040628133773610787, guid: ca1d321a9a30c434ca2746d0d695ef5a,
         type: 3}
@@ -2713,6 +2731,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5166978592696269370, guid: ca1d321a9a30c434ca2746d0d695ef5a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5396433965662192253, guid: ca1d321a9a30c434ca2746d0d695ef5a,
         type: 3}
       propertyPath: m_text
@@ -2782,6 +2805,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: NetworkLogic
+      objectReference: {fileID: 0}
+    - target: {fileID: 9191696823655890671, guid: ca1d321a9a30c434ca2746d0d695ef5a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

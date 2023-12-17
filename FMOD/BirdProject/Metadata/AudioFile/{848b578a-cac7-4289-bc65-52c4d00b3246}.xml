@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{848b578a-cac7-4289-bc65-52c4d00b3246}">
+		<property name="assetPath">
+			<value>Whoosh.mp3</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.49632653061224491</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{e2bb1ffb-210e-4401-b764-9f4c36820545}</destination>
+		</relationship>
+	</object>
+</objects>

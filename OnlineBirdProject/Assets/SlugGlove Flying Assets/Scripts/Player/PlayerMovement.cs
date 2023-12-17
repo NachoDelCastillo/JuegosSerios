@@ -537,6 +537,7 @@ public class PlayerMovement : MonoBehaviour
         Rigid.velocity = Rigid.velocity.normalized * currentVelocity;
 
         birdModel.DOLocalRotate(Vector3.forward * 360, 1, RotateMode.FastBeyond360);
+        FMODUnity.RuntimeManager.PlayOneShot("event:/SpeedBoost");
     }
 
     // Update is called once per frame
