@@ -47,7 +47,7 @@ public class BirdSoundManager : MonoBehaviour
 
 
         instance.setParameterByName("Obstruction", 1);
-
+        instance.start();
 
         // Comprobar si este es el pajaro local
         if (GetComponent<BirdManager>().IsOwnerBool())
