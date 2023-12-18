@@ -71,7 +71,7 @@ public class GameplayManager : NetworkBehaviour
     NetworkVariable<float> countDownToStart_Timer = new NetworkVariable<float>(3f);
     // Tiempo que dura la partida
     NetworkVariable<float> gameplay_Timer = new NetworkVariable<float>(maxGameplayTimer);
-    public const float maxGameplayTimer = 15;
+    public const float maxGameplayTimer = 20;
     // Tiempo desde que termina la partida hasta que se vuelve al lobby, mostrando resultados de la partida
     NetworkVariable<float> gameover_Timer = new NetworkVariable<float>(maxGameoverTimer);
     public const float maxGameoverTimer = 5;
@@ -241,16 +241,19 @@ public class GameplayManager : NetworkBehaviour
     void StartLevelClientRpc(int newLevel)
     {
         if (IsServer)
+        {
             gameplay_Timer.Value = maxGameplayTimer;
+            BirdsToSpawnPointClientRpc();
+        }
 
-        //if (newLevel == 1)
-        //    EnvironmentChanger.Instance.SetFirstLevel();
-        //else if (newLevel == 2)
-        //    EnvironmentChanger.Instance.SetSecondLevel();
-        //else if (newLevel == 3)
-        //    EnvironmentChanger.Instance.SetThirdLevel();
+        if (newLevel == 1)
+            EnvironmentChanger.Instance.SetFirstLevel();
+        else if (newLevel == 2)
+            EnvironmentChanger.Instance.SetSecondLevel();
+        else if (newLevel == 3)
+            EnvironmentChanger.Instance.SetThirdLevel();
 
-        EnvironmentChanger.Instance.SetFirstLevel();
+        //EnvironmentChanger.Instance.SetFirstLevel();
 
 
         birdCamera.gameObject.SetActive(false);
@@ -319,17 +322,17 @@ public class GameplayManager : NetworkBehaviour
         ageText.text = ageStrings[currentLevel - 1];
         ageText.DOFade(1, 1);
 
-        birdsLeftText.text = " " + birdsAlive + " birds left ";
+        birdsLeftText.text = " " + birdsAlive.Value + " birds left ";
         birdsLeftText.DOFade(1, 1);
         // Renderizar Texto
         //StartCoroutine(RenderText());
 
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(4);
 
         ageText.DOFade(0, 1);
         birdsLeftText.DOFade(0, 1);
 
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(3);
 
         birdCamera.gameObject.SetActive(true);
 
@@ -538,7 +541,7 @@ public class GameplayManager : NetworkBehaviour
                         // El servidor activa la animacion, la cual tambien avisa al resto de maquinas para que empiecen 
                         // la misma animacion en su propia maquina local
                         //StartAnimationClientRpc();
-                        StartLevelClientRpc(3); // 1
+                        StartLevelClientRpc(1); // 1
                 }
 
                 if (gameplay_Timer.Value < 0)
