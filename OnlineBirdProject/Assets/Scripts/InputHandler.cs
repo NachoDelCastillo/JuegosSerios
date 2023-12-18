@@ -107,5 +107,12 @@ public class InputHandler : MonoBehaviour
     {
         horizontal = 0;
         vertical = 0;
+
+        jump_input = false;
+        jumpHold_input = false;
+        fly_input = false;
+
+        tiltRight = false;
+        tiltLeft = false;
     }
 }

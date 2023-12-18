@@ -51,14 +51,19 @@ public class BirdManager : NetworkBehaviour
 
     void Update()
     {
+
         if (!GameplayManager.Instance.birdsCanMove)
-            return;
+        {
+            inputHandler.ResetMovementValues();
+        }
 
         // if (CanMove())
         if (IsOwnerBool())
         {
             float delta = Time.deltaTime;
-            inputHandler.TickInput(delta);
+
+            if (GameplayManager.Instance.birdsCanMove)
+                inputHandler.TickInput(delta);
 
             //if (Input.GetKeyDown(KeyCode.G))
             //{

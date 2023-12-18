@@ -136,13 +136,20 @@ public class PlayerMovement : MonoBehaviour
 
         float totalDistance = Vector3.Distance(transform.position, position);
 
-        teleportVel = dir.normalized * 80 * totalDistance/100;
+        teleportVel = dir.normalized * 80 * totalDistance / 100;
 
         teleporting = true;
 
         finalPosition = position;
 
         GetComponentInChildren<SphereCollider>().enabled = false;
+
+        Invoke("TeleportAgain", 1);
+    }
+
+    void TeleportAgain()
+    {
+        TeleportThis(finalPosition);
     }
 
     bool staticThis = false;
@@ -150,6 +157,13 @@ public class PlayerMovement : MonoBehaviour
     public void SetStatic(bool b)
     {
         staticThis = b;
+    }
+
+    void ResetVelocity()
+    {
+        Rigid.velocity = Vector3.zero;
+        velocityLastFrame = Vector3.zero;
+        ActSpeed = 0;
     }
 
     public void MovementUpdate()
@@ -161,8 +175,7 @@ public class PlayerMovement : MonoBehaviour
             if (Vector3.Distance(transform.position, finalPosition) < 10)
             {
                 teleporting = false;
-                Rigid.velocity = Vector3.zero;
-                velocityLastFrame = Vector3.zero;
+                ResetVelocity();
 
 
                 States = WorldState.Flying;
@@ -170,6 +183,10 @@ public class PlayerMovement : MonoBehaviour
                 //SetStatic(true);
 
                 GetComponentInChildren<SphereCollider>().enabled = true;
+
+                CancelInvoke();
+
+                Invoke("ResetVelocity", .2f);
             }
 
             //TeleportThis(finalPosition);
@@ -490,9 +507,7 @@ public class PlayerMovement : MonoBehaviour
         //else
         //    canDeccelerate = true;
 
-
-
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F) && GameplayManager.Instance.birdsCanMove)
             Boost();
 
         //Debug.Log("Rigid.velocity = " + Rigid.velocity.magnitude);
