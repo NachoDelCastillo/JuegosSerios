@@ -141,6 +141,8 @@ public class PlayerMovement : MonoBehaviour
         teleporting = true;
 
         finalPosition = position;
+
+        GetComponentInChildren<Rigidbody>().GetComponent<SphereCollider>().enabled = false;
     }
 
     bool staticThis = false;
@@ -166,6 +168,8 @@ public class PlayerMovement : MonoBehaviour
                 States = WorldState.Flying;
                 SetFlying();
                 //SetStatic(true);
+
+                GetComponentInChildren<Rigidbody>().GetComponent<SphereCollider>().enabled = false;
             }
 
             //TeleportThis(finalPosition);
