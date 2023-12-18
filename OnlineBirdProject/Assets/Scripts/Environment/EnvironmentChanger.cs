@@ -29,6 +29,8 @@ public class EnvironmentChanger : MonoBehaviour
     Transform greenTerrain;
     [SerializeField]
     Transform lessGreenTerrain;
+    [SerializeField]
+    Transform level2Decoration;
 
     [SerializeField]
     Transform bigRocks;
@@ -100,6 +102,7 @@ public class EnvironmentChanger : MonoBehaviour
         greenTerrain.gameObject.SetActive(false);
         lessGreenTerrain.gameObject.SetActive(true);
         subwaterFloor.gameObject.SetActive(false);
+        level2Decoration.gameObject.SetActive(true);
     }
 
     public void SetThirdLevel()
@@ -116,6 +119,7 @@ public class EnvironmentChanger : MonoBehaviour
 
         greenTerrain.gameObject.SetActive(false);
         lessGreenTerrain.gameObject.SetActive(false);
+        level2Decoration.gameObject.SetActive(false);
         subwaterFloor.gameObject.SetActive(true);
     }
 }
