@@ -73,7 +73,7 @@ public class GameplayManager : NetworkBehaviour
     NetworkVariable<float> countDownToStart_Timer = new NetworkVariable<float>(3f);
     // Tiempo que dura la partida
     NetworkVariable<float> gameplay_Timer = new NetworkVariable<float>(maxGameplayTimer);
-    public const float maxGameplayTimer = 100; // 20 tiempo optimo
+    public const float maxGameplayTimer = 60; // 20 tiempo optimo
     // Tiempo desde que termina la partida hasta que se vuelve al lobby, mostrando resultados de la partida
     NetworkVariable<float> gameover_Timer = new NetworkVariable<float>(maxGameoverTimer);
     public const float maxGameoverTimer = 5;
@@ -329,48 +329,48 @@ public class GameplayManager : NetworkBehaviour
         //////////////////////////////////////////////////
 
 
-        //cameras[0].gameObject.SetActive(true);
-
-        //yield return new WaitForSeconds(1);
-
-        //cameras[0].gameObject.SetActive(false);
-        //cameras[1].gameObject.SetActive(true);
-
-        //yield return new WaitForSeconds(5);
-
-        //ageText.text = ageStrings[currentLevel - 1];
-        //ageText.DOFade(1, 1);
-
-        //birdsLeftText.text = " " + birdsAlive.Value + " birds left ";
-        //birdsLeftText.DOFade(1, 1);
-        //// Renderizar Texto
-        ////StartCoroutine(RenderText());
-
-        //yield return new WaitForSeconds(4);
-
-        //ageText.DOFade(0, 1);
-        //birdsLeftText.DOFade(0, 1);
-
-        //yield return new WaitForSeconds(3);
-
-        //birdCamera.gameObject.SetActive(true);
-
-        //countDownText.DOFade(1, .5f);
-        //countDownText.text = "3";
-        //yield return new WaitForSeconds(1);
-        //countDownText.text = "2";
-        //yield return new WaitForSeconds(1);
-        //countDownText.text = "1";
-        //yield return new WaitForSeconds(1);
-        //countDownText.text = "SURVIVE";
-        //countDownText.DOFade(0, 1);
-
-        //if (currentLevel != 3)
-        //    showLevelTimerText = true;
-
+        cameras[0].gameObject.SetActive(true);
 
         yield return new WaitForSeconds(1);
+
+        cameras[0].gameObject.SetActive(false);
+        cameras[1].gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(5);
+
+        ageText.text = ageStrings[currentLevel - 1];
+        ageText.DOFade(1, 1);
+
+        birdsLeftText.text = " " + birdsAlive.Value + " birds left ";
+        birdsLeftText.DOFade(1, 1);
+        // Renderizar Texto
+        //StartCoroutine(RenderText());
+
+        yield return new WaitForSeconds(4);
+
+        ageText.DOFade(0, 1);
+        birdsLeftText.DOFade(0, 1);
+
+        yield return new WaitForSeconds(3);
+
         birdCamera.gameObject.SetActive(true);
+
+        countDownText.DOFade(1, .5f);
+        countDownText.text = "3";
+        yield return new WaitForSeconds(1);
+        countDownText.text = "2";
+        yield return new WaitForSeconds(1);
+        countDownText.text = "1";
+        yield return new WaitForSeconds(1);
+        countDownText.text = "SURVIVE";
+        countDownText.DOFade(0, 1);
+
+        if (currentLevel != 3)
+            showLevelTimerText = true;
+
+
+        //yield return new WaitForSeconds(1);
+        //birdCamera.gameObject.SetActive(true);
 
         //////////////////////////////////////////////////
 
@@ -747,7 +747,11 @@ public class GameplayManager : NetworkBehaviour
 
     void BirdDestroyedUI()
     {
-        birdHasDied.text = "Only " + birdsAlive.Value + " birds alive";
+        int value = birdsAlive.Value;
+        if (value < 0)
+            value = 0;
+
+        birdHasDied.text = "Only " + value + " birds alive";
         birdHasDied.DOFade(1, 0.1f);
 
         Invoke("BirdDestroyedUIDissappear", 1);
