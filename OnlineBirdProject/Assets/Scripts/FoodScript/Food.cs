@@ -32,6 +32,9 @@ public class Food : MonoBehaviour
     }
 
     bool foodEaten = false;
+    bool eatingFood = false;
+    float eatSpeed = 5;
+    float eatTime = 1;
 
     private void Update()
     {
@@ -51,20 +54,30 @@ public class Food : MonoBehaviour
             localBird.GetComponent<LifeBar>().eatFood(foodCount);
             AudioManager_PK.GetInstance().PlayOneShoot(eatSound, transform.position);
 
-            Destroy(this.gameObject);
+            //Destroy(this.gameObject);
+            eatingFood = true;
 
-            //StartCoroutine(EatFood());
+            StartCoroutine(EatFood());
+        }
+
+        if (eatingFood)
+        {
+            transform.position = Vector3.Lerp(transform.position, localBird.transform.position, Time.deltaTime * eatSpeed);
         }
     }
 
-    //IEnumerator EatFood()
-    //{
-    //    Vector3 finalPos = localBird.transform.position + localBird.transform.forward * 2;
-    //    transform.DOMove(finalPos, .5f);
+    IEnumerator EatFood()
+    {
+        //Vector3 finalPos = localBird.transform.position + localBird.transform.forward * 2;
+        //transform.DOMove(finalPos, eatTime);
+        transform.DOScale(Vector3.zero, eatTime);
+        transform.DORotate(new Vector3(0, 360, 0), eatTime, RotateMode.FastBeyond360);
 
-    //    yield return new WaitForSeconds(1);
-    //    Destroy(this.gameObject);
-    //}
+        yield return new WaitForSeconds(eatTime);
+
+        eatingFood = false;
+        Destroy(this.gameObject);
+    }
 
     private void OnTriggerEnter(Collider other)
     {
