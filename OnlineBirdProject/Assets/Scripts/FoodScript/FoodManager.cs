@@ -5,15 +5,24 @@ using UnityEngine;
 public class FoodManager : MonoBehaviour
 {
 
+    static public FoodManager Instance;
+
+    private void Awake()
+    {
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(this);
+    }
+
     private void Start()
     {
-        FirstLevelFood();
     }
 
     public void FirstLevelFood()
     {
         //Los 5 primeros hijos son los paths del primer nivel
-        int randomPath = Random.RandomRange(0, 4);
+        int randomPath = 0; // Random.RandomRange(0, 4);
         transform.GetChild(randomPath).gameObject.SetActive(true);
     }
 

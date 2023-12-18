@@ -73,7 +73,7 @@ public class GameplayManager : NetworkBehaviour
     NetworkVariable<float> countDownToStart_Timer = new NetworkVariable<float>(3f);
     // Tiempo que dura la partida
     NetworkVariable<float> gameplay_Timer = new NetworkVariable<float>(maxGameplayTimer);
-    public const float maxGameplayTimer = 20;
+    public const float maxGameplayTimer = 100; // 20 tiempo optimo
     // Tiempo desde que termina la partida hasta que se vuelve al lobby, mostrando resultados de la partida
     NetworkVariable<float> gameover_Timer = new NetworkVariable<float>(maxGameoverTimer);
     public const float maxGameoverTimer = 5;
@@ -368,6 +368,15 @@ public class GameplayManager : NetworkBehaviour
 
         if (IsServer)
             BirdsCanMoveClientRpc(true);
+
+
+        if (currentLevel == 1)
+            FoodManager.Instance.FirstLevelFood();
+        else if (currentLevel == 2)
+            FoodManager.Instance.SecondLevelFood();
+        else if (currentLevel == 3)
+            FoodManager.Instance.ThirdLevelFood();
+
 
         Debug.Log("END LEVEL ANIMATION");
     }
