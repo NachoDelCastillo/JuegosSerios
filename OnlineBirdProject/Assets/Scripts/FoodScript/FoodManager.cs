@@ -25,6 +25,7 @@ public class FoodManager : MonoBehaviour
     {
         Debug.Log("FOOD LOADED Lvl 1");
 
+        if (currentPath != null)
         currentPath.SetActive(false);
 
         //Los 5 primeros hijos son los paths del primer nivel
@@ -37,8 +38,8 @@ public class FoodManager : MonoBehaviour
     public void SecondLevelFood()
     {
         Debug.Log("FOOD LOADED Lvl 2");
-
-        currentPath.SetActive(false);
+        if (currentPath != null)
+            currentPath.SetActive(false);
 
         //Los 5 segundos hijos son los paths del segundo nivel
         int randomPath = Random.Range(5, 9);
@@ -52,8 +53,8 @@ public class FoodManager : MonoBehaviour
     public void ThirdLevelFood()
     {
         Debug.Log("FOOD LOADED Lvl 3");
-
-        currentPath.SetActive(false);
+        if (currentPath != null)
+            currentPath.SetActive(false);
 
         //Los 5 terceros hijos son los paths del tercer nivel
         int randomPath = Random.Range(10, 14);
