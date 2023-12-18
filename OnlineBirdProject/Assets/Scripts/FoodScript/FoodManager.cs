@@ -19,25 +19,47 @@ public class FoodManager : MonoBehaviour
     {
     }
 
+    GameObject currentPath;
+
     public void FirstLevelFood()
     {
+        Debug.Log("FOOD LOADED Lvl 1");
+
+        currentPath.SetActive(false);
+
         //Los 5 primeros hijos son los paths del primer nivel
         int randomPath = 0; // Random.RandomRange(0, 4);
-        transform.GetChild(randomPath).gameObject.SetActive(true);
+
+        currentPath = transform.GetChild(randomPath).gameObject;
+        currentPath.SetActive(true);
     }
 
     public void SecondLevelFood()
     {
+        Debug.Log("FOOD LOADED Lvl 2");
+
+        currentPath.SetActive(false);
 
         //Los 5 segundos hijos son los paths del segundo nivel
-        int randomPath = Random.RandomRange(5, 9);
-        transform.GetChild(randomPath).gameObject.SetActive(true);
+        int randomPath = Random.Range(5, 9);
+        //transform.GetChild(randomPath).gameObject.SetActive(true);
+
+        randomPath = 5;
+        currentPath = transform.GetChild(randomPath).gameObject;
+        currentPath.SetActive(true);
     }
 
     public void ThirdLevelFood()
     {
+        Debug.Log("FOOD LOADED Lvl 3");
+
+        currentPath.SetActive(false);
+
         //Los 5 terceros hijos son los paths del tercer nivel
-        int randomPath = Random.RandomRange(10, 14);
-        transform.GetChild(randomPath).gameObject.SetActive(true);
+        int randomPath = Random.Range(10, 14);
+        //transform.GetChild(randomPath).gameObject.SetActive(true);
+        randomPath = 10;
+        currentPath = transform.GetChild(randomPath).gameObject;
+        currentPath.SetActive(true);
     }
 }
