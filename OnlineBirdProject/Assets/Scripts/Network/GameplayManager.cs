@@ -82,6 +82,8 @@ public class GameplayManager : NetworkBehaviour
 
     NetworkVariable<int> birdsAlive = new NetworkVariable<int>(0);
 
+    public BirdManager localBird;
+
     private void Awake()
     {
         Instance = this;
@@ -497,6 +499,9 @@ public class GameplayManager : NetworkBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.L))
+            SceneManager.LoadScene(0);
+
         // Codigo provisional
         // Si es tanto el cliente como el host, poder volver al menu desconectandose de la partida actual
         if (Input.GetKeyDown(KeyCode.M))
@@ -648,6 +653,9 @@ public class GameplayManager : NetworkBehaviour
     public void addBird(BirdManager birdManager)
     {
         allBirds.Add(birdManager);
+
+        if (birdManager.IsOwner)
+            localBird = birdManager;
     }
 
     public void birdDestroyed(BirdManager birdManager)

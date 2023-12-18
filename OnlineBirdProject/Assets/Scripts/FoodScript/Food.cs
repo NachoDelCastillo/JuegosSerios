@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using FMODUnity;
+using DG.Tweening;
 
 public class Food : MonoBehaviour
 {
@@ -13,41 +14,49 @@ public class Food : MonoBehaviour
 
     private void Start()
     {
-        Invoke("ConfigureBirds", 4);
+        Invoke("ConfigureBirds", 10);
     }
-
-    BirdManager[] allBirds;
 
     BirdManager localBird;
 
     void ConfigureBirds()
     {
-        allBirds = GameplayManager.Instance.allBirds.ToArray();
+        //BirdManager[] allBirds = FindObjectsByType<BirdManager>(FindObjectsSortMode.None);
 
-        for (int i = 0; i < allBirds.Length; i++)
-        {
-            if (allBirds[i].IsOwner)
-                localBird = allBirds[i];
-        }
+        //for (int i = 0; i < allBirds.Length; i++)
+        //{
+        //    if (allBirds[i].IsOwner)
+        //        localBird = allBirds[i];
+        //}
+
     }
+
+    bool foodEaten = false;
 
     private void Update()
     {
-        if (Vector3.Distance(localBird.transform.position, transform.position) < 10)
+        BirdManager localBird = GameplayManager.Instance.localBird;
+
+        if (!foodEaten && localBird != null && Vector3.Distance(localBird.transform.position, transform.position) < 5)
         {
+            foodEaten = true;
             localBird.GetComponent<LifeBar>().eatFood(foodCount);
             AudioManager_PK.GetInstance().PlayOneShoot(eatSound, transform.position);
 
             Destroy(this.gameObject);
+
+            //StartCoroutine(EatFood());
         }
     }
 
-    IEnumerator EatFood()
-    {
+    //IEnumerator EatFood()
+    //{
+    //    Vector3 finalPos = localBird.transform.position + localBird.transform.forward * 2;
+    //    transform.DOMove(finalPos, .5f);
 
-        yield return new WaitForSeconds(1);
-        Destroy(this.gameObject);
-    }
+    //    yield return new WaitForSeconds(1);
+    //    Destroy(this.gameObject);
+    //}
 
     private void OnTriggerEnter(Collider other)
     {
