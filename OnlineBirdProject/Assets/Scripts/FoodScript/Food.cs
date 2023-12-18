@@ -21,13 +21,13 @@ public class Food : MonoBehaviour
 
     void ConfigureBirds()
     {
-        //BirdManager[] allBirds = FindObjectsByType<BirdManager>(FindObjectsSortMode.None);
+        BirdManager[] allBirds = FindObjectsByType<BirdManager>(FindObjectsSortMode.None);
 
-        //for (int i = 0; i < allBirds.Length; i++)
-        //{
-        //    if (allBirds[i].IsOwner)
-        //        localBird = allBirds[i];
-        //}
+        for (int i = 0; i < allBirds.Length; i++)
+        {
+            if (allBirds[i].IsOwner)
+                localBird = allBirds[i];
+        }
 
     }
 
@@ -35,7 +35,15 @@ public class Food : MonoBehaviour
 
     private void Update()
     {
-        BirdManager localBird = GameplayManager.Instance.localBird;
+        //BirdManager localBird = GameplayManager.Instance.localBird;
+
+        BirdManager[] allBirds = FindObjectsByType<BirdManager>(FindObjectsSortMode.None);
+
+        for (int i = 0; i < allBirds.Length; i++)
+        {
+            if (allBirds[i].IsOwner)
+                localBird = allBirds[i];
+        }
 
         if (!foodEaten && localBird != null && Vector3.Distance(localBird.transform.position, transform.position) < 5)
         {
