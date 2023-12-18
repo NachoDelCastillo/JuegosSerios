@@ -19,8 +19,8 @@ MonoBehaviour:
     Data3: 1786084788
     Data4: -668537337
   Banks:
-  - {fileID: -8038520381620364574}
   - {fileID: 6953961819368678785}
+  - {fileID: -8038520381620364574}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
@@ -73,7 +73,7 @@ MonoBehaviour:
   Path: ../FMOD/BirdProject/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638384393727692107
+  lastModified: 638384446240292341
   FileSizes:
   - Name: Desktop
     Value: 14366272
@@ -315,7 +315,7 @@ MonoBehaviour:
   - {fileID: 6953961819368678785}
   StringsBanks:
   - {fileID: 8376274002329717970}
-  cacheTime: 638384394036998172
+  cacheTime: 638384446240292341
   cacheVersion: 131609
 --- !u!114 &385201373054299167
 MonoBehaviour:
@@ -467,7 +467,7 @@ MonoBehaviour:
   Path: ../FMOD/BirdProject/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638384394036978166
+  lastModified: 638384446238625227
   FileSizes:
   - Name: Desktop
     Value: 7187680
@@ -514,7 +514,7 @@ MonoBehaviour:
   Path: ../FMOD/BirdProject/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638384394036998172
+  lastModified: 638384446238700532
   FileSizes:
   - Name: Desktop
     Value: 1522
