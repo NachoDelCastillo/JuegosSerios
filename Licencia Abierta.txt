@@ -1,0 +1,39 @@
+Licencia Abierta para Proyecto de Unity
+
+Versión 1.0, [18/12/2023]
+
+1. Definiciones
+
+1.1 "Proyecto" se refiere al software identificado en el repositorio https://github.com/NachoDelCastillo/JuegosSerios y cualquier modificación, mejora o extensión realizada por los contribuyentes.
+
+1.2 "Contribuyente" se refiere a cualquier persona o entidad que distribuye cambios, mejoras o extensiones al Proyecto.
+
+1.3 "Usuario" se refiere a cualquier persona o entidad que utilice el Proyecto.
+
+2. Concesión de Derechos
+
+2.1 Licencia: Se otorga a los Usuarios una licencia no exclusiva, mundial, libre de regalías y perpetua para copiar, modificar, distribuir y ejecutar el Proyecto con fines comerciales o no comerciales.
+
+2.2 Derechos de Autor: La titularidad del copyright del Proyecto pertenece a los Contribuyentes. Cada Contribuyente se reserva todos los derechos de autor sobre sus contribuciones individuales, pero otorga a los Usuarios una licencia de uso sobre esas contribuciones de acuerdo con los términos de esta licencia.
+
+3. Limitaciones
+
+3.1 Garantía: EL PROYECTO SE PROPORCIONA "TAL CUAL", SIN GARANTÍA DE NINGÚN TIPO, EXPRESA O IMPLÍCITA, INCLUYENDO, PERO NO LIMITADO A, LAS GARANTÍAS DE COMERCIABILIDAD, IDONEIDAD PARA UN PROPÓSITO PARTICULAR Y NO INFRACCIÓN. EN NINGÚN CASO LOS TITULARES DE DERECHOS DE AUTOR O LOS CONTRIBUYENTES SERÁN RESPONSABLES DE CUALQUIER RECLAMO, DAÑO U OTRA RESPONSABILIDAD, YA SEA EN UNA ACCIÓN DE CONTRATO, AGRAVIO O DE OTRA MANERA, DERIVADA DE, FUERA DE O EN CONEXIÓN CON EL SOFTWARE O EL USO U OTROS TRATOS EN EL SOFTWARE.
+
+3.2 Responsabilidad: Ni los Titulares de Derechos de Autor ni los Contribuyentes serán responsables ante ningún Usuario por daños directos, indirectos, incidentales, especiales, ejemplares o consecuentes (incluidos, entre otros, la adquisición de bienes o servicios sustitutos, la pérdida de uso, datos o beneficios; o interrupción de negocios) sin importar la causa y bajo cualquier teoría de responsabilidad, ya sea en contrato, responsabilidad estricta o agravio (incluida la negligencia o de otra manera), incluso si se ha informado de la posibilidad de tales daños.
+
+4. Contribuciones
+
+4.1 Aceptación de Contribuciones: Al presentar una contribución, cada Contribuyente declara que es el titular de los derechos de autor de la contribución o que tiene el derecho de autorizar su inclusión en el Proyecto.
+
+4.2 Licencia de Contribuciones: Cada Contribuyente otorga a los Usuarios una licencia para sus contribuciones según los términos de la Sección 2 de esta licencia.
+
+5. Cambios en la Licencia
+
+Los Titulares de Derechos de Autor se reservan el derecho de cambiar los términos de esta licencia en cualquier momento, sujeto a un aviso razonable en el repositorio del Proyecto.
+
+Rodrigo Cabello Hernández
+Ignacio Del Castillo
+Diego Rol Sánchez
+
+Fecha: [18/12/2023]
