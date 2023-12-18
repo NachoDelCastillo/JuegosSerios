@@ -14,6 +14,8 @@ using DG.Tweening;
 
 public class GameplayManager : NetworkBehaviour
 {
+    public bool birdsCanMove = false;
+
     public List<BirdManager> allBirds;
 
     float secondsToAnimation = 5;
@@ -151,6 +153,12 @@ public class GameplayManager : NetworkBehaviour
     }
 
     [ClientRpc]
+    void BirdsCanMoveClientRpc(bool newValue)
+    {
+        birdsCanMove = newValue;
+    }
+
+    [ClientRpc]
     void BirdsToSpawnPointClientRpc()
     {
         //if (localBirdManager != null)
@@ -200,6 +208,9 @@ public class GameplayManager : NetworkBehaviour
                 gameplay_Timer.Value = maxGameplayTimer + endingAnimationTime + 1000;
             else
                 gameplay_Timer.Value = maxGameplayTimer + endingAnimationTime;
+
+            if (IsServer)
+                BirdsCanMoveClientRpc(false);
         }
 
         showLevelTimerText = false;
@@ -244,6 +255,7 @@ public class GameplayManager : NetworkBehaviour
         {
             gameplay_Timer.Value = maxGameplayTimer;
             BirdsToSpawnPointClientRpc();
+            BirdsCanMoveClientRpc(false);
         }
 
         if (newLevel == 1)
@@ -352,6 +364,9 @@ public class GameplayManager : NetworkBehaviour
 
         for (int i = 0; i < cameras.Length; i++)
             cameras[i].gameObject.SetActive(false);
+
+        if (IsServer)
+            BirdsCanMoveClientRpc(true);
 
         Debug.Log("END LEVEL ANIMATION");
     }

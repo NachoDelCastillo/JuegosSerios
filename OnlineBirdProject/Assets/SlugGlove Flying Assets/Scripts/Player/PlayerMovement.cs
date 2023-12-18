@@ -142,7 +142,7 @@ public class PlayerMovement : MonoBehaviour
 
         finalPosition = position;
 
-        GetComponentInChildren<Rigidbody>().GetComponent<SphereCollider>().enabled = false;
+        GetComponentInChildren<SphereCollider>().enabled = false;
     }
 
     bool staticThis = false;
@@ -169,7 +169,7 @@ public class PlayerMovement : MonoBehaviour
                 SetFlying();
                 //SetStatic(true);
 
-                GetComponentInChildren<Rigidbody>().GetComponent<SphereCollider>().enabled = false;
+                GetComponentInChildren<SphereCollider>().enabled = true;
             }
 
             //TeleportThis(finalPosition);

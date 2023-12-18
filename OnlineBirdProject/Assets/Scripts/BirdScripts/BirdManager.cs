@@ -51,6 +51,9 @@ public class BirdManager : NetworkBehaviour
 
     void Update()
     {
+        if (!GameplayManager.Instance.birdsCanMove)
+            return;
+
         // if (CanMove())
         if (IsOwnerBool())
         {
@@ -83,6 +86,9 @@ public class BirdManager : NetworkBehaviour
 
     private void FixedUpdate()
     {
+        //if (!GameplayManager.Instance.birdsCanMove)
+        //    return;
+
         if (IsOwnerBool())
 
             // Handle Movement
