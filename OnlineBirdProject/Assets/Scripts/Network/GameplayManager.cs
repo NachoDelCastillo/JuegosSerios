@@ -313,8 +313,8 @@ public class GameplayManager : NetworkBehaviour
         birdsLeftText.DOFade(0, .001f);
         countDownText.text = "";
 
-        if (currentLevel != 3)
-            showLevelTimerText = false;
+        showLevelTimerText = false;
+
         levelTimerText.text = "";
 
         waitingForOtherPlayersText.transform.parent.gameObject.SetActive(false);
@@ -358,7 +358,8 @@ public class GameplayManager : NetworkBehaviour
         countDownText.text = "SURVIVE";
         countDownText.DOFade(0, 1);
 
-        showLevelTimerText = true;
+        if (currentLevel != 3)
+            showLevelTimerText = true;
 
         // Devolver controles al pajaroOwner
 
