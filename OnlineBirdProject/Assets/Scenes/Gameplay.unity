@@ -39,7 +39,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 355987664}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.772576, g: 0.9110399, b: 0.996044, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -752,11 +752,6 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 82112178
       objectReference: {fileID: 0}
-    - target: {fileID: 259156216804941859, guid: da15110de96aa974c8f0636ffef0ef4d,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 262949788230243852, guid: da15110de96aa974c8f0636ffef0ef4d,
         type: 3}
       propertyPath: GlobalObjectIdHash
@@ -976,11 +971,6 @@ PrefabInstance:
         type: 3}
       propertyPath: GlobalObjectIdHash
       value: 2236605737
-      objectReference: {fileID: 0}
-    - target: {fileID: 645257241370241359, guid: da15110de96aa974c8f0636ffef0ef4d,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 645400880973395261, guid: da15110de96aa974c8f0636ffef0ef4d,
         type: 3}
@@ -1937,6 +1927,11 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 444786026
       objectReference: {fileID: 0}
+    - target: {fileID: 2855373892022414327, guid: da15110de96aa974c8f0636ffef0ef4d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2893684492327985772, guid: da15110de96aa974c8f0636ffef0ef4d,
         type: 3}
       propertyPath: GlobalObjectIdHash
@@ -1951,21 +1946,6 @@ PrefabInstance:
         type: 3}
       propertyPath: GlobalObjectIdHash
       value: 2411014006
-      objectReference: {fileID: 0}
-    - target: {fileID: 2926403420706331898, guid: da15110de96aa974c8f0636ffef0ef4d,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 5.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 2926403420706331898, guid: da15110de96aa974c8f0636ffef0ef4d,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -11.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 2926403420706331898, guid: da15110de96aa974c8f0636ffef0ef4d,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 25.5
       objectReference: {fileID: 0}
     - target: {fileID: 2930119285772825537, guid: da15110de96aa974c8f0636ffef0ef4d,
         type: 3}
@@ -2761,11 +2741,6 @@ PrefabInstance:
         type: 3}
       propertyPath: GlobalObjectIdHash
       value: 1369637398
-      objectReference: {fileID: 0}
-    - target: {fileID: 4551811841441047748, guid: da15110de96aa974c8f0636ffef0ef4d,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4553759968557779073, guid: da15110de96aa974c8f0636ffef0ef4d,
         type: 3}
@@ -4201,21 +4176,6 @@ PrefabInstance:
         type: 3}
       propertyPath: GlobalObjectIdHash
       value: 1652345641
-      objectReference: {fileID: 0}
-    - target: {fileID: 7755221609307252717, guid: da15110de96aa974c8f0636ffef0ef4d,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -367.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7755221609307252717, guid: da15110de96aa974c8f0636ffef0ef4d,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -212.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7755221609307252717, guid: da15110de96aa974c8f0636ffef0ef4d,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -476.1
       objectReference: {fileID: 0}
     - target: {fileID: 7755427026439908239, guid: da15110de96aa974c8f0636ffef0ef4d,
         type: 3}

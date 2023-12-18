@@ -324,44 +324,58 @@ public class GameplayManager : NetworkBehaviour
         for (int i = 0; i < cameras.Length; i++)
             cameras[i].gameObject.SetActive(false);
 
-        cameras[0].gameObject.SetActive(true);
+
+
+        //////////////////////////////////////////////////
+
+
+        //cameras[0].gameObject.SetActive(true);
+
+        //yield return new WaitForSeconds(1);
+
+        //cameras[0].gameObject.SetActive(false);
+        //cameras[1].gameObject.SetActive(true);
+
+        //yield return new WaitForSeconds(5);
+
+        //ageText.text = ageStrings[currentLevel - 1];
+        //ageText.DOFade(1, 1);
+
+        //birdsLeftText.text = " " + birdsAlive.Value + " birds left ";
+        //birdsLeftText.DOFade(1, 1);
+        //// Renderizar Texto
+        ////StartCoroutine(RenderText());
+
+        //yield return new WaitForSeconds(4);
+
+        //ageText.DOFade(0, 1);
+        //birdsLeftText.DOFade(0, 1);
+
+        //yield return new WaitForSeconds(3);
+
+        //birdCamera.gameObject.SetActive(true);
+
+        //countDownText.DOFade(1, .5f);
+        //countDownText.text = "3";
+        //yield return new WaitForSeconds(1);
+        //countDownText.text = "2";
+        //yield return new WaitForSeconds(1);
+        //countDownText.text = "1";
+        //yield return new WaitForSeconds(1);
+        //countDownText.text = "SURVIVE";
+        //countDownText.DOFade(0, 1);
+
+        //if (currentLevel != 3)
+        //    showLevelTimerText = true;
+
 
         yield return new WaitForSeconds(1);
-
-        cameras[0].gameObject.SetActive(false);
-        cameras[1].gameObject.SetActive(true);
-
-        yield return new WaitForSeconds(5);
-
-        ageText.text = ageStrings[currentLevel - 1];
-        ageText.DOFade(1, 1);
-
-        birdsLeftText.text = " " + birdsAlive.Value + " birds left ";
-        birdsLeftText.DOFade(1, 1);
-        // Renderizar Texto
-        //StartCoroutine(RenderText());
-
-        yield return new WaitForSeconds(4);
-
-        ageText.DOFade(0, 1);
-        birdsLeftText.DOFade(0, 1);
-
-        yield return new WaitForSeconds(3);
-
         birdCamera.gameObject.SetActive(true);
 
-        countDownText.DOFade(1, .5f);
-        countDownText.text = "3";
-        yield return new WaitForSeconds(1);
-        countDownText.text = "2";
-        yield return new WaitForSeconds(1);
-        countDownText.text = "1";
-        yield return new WaitForSeconds(1);
-        countDownText.text = "SURVIVE";
-        countDownText.DOFade(0, 1);
+        //////////////////////////////////////////////////
 
-        if (currentLevel != 3)
-            showLevelTimerText = true;
+
+
 
         // Devolver controles al pajaroOwner
 

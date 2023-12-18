@@ -33,22 +33,25 @@ public class Food : MonoBehaviour
 
     bool foodEaten = false;
     bool eatingFood = false;
-    float eatSpeed = 5;
-    float eatTime = 1;
+    float eatSpeed = 15;
+    float eatTime = .8f;
 
     private void Update()
     {
         //BirdManager localBird = GameplayManager.Instance.localBird;
 
-        BirdManager[] allBirds = FindObjectsByType<BirdManager>(FindObjectsSortMode.None);
-
-        for (int i = 0; i < allBirds.Length; i++)
+        if (localBird == null)
         {
-            if (allBirds[i].IsOwner)
-                localBird = allBirds[i];
+            BirdManager[] allBirds = FindObjectsByType<BirdManager>(FindObjectsSortMode.None);
+
+            for (int i = 0; i < allBirds.Length; i++)
+            {
+                if (allBirds[i].IsOwner)
+                    localBird = allBirds[i];
+            }
         }
 
-        if (!foodEaten && localBird != null && Vector3.Distance(localBird.transform.position, transform.position) < 5)
+        if (!foodEaten && localBird != null && Vector3.Distance(localBird.transform.position, transform.position) < 10)
         {
             foodEaten = true;
             localBird.GetComponent<LifeBar>().eatFood(foodCount);
@@ -62,7 +65,8 @@ public class Food : MonoBehaviour
 
         if (eatingFood)
         {
-            transform.position = Vector3.Lerp(transform.position, localBird.transform.position, Time.deltaTime * eatSpeed);
+            Vector3 finalPos = localBird.transform.position + localBird.transform.forward * .5f;
+            transform.position = Vector3.Lerp(transform.position, finalPos, Time.deltaTime * eatSpeed);
         }
     }
 
@@ -71,7 +75,7 @@ public class Food : MonoBehaviour
         //Vector3 finalPos = localBird.transform.position + localBird.transform.forward * 2;
         //transform.DOMove(finalPos, eatTime);
         transform.DOScale(Vector3.zero, eatTime);
-        transform.DORotate(new Vector3(0, 360, 0), eatTime, RotateMode.FastBeyond360);
+        //transform.DORotate(new Vector3(0, 360, 0), eatTime, RotateMode.FastBeyond360);
 
         yield return new WaitForSeconds(eatTime);
 
