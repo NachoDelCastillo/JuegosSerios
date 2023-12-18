@@ -21,6 +21,8 @@ public class GameplayManager : NetworkBehaviour
     float secondsToAnimation = 5;
 
 
+    [SerializeField]
+    private GameObject healthBar;
 
     [SerializeField]
     private TMP_Text birdHasDied;
@@ -144,6 +146,8 @@ public class GameplayManager : NetworkBehaviour
     {
         currentLevel = 1;
         Invoke("SetupValues", .1f);
+
+        //healthBar.gameObject.SetActive(false);
     }
 
     BirdManager localBirdManager;
@@ -222,6 +226,10 @@ public class GameplayManager : NetworkBehaviour
 
     IEnumerator EndingLevelAnimation(int newLevel)
     {
+        healthBar.gameObject.SetActive(false);
+
+        FoodManager.Instance.ResetPaths();
+
         BirdManager[] allPlayerManagers = FindObjectsByType<BirdManager>(FindObjectsSortMode.None);
 
         bool playerStillAlive = false;
@@ -253,6 +261,8 @@ public class GameplayManager : NetworkBehaviour
     [ClientRpc]
     void StartLevelClientRpc(int newLevel)
     {
+        healthBar.gameObject.SetActive(false);
+
         if (IsServer)
         {
             gameplay_Timer.Value = maxGameplayTimer;
@@ -393,6 +403,7 @@ public class GameplayManager : NetworkBehaviour
         else if (currentLevel == 3)
             FoodManager.Instance.ThirdLevelFood();
 
+        healthBar.gameObject.SetActive(true);
 
         Debug.Log("END LEVEL ANIMATION");
     }

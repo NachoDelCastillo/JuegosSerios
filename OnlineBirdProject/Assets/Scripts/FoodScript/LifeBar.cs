@@ -9,7 +9,7 @@ public class LifeBar : MonoBehaviour
     private Image barImage;
     private Image barImage2;
     [SerializeField]
-    private float lifeAmountDecreasing = 0.000000000001f;
+    private float lifeAmountDecreasing = 0.8f; //0.000000000001f;
 
     BirdManager birdManager;
 
@@ -20,12 +20,18 @@ public class LifeBar : MonoBehaviour
         barImage2 = GameObject.Find("Lifes2").GetComponent<Image>();
 
         birdManager = GetComponent<BirdManager>();
+
+        if (birdManager.IsOwner)
+            barImage2.transform.parent.gameObject.SetActive(false);
     }
     // Update is called once per frame
     void Update()
     {
-        //barImage.fillAmount -= lifeAmountDecreasing*Time.deltaTime;
-        //barImage2.fillAmount -= lifeAmountDecreasing*Time.deltaTime;
+        barImage.fillAmount -= lifeAmountDecreasing * Time.deltaTime;
+        barImage2.fillAmount -= lifeAmountDecreasing * Time.deltaTime;
+
+        barImage.color = new Color(1, barImage.fillAmount, barImage.fillAmount);
+        barImage2.color = new Color(1, barImage.fillAmount, barImage.fillAmount);
 
         if (barImage.fillAmount <= 0 && barImage2.fillAmount <= 0 && transform.GetComponent<BirdManager>().IsOwner) {
             GameObject cameraFollow = GameObject.Find("CameraFollow");
