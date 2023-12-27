@@ -277,6 +277,10 @@ public class GameplayManager : NetworkBehaviour
                 localBird = allBirds[i];
         localBird.GetComponent<LifeBar>().eatFood(9999);
 
+        Vector3 eulerAngles = localBird.transform.rotation.eulerAngles;
+        eulerAngles.y = -90;
+        localBird.transform.DORotate(eulerAngles, 1);
+
         if (IsServer)
         {
             gameplay_Timer.Value = maxGameplayTimer;
