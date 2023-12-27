@@ -29,7 +29,7 @@ public class AllMenuManager_PK : MonoBehaviour
         levelSelectorMenu = FindObjectOfType<LevelselectorMenu_PK>();
 
         mainMenu.enabled = true;
-        settingsMenu.enabled = false;
+        //settingsMenu.enabled = false;
         levelSelectorMenu.enabled = false;
 
         initialZ = cameraObj.transform.position.z;
@@ -44,13 +44,23 @@ public class AllMenuManager_PK : MonoBehaviour
         //Debug.Log("Mathf.Abs(cameraObj.position.z) = " + Mathf.Abs(cameraObj.position.z));
         //Debug.Log("initialZ + cameraDistanceX = " + initialZ + cameraDistanceX);
 
-        if (Input.anyKeyDown && ( Mathf.Abs(cameraObj.position.z) >= initialZ + cameraDistanceX || Mathf.Abs(cameraObj.position.z) < 181 )) 
+        //if (Input.anyKeyDown && ( Mathf.Abs(cameraObj.position.z) >= initialZ + cameraDistanceX || Mathf.Abs(cameraObj.position.z) < 181 )) 
+        //{
+        //    // Sound
+        //    AudioManager_PK.GetInstance().Play("ButtonPress", 1);
+
+        //    StartCoroutine(EnableMenu(mainMenu, true, cameraSpeed));
+        //    cameraObj.DOMoveZ(initialZ, cameraSpeed);
+        //    //cameraObj.DOMoveY(initialY, cameraSpeed);
+        //}
+
+        if (Input.anyKeyDown && cameraObj.position.y < 250)
         {
-            // Sound
             AudioManager_PK.GetInstance().Play("ButtonPress", 1);
 
             StartCoroutine(EnableMenu(mainMenu, true, cameraSpeed));
             cameraObj.DOMoveZ(initialZ, cameraSpeed);
+            cameraObj.DOMoveY(initialY, cameraSpeed);
         }
     }
 
@@ -93,7 +103,9 @@ public class AllMenuManager_PK : MonoBehaviour
     {
         mainMenu.enabled = false;
 
-        cameraObj.DOMoveZ(initialZ - cameraDistanceX, cameraSpeed);
+        cameraObj.DOMoveZ(initialZ - 200, cameraSpeed);
+
+        cameraObj.DOMoveY(247.4f, cameraSpeed);
     }
 
     #endregion

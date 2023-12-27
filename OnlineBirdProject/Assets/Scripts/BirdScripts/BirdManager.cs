@@ -95,27 +95,36 @@ public class BirdManager : NetworkBehaviour
         //    return;
 
         if (IsOwnerBool())
-
+        {
             // Handle Movement
             birdMovement.MovementFixedUpdate();
 
-        float velocity = birdMovement.GetCurrentVelocity() / 44;
+            float velocity = birdMovement.GetCurrentVelocity() / 44;
 
-        if (velocity < .3f)
-            velocity = 0;
+            if (velocity < .3f)
+                velocity = 0;
 
-        velocity -= .3f;
-        velocity /= .7f;
+            velocity -= .3f;
+            velocity /= .7f;
 
-        for (int i = 0; i < trailRenderers.Length; i++)
-            trailRenderers[i].startWidth = velocity * maxTrailWidth;
-
-        if (velocity * maxTrailWidth < .001f)
             for (int i = 0; i < trailRenderers.Length; i++)
-                trailRenderers[i].emitting = false;
-        else
+                trailRenderers[i].startWidth = velocity * maxTrailWidth;
+
+            if (velocity * maxTrailWidth < .001f)
+                for (int i = 0; i < trailRenderers.Length; i++)
+                    trailRenderers[i].emitting = false;
+            else
+                for (int i = 0; i < trailRenderers.Length; i++)
+                    trailRenderers[i].emitting = true;
+        }
+        else {
+            for (int i = 0; i < trailRenderers.Length; i++)
+                trailRenderers[i].startWidth = maxTrailWidth;
+
             for (int i = 0; i < trailRenderers.Length; i++)
                 trailRenderers[i].emitting = true;
+        }
+
     }
 
     float maxTrailWidth = 0.033f; //0.033f;
