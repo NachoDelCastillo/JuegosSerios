@@ -222,6 +222,13 @@ public class GameplayManager : NetworkBehaviour
         showLevelTimerText = false;
 
         StartCoroutine(EndingLevelAnimation(newLevel));
+
+
+        BirdManager[] allBirds = FindObjectsByType<BirdManager>(FindObjectsSortMode.None);
+        for (int i = 0; i < allBirds.Length; i++)
+            if (allBirds[i].IsOwner)
+                localBird = allBirds[i];
+        localBird.GetComponent<LifeBar>().eatFood(9999);
     }
 
     IEnumerator EndingLevelAnimation(int newLevel)
@@ -262,6 +269,13 @@ public class GameplayManager : NetworkBehaviour
     void StartLevelClientRpc(int newLevel)
     {
         healthBar.gameObject.SetActive(false);
+
+
+        BirdManager[] allBirds = FindObjectsByType<BirdManager>(FindObjectsSortMode.None);
+        for (int i = 0; i < allBirds.Length; i++)
+            if (allBirds[i].IsOwner)
+                localBird = allBirds[i];
+        localBird.GetComponent<LifeBar>().eatFood(9999);
 
         if (IsServer)
         {

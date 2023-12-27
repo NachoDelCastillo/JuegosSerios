@@ -6,7 +6,7 @@ public class EnvironmentChanger : MonoBehaviour
 {
     static public EnvironmentChanger Instance;
     public EnvironmentChanger GetInstance()
-    { return Instance;  }
+    { return Instance; }
 
     private void Awake()
     {
@@ -94,7 +94,10 @@ public class EnvironmentChanger : MonoBehaviour
             t.gameObject.SetActive(false);
 
         water.gameObject.SetActive(true);
-        water.position = new Vector3(water.position.x, waterInitialY - 50, water.position.z);
+        for (int i = 0; i < water.childCount; i++)
+            water.GetChild(i).position = new Vector3(water.GetChild(i).position.x, 
+                waterInitialY - 50, water.GetChild(i).position.z);
+        // water.position = new Vector3(water.position.x, waterInitialY - 50, water.position.z);
 
         MeshRenderer[] rocksMeshRenderers = bigRocks.GetComponentsInChildren<MeshRenderer>();
         for (int i = 0; i < rocksMeshRenderers.Length; i++)
