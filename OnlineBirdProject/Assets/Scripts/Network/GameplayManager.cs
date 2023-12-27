@@ -136,7 +136,7 @@ public class GameplayManager : NetworkBehaviour
             birdsAlive.Value++;
         }
 
-        createFoodClientRpc();
+        //createFoodClientRpc();
 
         initializeClientsClientRpc();
     }
@@ -428,13 +428,13 @@ public class GameplayManager : NetworkBehaviour
 
 
 
-    [ClientRpc]
-    void createFoodClientRpc()
-    {
-        //Debug.Log("En el server se ejecuta");
-        Transform p = Instantiate(foodManagerPrefab);
-        p.GetComponent<NetworkObject>().Spawn();
-    }
+    //[ClientRpc]
+    //void createFoodClientRpc()
+    //{
+    //    //Debug.Log("En el server se ejecuta");
+    //    Transform p = Instantiate(foodManagerPrefab);
+    //    p.GetComponent<NetworkObject>().Spawn();
+    //}
 
     // TimeLine acabada
     //void OnTimelineFinished(PlayableDirector director)
