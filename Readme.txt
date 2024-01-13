@@ -12,7 +12,7 @@ Con esta experiencia el objetivo no es enseñar algo directamente, sino meter al
 
 
 Link a un video corto
-https://www.youtube.com/watch?v=YJc2a9yRrnQ&feature=youtu.be
+https://youtu.be/8FU4kFt5j9I
 
 Link al GDD
 https://docs.google.com/document/d/1UL7osYr__g8rnBfPYYmmaB-rNnyBY9tg8j6rQcnXspY/edit
