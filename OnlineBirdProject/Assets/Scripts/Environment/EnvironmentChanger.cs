@@ -46,6 +46,9 @@ public class EnvironmentChanger : MonoBehaviour
     [SerializeField]
     Transform subwaterFloor;
 
+    [SerializeField]
+    Transform effects;
+
 
 
     private void Start()
@@ -83,8 +86,10 @@ public class EnvironmentChanger : MonoBehaviour
 
         greenTerrain.gameObject.SetActive(true);
         lessGreenTerrain.gameObject.SetActive(false);
-
         subwaterFloor.gameObject.SetActive(false);
+
+
+        effects.gameObject.SetActive(true);
     }
 
     public void SetSecondLevel()
@@ -107,6 +112,9 @@ public class EnvironmentChanger : MonoBehaviour
         lessGreenTerrain.gameObject.SetActive(true);
         subwaterFloor.gameObject.SetActive(false);
         level2Decoration.gameObject.SetActive(true);
+
+
+        effects.gameObject.SetActive(false);
     }
 
     public void SetThirdLevel()
@@ -126,5 +134,8 @@ public class EnvironmentChanger : MonoBehaviour
         level2Decoration.gameObject.SetActive(false);
         level3Decoration.gameObject.SetActive(true);
         subwaterFloor.gameObject.SetActive(true);
+
+
+        effects.gameObject.SetActive(false);
     }
 }

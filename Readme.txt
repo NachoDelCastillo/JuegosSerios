@@ -16,4 +16,3 @@ https://www.youtube.com/watch?v=YJc2a9yRrnQ&feature=youtu.be
 
 Link al GDD
 https://docs.google.com/document/d/1UL7osYr__g8rnBfPYYmmaB-rNnyBY9tg8j6rQcnXspY/edit
-
